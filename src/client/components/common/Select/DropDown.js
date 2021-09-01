@@ -52,7 +52,18 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("xs")]: {
             width: 210
         }
-    }
+    },
+    changedWidth: {
+          height: 15,
+          width: 150,
+          [theme.breakpoints.down("sm")]: {
+              width: 280
+          },
+
+          [theme.breakpoints.down("xs")]: {
+              width: 210
+          }
+      },
 }));
 
 
@@ -78,7 +89,8 @@ const styles = {
 const DropDown = (props) => {
     const classes = useStyles();
     const helperTestClasses = helperTextStyles();
-    const { options, fieldName, onChangeFunc, value, isError, errorMessage,eventValidation } = props;
+    const { options, fieldName, onChangeFunc, value, isError, errorMessage,eventValidation, changeWidth } = props;
+    const classNameForWidth = changeWidth ? classes.changedWidth : classes.widthAndHeight
     return (
         <TextField
             id={fieldName}
@@ -91,7 +103,7 @@ const DropDown = (props) => {
             label={fieldName}
             InputProps={{
                 classes: {
-                    input: classes.widthAndHeight
+                    input: classNameForWidth
                 }
             }}
             FormHelperTextProps={{ style: styles.helper }}
@@ -102,6 +114,10 @@ const DropDown = (props) => {
             )}
         </TextField>
     );
+}
+
+DropDown.defaultProps =  {
+    changeWidth : false
 }
 
 export default DropDown;
