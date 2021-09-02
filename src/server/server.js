@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const publicPath = path.resolve(__dirname, 'public');
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 9002;
 
 app.use(cors());
 
