@@ -1,2 +1,2 @@
 export NODE_ENV=dev
-export PORT=8000
+export PORT=9002
