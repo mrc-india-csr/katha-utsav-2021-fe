@@ -17,11 +17,5 @@ COPY --from=build /home/app/production_node_modules/ /home/app/node_modules/
 WORKDIR /home/app
 RUN chown -R node /home/app
 USER node
-EXPOSE 9001
+EXPOSE 9002
 CMD npm run server
-
-
-
-
-
-
