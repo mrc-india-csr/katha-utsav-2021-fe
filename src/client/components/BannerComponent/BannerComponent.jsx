@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import HeroImg from '../../assets/images/hero-bg.png';
 import DropDownButton from '../common/Button/DropDownButton';
 import Grid from "@material-ui/core/Grid";
@@ -20,7 +20,7 @@ const BannerComponent = (props) => {
     const classes = useStyles();
 
     const ContactUs = (
-        <Typography gutterBottom variant="subtitle1" className={classes.contactUs}>Contact us</Typography>
+        <Typography component={Link} to="/contact" gutterBottom variant="subtitle1" className={classes.contactUs}>Contact us</Typography>
     )
 
 
