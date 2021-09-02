@@ -8,7 +8,7 @@ import close from "../../assets/images/close.png"
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
-import StepTwo from "./StepTwo/StepTwo";
+import StepTwo from "./StepTwo";
 
 
 const useStyles = makeStyles(theme => ({

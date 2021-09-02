@@ -15,6 +15,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import InputField from "../../common/TextField/InputField";
 import PaymentButton from '../../common/Button/PayButton';
+import FileUploader from "../../common/FileUploader";
 
 
 const useStyles = makeStyles(theme => ({
@@ -93,7 +94,7 @@ const StepTwo = (props) => {
         studentPhone: '',
         studentClass: '',
         storyCategory: '',
-        storyPath: ''
+        storyPath: {}
       },
     },
     stepTwoErrorMessage: {
@@ -106,26 +107,33 @@ const StepTwo = (props) => {
         storyPath: ''
       }
     },
+    uploadFile: {
+      0: {
+        fileName: 'Upload File'
+      }
+    },
     dropDownValue : 1
   });
 
   const studentCount = (fieldName, e) => {
     let values = {}
+    let errorMessages = {}
+    let uploadFile = {}
+
     for (let step = 0; step < e.target.value; step++) {
       values.step = step
+      errorMessages.step = step
+      uploadFile.step = step
+
       values[step] = {
         studentName: '',
         studentEmail: '',
         studentPhone: '',
         studentClass: '',
         storyCategory: '',
-        storyPath: ''
+        storyPath: {}
       }
-    }
 
-    let errorMessages = {}
-    for (let step = 0; step < e.target.value; step++) {
-      errorMessages.step = step
       errorMessages[step] = {
         studentName: '',
         studentEmail: '',
@@ -134,6 +142,10 @@ const StepTwo = (props) => {
         storyCategory: '',
         storyPath: ''
       }
+
+      uploadFile[step] = {
+        fileName: 'Upload File'
+      }
     }
 
     setStates((states) => {
@@ -141,6 +153,7 @@ const StepTwo = (props) => {
         ...states,
         stepTwo: values,
         stepTwoErrorMessage: errorMessages,
+        uploadFile: uploadFile,
         dropDownValue: e.target.value
       }
     })
@@ -148,8 +161,96 @@ const StepTwo = (props) => {
 
   const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY"];
 
+  const onFileUpload = async (selectedFile, name, event, i) => {
+    if (name) {
+      setStates((states) => {
+        states.uploadFile[i].fileName = 'Uploaded'
+        states.stepTwo[i].storyPath = selectedFile
+        return {
+          ...states,
+        }
+      });
+    }
+  }
+
+  const validate = () => {
+    let isError = false
+    for (let step = 0; step < states.dropDownValue; step++) {
+      let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(states.stepTwo[step].studentEmail);
+      let phoneNumberValid = /^\d+$/.test(states.stepTwo[step].studentPhone);
+
+      if (_.isNull(states.stepTwo[step].studentEmail) || _.isEmpty(states.stepTwo[step].studentEmail) || !emailValid) {
+        setStates((states) => {
+          states.stepTwoErrorMessage[step].studentEmail = 'error'
+          return {
+            ...states,
+          }
+        })
+        isError = true;
+      }
+      if (_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName)) {
+        setStates((states) => {
+          states.stepTwoErrorMessage[step].studentName = 'error'
+          return {
+            ...states,
+          }
+        })
+        isError = true;
+      }
+      if (_.isNull(states.stepTwo[step].studentPhone) || _.isEmpty(states.stepTwo[step].studentPhone) || !phoneNumberValid) {
+        setStates((states) => {
+          states.stepTwoErrorMessage[step].studentPhone = 'error'
+          return {
+            ...states,
+          }
+        })
+        isError = true;
+      }
+      if (_.isEmpty(states.stepTwo[step].storyCategory) || !_.includes(["Fiction", "Non-Fiction", "Poetry"], states.stepTwo[step].storyCategory)) {
+        setStates((states) => {
+          states.stepTwoErrorMessage[step].storyCategory = 'error'
+          return {
+            ...states,
+          }
+        })
+        isError = true;
+      }
+
+      if (_.isEmpty(states.stepTwo[step].studentClass) || !_.includes(["4 to 6", "7 to 9", "10 to 12"], states.stepTwo[step].studentClass)) {
+        setStates((states) => {
+          states.stepTwoErrorMessage[step].studentClass = 'error'
+          return {
+            ...states,
+          }
+        })
+        isError = true;
+      }
+      if (_.isEmpty(states.stepTwo[step].storyPath.name) || states.stepTwo[step].storyPath.size > 10000000) {
+        setStates((states) => {
+          states.uploadFile[step].fileName = 'Upload File'
+          return {
+            ...states,
+          }
+        })
+        isError = false;
+      }
+    }
+
+    if(!isError) {
+      let stepTwoData = []
+      for (let step = 0; step < states.dropDownValue; step++) {
+        let data = states.stepTwo[step]
+        stepTwoData.push(data)
+      }
+      props.validateDetails(stepTwoData)
+    }
+  }
+
+  const onDropDown = (id, event, i) => {
+    stepTwoFormValidation({ target: { id: `${id}`, value: `${event.target.value}`} }, i);
+  }
+
   const stepTwoFormValidation = (event, i) => {
-    console.log('event.target.id',event.target.id, event.target.value, i)
     switch (event.target.id) {
       case 'studentEmail':
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
@@ -258,6 +359,28 @@ const StepTwo = (props) => {
     }
   }
 
+  const onReset = () => {
+    for (let step = 0; step < states.dropDownValue; step++) {
+      setStates((states) => {
+        states.stepTwo[step].studentName = ''
+        states.stepTwo[step].studentEmail = ''
+        states.stepTwo[step].studentPhone = ''
+        states.stepTwo[step].studentClass = ''
+        states.stepTwo[step].storyCategory = ''
+        states.stepTwo[step].storyPath = {}
+        states.stepTwoErrorMessage[step].studentName = ''
+        states.stepTwoErrorMessage[step].studentEmail = ''
+        states.stepTwoErrorMessage[step].studentPhone = ''
+        states.stepTwoErrorMessage[step].studentClass = ''
+        states.stepTwoErrorMessage[step].storyCategory = ''
+        states.stepTwoErrorMessage[step].storyPath = ''
+        states.uploadFile[step].fileName = 'Upload File'
+        return {
+          ...states,
+        }
+      })
+    }
+  }
   return (
     <Grid container direction="column" className={classes.background}>
       <Grid item container alignItems="center" direction="column">
@@ -318,15 +441,15 @@ const StepTwo = (props) => {
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
                                   options={["4 to 6", "7 to 9 ", "10 to 12"]}
-                                  value={states.stepTwo[i].studentClass} eventValidation={(event) => stepTwoFormValidation(event, i)} changeWidth={true}/>
+                                  value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)} changeWidth={true}/>
                       </TableCell>
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"}
                                   options={["Fiction", "Non-Fiction", "Poetry"]}
-                                  value={states.stepTwo[i].storyCategory} eventValidation={(event) => stepTwoFormValidation(event, i)} changeWidth={true}/>
+                                  value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)} changeWidth={true}/>
                       </TableCell>
                       <TableCell align="right">
-                        <Button className={classes.UploadFile}>Upload File</Button>
+                        <FileUploader onFileUpload={(selectedFile, name, event) => onFileUpload(selectedFile, name, event, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
                       </TableCell>
                     </TableRow>
                   })}
@@ -335,10 +458,10 @@ const StepTwo = (props) => {
             </TableContainer>
           </div>
           <Grid item  align="center" className={classes.Payment}>
-            <PaymentButton name={"Pay"}/>
+            <PaymentButton name={"Pay"} onButtonClick={validate}/>
           </Grid>
           <Grid item container align="center"direction="column">
-            <Grid item component={Button}>
+            <Grid item component={Button} onClick={onReset}>
               <Typography gutterBottom variant="body2" className={classes.Reset}>Reset</Typography>
             </Grid>
           </Grid>
