@@ -12,3 +12,9 @@ export {
     validateFailSchoolStepOne,
     showPopUpSchool
 } from './SchoolRegistrationStepOneAction'
+
+export {
+    validateStepTwo,
+    validateSuccessSchoolStepTwo,
+    validateFailSchoolStepTwo,
+} from './SchoolRegistrationStepTwoAction'

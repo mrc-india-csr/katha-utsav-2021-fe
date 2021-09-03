@@ -2,13 +2,13 @@ import React from 'react';
 import StepOne from './StepOne';
 import { renderIf } from '../../Utils';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import StepTwo from './StepTwo/StepTwo';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import close from "../../assets/images/close.png"
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
+import StepTwo from "./StepTwo";
 
 
 const useStyles = makeStyles(theme => ({
