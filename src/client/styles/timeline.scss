@@ -1,14 +1,14 @@
 .timeline {
-  padding: 0 1rem;
+  padding: 0 1rem 3rem;
   letter-spacing: 0;
   font-family: 'Fredoka One';
 
   @media (min-width: 1000px) {
-    padding: 0 2rem;
+    padding: 0 2rem 5rem;
   }
 
   @include breakpoint-xlarge {
-    padding: 0 5rem;
+    padding: 0 5rem 5rem;
   }
 
   h3 {
@@ -33,6 +33,11 @@
 
       @include breakpoint-medium-down {
         text-align: center;
+        margin: auto;
+      }
+
+      @media (max-width: 600px) {
+        margin: 0;
       }
 
       @include breakpoint-xlarge {
@@ -105,6 +110,7 @@
       @media screen and (min-width: 1500px) {
         width: 30%;
         margin-left: 10rem;
+        margin-top: -3rem;
       }
 
       @include breakpoint-medium-down {
