@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const publicPath = path.resolve(__dirname,'../../dist/');
 
 const port = process.env.PORT || 9002;
+console.log('enters');
+// console.log(process.env);
+console.log(process.env.NODE_ENV);
 
 app.use(cors());
 
