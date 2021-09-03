@@ -66,7 +66,8 @@ const useStyles = makeStyles(theme => ({
       "&:hover": {
         backgroundColor: "#FDF6D8"
       },
-      borderRadius: '4px'
+      borderRadius: '4px',
+      textTransform: 'none'
     },
     formsize:{
       width: 120,
