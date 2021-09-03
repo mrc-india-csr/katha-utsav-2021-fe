@@ -10,7 +10,13 @@
   max-width: 72rem;
 
   @media (max-width: 500px) {
-    padding: 1.5rem;
+    padding: .5rem;
+    width: 90%;
+  }
+
+  @media (max-width: 360px) {
+    padding: .5rem;
+    width: 80%;
   }
 
   h3 {
@@ -20,16 +26,36 @@
 
   &__time-left {
     font-family: Fredoka One;
-    font-weight: 400;
-    font-size: 3rem;
-    line-height: 4rem;
     letter-spacing: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    span {
-      margin: 2.625rem;
+    &--container {
+      position: relative;
+    }
+    &--value {
+      font-weight: 400;
+      font-size: 3rem;
+      line-height: 4rem;
+      margin: 0 2.625rem;
 
       @media (max-width: 500px) {
         margin: .75rem;
+      }
+
+      @media (max-width: 360px) {
+        font-size: 2rem;
+      }
+    }
+
+    &--desc {
+      position: absolute;
+      bottom: -1rem;
+      left: 3rem;
+
+      @media (max-width: 500px) {
+        left: 1rem;
       }
     }
   }

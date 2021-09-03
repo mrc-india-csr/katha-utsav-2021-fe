@@ -65,12 +65,20 @@
           margin: 0 4rem;
         }
 
+       @include breakpoint-xlarge {
+         margin: 0;
+       }
+
         img {
           height: 6rem;
           margin-right: 1rem;
 
           @media (max-width: 600px) {
             display: none;
+          }
+
+          @include breakpoint-xlarge {
+            margin-right: 5.625rem;
           }
         }
       }
