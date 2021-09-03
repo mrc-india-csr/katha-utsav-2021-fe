@@ -2,7 +2,7 @@
   background-color: rgba(254, 203, 5, 0.7);
 
   .container {
-    padding: 0 5rem 10rem;
+    padding: 0 2rem 10rem;
     .header-wrap {
       display: flex;
       flex-direction: row;
@@ -15,7 +15,7 @@
         flex: 1;
       }
       .menus {
-        align-self: flex-end;
+        align-self: center;
         ul {
           li {
             display: inline-block;

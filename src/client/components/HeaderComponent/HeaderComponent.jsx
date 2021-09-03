@@ -138,20 +138,21 @@ const HeaderComponent = (props) => {
     const tabProperties = [
         { name: "Why Katha", url: "whykatha" },
         { name: "Process", url: "process" },
-        { name: "About Katha21", url: "about-us" },
-        { name: "Schedule", url: "about-us" },
+        { name: "About Katha 21", url: "about-us" },
+        { name: "Schedule", url: "schedule" },
         { name: "Gallery", url: "katha-history" },
         { name: "Mentors", url: "mentors" },
 
     ]
 
     const menuServiceProperties = [
-        { name: 'Individual Registration', showPopUpFun: props.showIndividualPopUp },
-        { name: 'School Registration', showPopUpFun: props.showSchoolPopUp },
+        { name: 'For Individuals', showPopUpFun: props.showIndividualPopUp },
+        { name: 'For Schools', showPopUpFun: props.showSchoolPopUp },
     ];
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        
     };
 
     const tabs = (
@@ -166,7 +167,7 @@ const HeaderComponent = (props) => {
                                     <li><Link  to="whykatha" spy={true} smooth={true}><a href="#">Why Katha?</a></Link></li>
                                     <li><Link  to="process" spy={true} smooth={true}><a href="#">Process</a></Link></li>
                                     <li><Link  to="about-us" spy={true} smooth={true}><a href="#">About Katha 21</a></Link></li>
-                                    <li><Link  to="about-us" spy={true} smooth={true}><a href="#">Schedule</a></Link></li>
+                                    <li><Link  to="schedule" spy={true} smooth={true}><a href="#">Schedule</a></Link></li>
                                     <li><Link  to="katha-history" spy={true} smooth={true}><a href="#">Gallery</a></Link></li>
                                     <li><Link  to="mentors" spy={true} smooth={true}><a href="#">Mentors</a></Link></li>
                                 </ul>
