@@ -9,6 +9,7 @@ networks:
 services:
   katha_utsav:
     image: ${REGISTRY}/${IMAGETAG}:${GO_REVISION}
+    env_file: env_vars/${GO_STAGE_NAME}.env
     environment:
       SAMPLEENV: SAMPLEENV
     networks:

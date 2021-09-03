@@ -165,7 +165,7 @@ const HeaderComponent = (props) => {
                                 <ul>
                                     <li><Link  to="whykatha" spy={true} smooth={true}><a href="#">Why Katha?</a></Link></li>
                                     <li><Link  to="process" spy={true} smooth={true}><a href="#">Process</a></Link></li>
-                                    <li><Link  to="about-us" spy={true} smooth={true}><a href="#">About Katha21</a></Link></li>
+                                    <li><Link  to="about-us" spy={true} smooth={true}><a href="#">About Katha 21</a></Link></li>
                                     <li><Link  to="about-us" spy={true} smooth={true}><a href="#">Schedule</a></Link></li>
                                     <li><Link  to="katha-history" spy={true} smooth={true}><a href="#">Gallery</a></Link></li>
                                     <li><Link  to="mentors" spy={true} smooth={true}><a href="#">Mentors</a></Link></li>

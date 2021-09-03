@@ -6,6 +6,7 @@ import KathaHistory from '../KathaHistory/KathaHistory';
 import Mentors from '../Mentors/Mentors';
 import Process from '../Process/Process';
 import Timer from '../Timer/Timer';
+import Schedule from '../Schedule/Schedule';
 
 const Home = (props) => {
     return (
@@ -15,6 +16,7 @@ const Home = (props) => {
             <Timeline />
             <Process />
             <AboutKatha />
+            <Schedule/>
             <KathaHistory />
             <Mentors />
         </React.Fragment>
