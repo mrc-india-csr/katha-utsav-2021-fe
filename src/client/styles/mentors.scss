@@ -15,7 +15,7 @@
   }
 
   p {
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -26,7 +26,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 3rem;
 
     @include breakpoint-xlarge {
@@ -42,7 +42,7 @@
 
       .profile {
         margin: 0 1.5rem 2rem;
-        font-family: Poppins;
+        font-family: 'Poppins', sans-serif;
 
         img {
           @include breakpoint-large-down {

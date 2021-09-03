@@ -21,12 +21,12 @@ const Mentors = () => {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur </p>
                 <div className='mentors__container'>
                     <div className='mentors__container--box'>
-                        <Profile image={Mentor1} name='Name' description='text'/>
-                        <Profile image={Mentor2} name='Name' description='text'/>
+                        <Profile image={Mentor1} name='Rachana Kulshrestha' description='Poetry'/>
+                        <Profile image={Mentor2} name='Savi Sarin' description='Story'/>
                     </div>
                     <div className='mentors__container--box'>
-                        <Profile image={Mentor3} name='Name' description='text'/>
-                        <Profile image={Mentor4} name='Name' description='text'/>
+                        <Profile image={Mentor3} name='Vikram Sridhar' description='Story and Poetry'/>
+                        <Profile image={Mentor4} name='Dr Shivani Kanodia' description='Poetry'/>
                     </div>
                 </div>
             </div>
