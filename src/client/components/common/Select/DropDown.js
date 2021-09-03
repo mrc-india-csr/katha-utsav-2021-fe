@@ -1,123 +1,108 @@
-
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        "& .MuiOutlinedInput-input": {
-            color: "#000"
-        },
-        "& .MuiInputLabel-root": {
-            color: "#6D6C6C"
-        },
-        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#6D6C6C"
-        },
-        "&:hover .MuiOutlinedInput-input": {
-            color: "#98248D"
-        },
-        "&:hover .MuiInputLabel-root": {
-            color: "#98248D"
-        },
-        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#98248D"
-        },
-        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-            color: "purple"
-        },
-        "& .MuiInputLabel-root.Mui-focused": {
-            color: "purple"
-        },
-        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "purple"
-        },
-
+  root: {
+    "& .MuiOutlinedInput-input": {
+      color: "#000"
     },
-    error: {
-        "&.MuiFormHelperText-root.Mui-error": {
-            color: theme.palette.common.red
-        }
+    "& .MuiInputLabel-root": {
+      color: "#6D6C6C"
+    },
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#6D6C6C"
+    },
+    "&:hover .MuiOutlinedInput-input": {
+      color: "#98248D"
+    },
+    "&:hover .MuiInputLabel-root": {
+      color: "#98248D"
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#98248D"
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+      color: "purple"
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "purple"
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "purple"
     },
 
-    widthAndHeight: {
-        height: 15,
-        width: 330,
-        [theme.breakpoints.down("sm")]: {
-            width: 280
-        },
+  },
+  error: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: theme.palette.common.red
+    }
+  },
 
-        [theme.breakpoints.down("xs")]: {
-            width: 210
-        }
+  widthAndHeight: {
+    height: 15,
+    width: 330,
+    [theme.breakpoints.down("sm")]: {
+      width: 280
     },
-    changedWidth: {
-          height: 15,
-          width: 150,
-          [theme.breakpoints.down("sm")]: {
-              width: 280
-          },
 
-          [theme.breakpoints.down("xs")]: {
-              width: 210
-          }
-      },
+    [theme.breakpoints.down("xs")]: {
+      width: 210
+    }
+  }
 }));
 
 
 const helperTextStyles = makeStyles(theme => ({
-    root: {
-        margin: 4,
-        '&$error': {
-            color: '#f44336'
-        }
-    },
-    error: {
-        color: "#f44336"
-    } //<--this is required to make it work
+  root: {
+    margin: 4,
+    '&$error': {
+      color: '#f44336'
+    }
+  },
+  error: {
+    color: "#f44336"
+  } //<--this is required to make it work
 }));
 
 const styles = {
-    helper: {
-        color: 'red',
-        fontSize: '.8em',
-    }
+  helper: {
+    color: 'red',
+    fontSize: '.8em',
+  }
 }
 
 const DropDown = (props) => {
-    const classes = useStyles();
-    const helperTestClasses = helperTextStyles();
-    const { options, fieldName, onChangeFunc, value, isError, errorMessage,eventValidation, changeWidth } = props;
-    const classNameForWidth = changeWidth ? classes.changedWidth : classes.widthAndHeight
-    return (
-        <TextField
-            id={fieldName}
-            className={classes.root}
-            error={false}
-            helperText={isError ? errorMessage : ''}
-            value={value}
-            onChange={(e) => {eventValidation(fieldName,e)}}
-            variant="outlined"
-            label={fieldName}
-            InputProps={{
-                classes: {
-                    input: classNameForWidth
-                }
-            }}
-            FormHelperTextProps={{ style: styles.helper }}
+  const classes = useStyles();
+  const helperTestClasses = helperTextStyles();
+  const {options, fieldName, onChangeFunc, value, isError, errorMessage, eventValidation} = props;
+  return (
+    <TextField
+      id={fieldName}
+      className={classes.root}
+      error={false}
+      helperText={isError ? errorMessage : ''}
+      value={value}
+      onChange={(e) => {
+        eventValidation(fieldName, e)
+      }}
+      variant="outlined"
+      label={fieldName}
+      InputProps={{
+        classes: {
+          input: classes.widthAndHeight
+        }
+      }}
+      FormHelperTextProps={{style: styles.helper}}
 
-            select
-        >
-            {_.map(options, (option) => <MenuItem key={option} value={option}>{option}</MenuItem>
-            )}
-        </TextField>
-    );
-}
-
-DropDown.defaultProps =  {
-    changeWidth : false
+      select
+    >
+      {_.map(options, (option) => <MenuItem key={option} value={option}>{option}</MenuItem>
+      )}
+    </TextField>
+  );
 }
 
 export default DropDown;
