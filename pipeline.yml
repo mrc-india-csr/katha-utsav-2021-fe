@@ -10,10 +10,10 @@ traefik_application_port: 9002
 traefik_https_enable: true
 traefik_ssl_provider: letsencrypt
 vault:
-  enabled: false
+  enabled: true
   name: katha-utsav
-#  envs:
-#    - NODE_ENV
+  envs:
+    - NODE_ENV
 #    - DB_USER
 #    - DB_PWD
 #    - DB_NAME
