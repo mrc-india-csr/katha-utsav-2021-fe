@@ -34,8 +34,10 @@ const Timer = () => {
             <div className='timer'>
                 <h3>Registration ends in</h3>
                 <div className='timer__time-left'>
-                    <span>{timeLeft.days}</span>:<span>{timeLeft.hours}</span>:<span>{timeLeft.minutes}</span>:<span>{timeLeft.seconds}</span>
-                    {/*<span>{timeLeft.days} days</span>:<span>{timeLeft.hours} hours</span>:<span>{timeLeft.minutes} minutes</span>:<span>{timeLeft.seconds} seconds</span>*/}
+                    <div className='timer__time-left--container'><span className='timer__time-left--value'>{timeLeft.days}</span><span className='timer__time-left--desc'>days</span></div>:
+                    <div className='timer__time-left--container'><span className='timer__time-left--value'>{timeLeft.hours}</span><span className='timer__time-left--desc'>hours</span></div>:
+                    <div className='timer__time-left--container'><span className='timer__time-left--value'>{timeLeft.minutes}</span><span className='timer__time-left--desc'>mins</span></div>:
+                    <div className='timer__time-left--container'><span className='timer__time-left--value'>{timeLeft.seconds}</span><span className='timer__time-left--desc'>secs</span></div>
 
                 </div>
             </div>
