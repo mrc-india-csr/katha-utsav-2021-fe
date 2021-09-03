@@ -47,7 +47,13 @@ const BannerComponent = (props) => {
     const ContactUs = (
         <Typography component={Link} to="/contact" gutterBottom variant="subtitle1" className={classes.contactUs}>Contact us</Typography>
     )
-
+    const matchesLGUp = useMediaQuery(theme.breakpoints.up('lg'));
+    let width ="500px";
+    let height = "500px"
+   if(matchesLGUp){
+     width ="600px";
+     height = "600px"
+   }
 
     return (
         <React.Fragment>
@@ -69,7 +75,7 @@ const BannerComponent = (props) => {
                     </Grid>
                 </Grid>
                 <Grid item container direction="row" xl={10} lg={9} md={7} justifyContent="center">
-                    <img src={HeroImg} alt="hero" width="600rem" height="500rem" />;
+                    <img src={HeroImg} alt="hero" width={width} height={height} />
                 </Grid>
             </Grid>
         </React.Fragment>
