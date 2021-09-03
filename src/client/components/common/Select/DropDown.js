@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
@@ -10,13 +10,13 @@ const useStyles = makeStyles(theme => ({
       color: "#000"
     },
     "& .MuiInputLabel-root": {
-      color: "#6D6C6C"
+      color: "#000"
     },
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#6D6C6C"
+      borderColor: "#000"
     },
     "&:hover .MuiOutlinedInput-input": {
-      color: "#98248D"
+      color: "#000"
     },
     "&:hover .MuiInputLabel-root": {
       color: "#98248D"
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
       borderColor: "#98248D"
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-      color: "purple"
+      color: "#000"
     },
     "& .MuiInputLabel-root.Mui-focused": {
       color: "purple"
@@ -43,7 +43,10 @@ const useStyles = makeStyles(theme => ({
 
   widthAndHeight: {
     height: 15,
-    width: 330,
+    width: 380,
+    [theme.breakpoints.up("xl")]: {
+      width: 480,
+    },
     [theme.breakpoints.down("sm")]: {
       width: 280
     },
@@ -77,7 +80,7 @@ const styles = {
 const DropDown = (props) => {
   const classes = useStyles();
   const helperTestClasses = helperTextStyles();
-  const {options, fieldName, onChangeFunc, value, isError, errorMessage, eventValidation} = props;
+  const { options, fieldName, onChangeFunc, value, isError, errorMessage, eventValidation } = props;
   return (
     <TextField
       id={fieldName}
@@ -95,7 +98,7 @@ const DropDown = (props) => {
           input: classes.widthAndHeight
         }
       }}
-      FormHelperTextProps={{style: styles.helper}}
+      FormHelperTextProps={{ style: styles.helper }}
 
       select
     >

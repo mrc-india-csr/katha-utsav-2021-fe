@@ -14,7 +14,9 @@ import MenuIcon from '../../assets/images/MenuIcon.png';
 import Grid from "@material-ui/core/Grid";
 import HeroImg from '../../assets/images/hero-bg.png';
 import DropDownButton from '../common/Button/DropDownButton';
-import {Link} from 'react-scroll'
+import { Link } from 'react-scroll';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 function ElevationScroll(props) {
     const { children } = props;
@@ -119,10 +121,27 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "normal",
         fontSize: "18px"
     },
-    cta:{
-        marginBottom:"10rem"
+    cta: {
+        marginBottom: "10rem"
+    },
+    container: {
+        paddingRight: "2rem",
+        paddingLeft: "2rem",
+        paddingBottom: "10rem"
+    },
+    tabsContainer: {
+    },
+    tab: {
+        minWidth: 10,
+        fontFamily: "Poppins",
+        fontSize: "0.75rem",
+        color: "#000",
+        fontWeight:"500",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.5rem",
+            minWidth: 20
+        }
     }
-
 }));
 
 const HeaderComponent = (props) => {
@@ -132,7 +151,15 @@ const HeaderComponent = (props) => {
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const [openDrawer, setOpenDrawer] = useState(false);
     const [value, setValue] = useState(0);
+    let imageWidth = "inherit";
+    let imageHeight = "inherit";
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
 
+    if(matchesXL)
+    {
+        imageWidth ="250px";
+        imageHeight = "133px";
+    }
 
 
     const tabProperties = [
@@ -152,30 +179,34 @@ const HeaderComponent = (props) => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        
     };
 
     const tabs = (
         <React.Fragment>
             <div className='header-container'>
-                <div className='container'>
-                    <header>
-                        <div className='header-wrap'>
-                            <div className='logo'><img src={Logo} alt="logo" /></div>
-                            <div className='menus'>
-                                <ul>
-                                    <li><Link  to="whykatha" spy={true} smooth={true}><a href="#">Why Katha?</a></Link></li>
-                                    <li><Link  to="process" spy={true} smooth={true}><a href="#">Process</a></Link></li>
-                                    <li><Link  to="about-us" spy={true} smooth={true}><a href="#">About Katha 21</a></Link></li>
-                                    <li><Link  to="schedule" spy={true} smooth={true}><a href="#">Schedule</a></Link></li>
-                                    <li><Link  to="katha-history" spy={true} smooth={true}><a href="#">Gallery</a></Link></li>
-                                    <li><Link  to="mentors" spy={true} smooth={true}><a href="#">Mentors</a></Link></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </header>
-                    <BannerComponent menuServiceProperties={menuServiceProperties} />
-                </div>
+                <Grid container direction="column" className={classes.container}>
+                    <Grid item container direction="row" justifyContent="space-between" alignItems="center" style={{ width: "100%", paddingTop: "1rem", paddingBottom: "1rem" }}>
+                        <Grid item style={{marginLeft: "30px"}}>
+                            <img src={Logo} alt="logo" width={imageWidth} height={imageHeight} />
+                        </Grid>
+                        <Grid item >
+                            <Tabs indicatorColor="primary" className={classes.tabsContainer}>
+                                {
+                                    tabProperties.map((option, index) => (
+                                        <Grid item>
+                                            <Link to={option.url} spy={true} smooth={true}>
+                                                <Tab key={option.name} label={option.name} className={classes.tab} />
+                                            </Link>
+                                        </Grid>
+                                    ))
+                                }
+                            </Tabs>
+                        </Grid>
+                    </Grid>
+                    <Grid item container>
+                        <BannerComponent menuServiceProperties={menuServiceProperties} />
+                    </Grid>
+                </Grid>
             </div>
         </React.Fragment>
     );
@@ -192,11 +223,11 @@ const HeaderComponent = (props) => {
                 <List disablePadding>
                     {
                         tabProperties.map((option, index) => (
-                            <Link  to={option.url} spy={true} smooth={true}>
-                            <ListItem key={option.name} selected={value === index}
-                                onClick={(e) => { handleChange(e, index); setOpenDrawer(false) }} divider button>
-                                <ListItemText classes={{ root: value !== index ? classes.menuItem : classes.selectedItem }} disableTypography>{option.name}</ListItemText>
-                            </ListItem>
+                            <Link to={option.url} spy={true} smooth={true}>
+                                <ListItem key={option.name} selected={value === index}
+                                    onClick={(e) => { handleChange(e, index); setOpenDrawer(false) }} divider button>
+                                    <ListItemText classes={{ root: value !== index ? classes.menuItem : classes.selectedItem }} disableTypography>{option.name}</ListItemText>
+                                </ListItem>
                             </Link>
                         ))
                     }

@@ -12,12 +12,19 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Fredoka One',
         color: "#98248D",
         fontWeight: "normal",
-        fontSize: "18px",
-        marginTop: "10px"
+        fontSize: "1.25rem",
+        marginTop: "10px",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "2.85rem",
+        }
     },
     bannerWrap: {
         width: "100%",
         padding: "1rem 0rem",
+        [theme.breakpoints.up("xl")]: {
+           paddingLeft: "5rem",
+           paddingRight: "5rem"
+        }
     },
     bannerImage: {
         textAlign: "center"
@@ -25,19 +32,28 @@ const useStyles = makeStyles(theme => ({
     storyText: {
         color: " #000000",
         fontFamily: 'Fredoka One',
-        fontSize: "24px",
-        margin: "0.5rem 0"
+        fontSize: "2rem",
+        margin: "0.5rem 0",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "4rem",
+        }
     },
     bannerText: {
         marginTop: "2rem",
         color: "#98248D",
         fontSize: "2.9rem",
-        fontFamily: 'Fredoka One'
+        fontFamily: 'Fredoka One',
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "7rem",
+        }
     },
     styleFormat: {
         color: "#66645E",
-        fontSize: "24px",
-        fontFamily: "Poppins-Regular"
+        fontSize: "1.5rem",
+        fontFamily: "Poppins-Regular",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "3rem",
+        }
       }
 }));
 
@@ -48,17 +64,22 @@ const BannerComponent = (props) => {
         <Typography component={Link} to="/contact" gutterBottom variant="subtitle1" className={classes.contactUs}>Contact us</Typography>
     )
     const matchesLGUp = useMediaQuery(theme.breakpoints.up('lg'));
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
     let width ="500px";
     let height = "500px"
    if(matchesLGUp){
      width ="600px";
      height = "600px"
    }
+   if(matchesXL){
+    width ="1000px";
+    height = "1000px"
+   }
 
     return (
         <React.Fragment>
             <Grid container direction="row" className={classes.bannerWrap}>
-                <Grid item container direction="column" lg={3} md={5} xl={2}>
+                <Grid item container direction="column" lg={3} md={5} xl={5}>
                     <Grid item>
                         <Typography gutterBottom variant="h1" className={classes.bannerText}>Katha Utsav 2021</Typography>
                     </Grid>
@@ -66,7 +87,7 @@ const BannerComponent = (props) => {
                     <Typography gutterBottom variant="h6" className={classes.styleFormat}>Search for Excellence in Creative <br /> Writing is here...</Typography>
 
                     <Grid item container direction="row">
-                        <Grid item style={{ marginRight: "3rem" }}>
+                        <Grid item style={{ marginRight: "2rem" }}>
                             <DropDownButton menuServiceProperties={props.menuServiceProperties} />
                         </Grid>
                         <Grid item style={{ marginTop: "0.5rem" }}>
@@ -74,7 +95,7 @@ const BannerComponent = (props) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item container direction="row" xl={10} lg={9} md={7} justifyContent="center">
+                <Grid item container direction="row" xl={7} lg={9} md={7} justifyContent="center">
                     <img src={HeroImg} alt="hero" width={width} height={height} />
                 </Grid>
             </Grid>

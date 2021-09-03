@@ -226,7 +226,7 @@ const StepTwo = (props) => {
         isError = true;
       }
 
-      if (_.isEmpty(states.stepTwo[step].studentClass) || !_.includes(["4 to 6", "7 to 9", "10 to 12"], states.stepTwo[step].studentClass)) {
+      if (_.isEmpty(states.stepTwo[step].studentClass) || !_.includes(["IV to VI", "VII to IX", "X to XII"], states.stepTwo[step].studentClass)) {
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentClass = 'error'
           return {
@@ -324,7 +324,7 @@ const StepTwo = (props) => {
         }
         break;
       case 'studentClass':
-        if (_.isEmpty(event.target.value) || !_.includes(["4 to 6", "7 to 9", "10 to 12"], event.target.value)) {
+        if (_.isEmpty(event.target.value) || !_.includes(["IV to VI", "VII to IX", "X to XII"], event.target.value)) {
           setStates((states) => {
             states.stepTwo[i][event.target.id] = event.target.value
             states.stepTwoErrorMessage[i][event.target.id] = 'error'
@@ -450,7 +450,7 @@ const StepTwo = (props) => {
                       </TableCell>
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
-                                  options={["4 to 6", "7 to 9 ", "10 to 12"]}
+                                  options={["IV to VI", "VII to IX ", "X to XII"]}
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right" >
