@@ -4,9 +4,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import downarrow from "../../../assets/images/downarrow.png"
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import IndividualRegistrationContainer from '../../../containers/IndividualRegistrationContainer';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
     buttonArrow: {
@@ -16,11 +14,18 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "2em",
         color: "#98248D",
         fontFamily: 'Fredoka One',
+        [theme.breakpoints.up("xl")]: {
+            padding: "2rem",
+            fontSize: "1.75rem"
+        }
     },
     menuRegistration: {
         backgroundColor: "#fff",
         color: "#000",
     },
+    root:{
+        fontSize: "3rem"
+    }
 
 }));
 
@@ -49,6 +54,7 @@ const DropDownButton = (props) => {
     const RegisterNow = (
         <Button className={classes.buttonArrow} aria-haspopup={anchorEl ? "true" : undefined} aria-owns={anchorEl ? "simple-menu" : undefined} variant="contained" onClick={handleClick}><span style={{ marginRight: "10px" }}>Register Now </span><img src={downarrow} alt="down arrow" /> </Button>
     );
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
 
     return (
         <React.Fragment>
@@ -69,7 +75,7 @@ const DropDownButton = (props) => {
                 }}
                 getContentAnchorEl={null}
 
-                classes={{ paper: classes.menuRegistration }}
+                classes={{ paper: classes.menuRegistration}}
                 MenuListProps={{
                     onMouseLeave: handleClose,
                 }}
@@ -78,7 +84,7 @@ const DropDownButton = (props) => {
             >
                 {
                     props.menuServiceProperties.map((option, index) => {
-                        return <MenuItem key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
+                        return <MenuItem style={{fontSize: matchesXL?"2.75rem":"inherit", paddingLeft: "1.8rem", paddingRight:"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
                     })
                 }
             </Menu>

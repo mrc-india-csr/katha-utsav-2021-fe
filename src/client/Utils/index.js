@@ -35,7 +35,7 @@ export const IndividualRegistrationValidation = (name, emailId, phoneNumber, Sch
     errorObject.StoryCategoryError = "Please enter a valid StoryCategory";
     errorObject.isError = true;
   }
-  if (_.isEmpty(Class) || !_.includes(["4 to 6", "7 to 9", "10 to 12"], Class)) {
+  if (_.isEmpty(Class) || !_.includes(["IV to VI", "VII to IX", "X to XII"], Class)) {
     errorObject.ClassError = "Please enter a valid Class";
     errorObject.isError = true;
   }

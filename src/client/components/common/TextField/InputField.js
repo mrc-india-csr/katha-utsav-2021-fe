@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         flexWrap: "wrap",
     },
     cssLabel: {
-        color: "#6D6C6C",
+        color: "#000",
         "&.Mui-focused": {
             color: "#98248D"
         }
@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexWrap: "wrap",
         "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
-            borderColor: "#6D6C6C" //default
+            borderColor: "#000" //default
         },
         "&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline": {
-            borderColor: "#6D6C6C" //hovered #DCDCDC
+            borderColor: "#000" //hovered #DCDCDC
         },
         "&$cssFocused $notchedOutline": {
             borderColor: "#98248D" //focused
@@ -36,7 +36,10 @@ const useStyles = makeStyles(theme => ({
     disabled: {},
     widthAndHeight: {
         height: 15,
-        width: 350,
+        width: 400,
+        [theme.breakpoints.up("xl")]: {
+            width:500,
+        },
         [theme.breakpoints.down("sm")]: {
             width: 300
         },
@@ -57,7 +60,7 @@ const InputField = (props) => {
             error={isError}
             helperText={isError ? errorMessage : ''}
             onChange={event => { eventValidation(event) }}
-            required InputLabelProps={{
+             InputLabelProps={{
                 classes: {
                     root: classes.cssLabel,
                     focused: classes.cssFocused

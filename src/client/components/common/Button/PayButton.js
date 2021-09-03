@@ -6,9 +6,13 @@ const useStyles = makeStyles(theme => ({
     PaymentButton:{
         backgroundColor:"#98248D",
         color: "#ffffff",
-        width: 360,
+        width: 400,
         height: 40,
         textTransform: "none",
+        [theme.breakpoints.up("xl")]: {
+            width: 520,
+            fontSize: "1.25rem"
+        },
         [theme.breakpoints.down("sm")]: {
             width: 320
         },
