@@ -19,8 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     menuRegistration: {
         backgroundColor: "#fff",
-        color: "#98248D",
-
+        color: "#000",
     },
 
 }));
