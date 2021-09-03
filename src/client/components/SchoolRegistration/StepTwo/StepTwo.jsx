@@ -26,14 +26,15 @@ const useStyles = makeStyles(theme => ({
       backgroundRepeat: "no-repeat",
 
     },
-    StudentCount: {
+    StudentCountStepTwo: {
       padding: 30,
     },
     Detail: {
       color: '#66645E',
       fontWeight: "400",
       fontSize: "1rem",
-      left: '40px'
+      left: '40px',
+      marginTop:'31px'
     },
     registrationCard: {
       width: '100%',
@@ -59,11 +60,13 @@ const useStyles = makeStyles(theme => ({
       marginBottom: '17px'
     },
     UploadFile: {
-      width: 130,
+      width: '160px',
+      padding: '13px 14px',
       backgroundColor: "#FDF6D8",
       "&:hover": {
         backgroundColor: "#FDF6D8"
       },
+      borderRadius: '4px'
     },
     formsize:{
       width: 120,
@@ -78,14 +81,21 @@ const useStyles = makeStyles(theme => ({
       align_items: 'center',
       /* Text Color/Blue Grey */
       color: '#525F7F'
-    }
+    },
+    Note: {
+    fontWeight: 500,
+    fontSize: '12px',
+    lineHeight: '32px',
+    textAlign: 'right',
+    letterSpacing: '-0.02em',
+    color: '#000000',
+    paddingRight: '28px'
+  }
   })
 );
 const StepTwo = (props) => {
-
   const options = Array(20).fill().map((x, i) => i + 1);
   const classes = useStyles();
-
   const [states, setStates] = React.useState({
     stepTwo: {
       0 : {
@@ -99,12 +109,12 @@ const StepTwo = (props) => {
     },
     stepTwoErrorMessage: {
       0: {
-        studentName: '',
-        studentEmail: '',
-        studentPhone: '',
-        studentClass: '',
-        storyCategory: '',
-        storyPath: ''
+        studentName: props.stepTwoMessage[0].studentName,
+        studentEmail: props.stepTwoMessage[0].studentEmail,
+        studentPhone: props.stepTwoMessage[0].studentPhone,
+        studentClass: props.stepTwoMessage[0].studentClass,
+        storyCategory: props.stepTwoMessage[0].storyCategory,
+        storyPath: props.stepTwoMessage[0].studentName
       }
     },
     uploadFile: {
@@ -119,7 +129,6 @@ const StepTwo = (props) => {
     let values = {}
     let errorMessages = {}
     let uploadFile = {}
-
     for (let step = 0; step < e.target.value; step++) {
       values.step = step
       errorMessages.step = step
@@ -140,7 +149,7 @@ const StepTwo = (props) => {
         studentPhone: '',
         studentClass: '',
         storyCategory: '',
-        storyPath: ''
+        storyPath: {}
       }
 
       uploadFile[step] = {
@@ -236,16 +245,15 @@ const StepTwo = (props) => {
       }
     }
 
-    if(!isError) {
+    if(true) {
       let stepTwoData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         let data = states.stepTwo[step]
         stepTwoData.push(data)
       }
-      props.validateDetails(stepTwoData)
+      props.validateDetailsStepTwo(stepTwoData)
     }
   }
-
   const onDropDown = (id, event, i) => {
     stepTwoFormValidation({ target: { id: `${id}`, value: `${event.target.value}`} }, i);
   }
@@ -381,6 +389,7 @@ const StepTwo = (props) => {
       })
     }
   }
+
   return (
     <Grid container direction="column" className={classes.background}>
       <Grid item container alignItems="center" direction="column">
@@ -401,14 +410,14 @@ const StepTwo = (props) => {
             </Grid>
           </Grid>
           <Grid item container alignItems="center" direction="column">
-            <Grid item className={classes.StudentCount}>
+            <Grid item className={classes.StudentCountStepTwo}>
               <DropDown errorMessage='' isError={false} fieldName={"StudentCount"} options={options} toChange={true}
                         eventValidation={(fieldName, e) => studentCount(fieldName, e)} value={states.dropDownValue}/>
             </Grid>
           </Grid>
           <Grid item container align="right" direction="column">
             <Grid item>
-              <Typography gutterBottom variant="subtitle2">Note : Supported Document types:
+              <Typography gutterBottom variant="subtitle2" className={classes.Note}>Note : Supported Document types:
                 word, pdf, jpg, jpeg,png</Typography>
             </Grid>
           </Grid>
@@ -441,12 +450,12 @@ const StepTwo = (props) => {
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
                                   options={["4 to 6", "7 to 9 ", "10 to 12"]}
-                                  value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)} changeWidth={true}/>
+                                  value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
-                      <TableCell align="right">
-                        <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"}
-                                  options={["Fiction", "Non-Fiction", "Poetry"]}
-                                  value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)} changeWidth={true}/>
+                      <TableCell align="right" >
+                          <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"}
+                                    options={["Fiction", "Non-Fiction", "Poetry"]}
+                                    value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right">
                         <FileUploader onFileUpload={(selectedFile, name, event) => onFileUpload(selectedFile, name, event, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />

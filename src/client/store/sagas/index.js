@@ -15,7 +15,6 @@ export  function* watchIndividualRegistrationCall() {
 }
 
 export  function* watchSchoolStepOneRegistrationCall() {
-  console.log('saga')
   yield all([
      takeEvery(actionTypes.VALID_INITIATE, ValidateIndividualRegistration),
      takeEvery(actionTypes.VALID_INITIATE_SCHOOL_STEPONE, ValidateSchoolStepOneRegistration),

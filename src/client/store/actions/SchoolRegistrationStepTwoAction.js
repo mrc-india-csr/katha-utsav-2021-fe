@@ -7,34 +7,19 @@ export const validateStepTwo = (stepTwoData) => {
   }
 }
 
-export const validateSuccessSchoolStepTwo = (schoolName,emailId,phoneNumber,schoolCoordinatorName,city) => {
-  const stepOneData = {
-    schoolName,emailId,phoneNumber,schoolCoordinatorName,city
-  }
+export const validateSuccessSchoolStepTwo = (stepTwoFormData) => {
   return {
-    type: actionTypes.VALID_SUCCESS_SCHOOL_STEPONE,
-    stepOneData
+    type: actionTypes.VALID_SUCCESS_SCHOOL_STEPTWO,
+    stepTwoFormData
   }
 }
 
-export const validateFailSchoolStepTwo = (schoolNameMessage,emailIdMessage,phoneNumberMessage,schoolCoordinatorNameMessage,cityMessage) => {
-  const errorPayload = {
-    schoolNameMessage,
-    emailIdMessage,
-    phoneNumberMessage,
-    schoolCoordinatorNameMessage,
-    cityMessage
-  };
+export const validateFailSchoolStepTwo = (stepTwoErrorData) => {
+
   return {
-    type: actionTypes.VALID_FAIL_SCHOOL_STEPONE,
-    errorPayload
+    type: actionTypes.VALID_FAIL_SCHOOL_STEPTWO,
+    stepTwoErrorData
   }
 }
 
-export const showPopUpSchool = (showPopUp) => {
-  return {
-    type: actionTypes.IS_SHOW_POPUP_SCHOOL,
-    showPopUp
-  }
-}
 
