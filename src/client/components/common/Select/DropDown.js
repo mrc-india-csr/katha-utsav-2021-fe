@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
   widthAndHeight: {
     height: 15,
     width: 380,
+    [theme.breakpoints.up("lg")]: {
+      width: 430,
+    },
     [theme.breakpoints.up("xl")]: {
       width: 480,
     },

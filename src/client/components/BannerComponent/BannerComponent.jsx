@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "normal",
         fontSize: "1.25rem",
         marginTop: "10px",
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "2.35rem",
+        },
         [theme.breakpoints.up("xl")]: {
             fontSize: "2.85rem",
         }
@@ -24,7 +27,11 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("xl")]: {
            paddingLeft: "5rem",
            paddingRight: "5rem"
-        }
+        },
+        [theme.breakpoints.up("lg")]: {
+            paddingLeft: "5rem",
+            paddingRight: "5rem"
+         }
     },
     bannerImage: {
         textAlign: "center"
@@ -36,6 +43,9 @@ const useStyles = makeStyles(theme => ({
         margin: "0.5rem 0",
         [theme.breakpoints.up("xl")]: {
             fontSize: "4rem",
+        },
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "3rem",
         }
     },
     bannerText: {
@@ -45,6 +55,9 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Fredoka One',
         [theme.breakpoints.up("xl")]: {
             fontSize: "7rem",
+        },
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "5rem",
         }
     },
     styleFormat: {
@@ -53,7 +66,11 @@ const useStyles = makeStyles(theme => ({
         fontFamily: "Poppins-Regular",
         [theme.breakpoints.up("xl")]: {
             fontSize: "3rem",
-        }
+        },
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "2rem",
+        },
+
       }
 }));
 
@@ -68,8 +85,8 @@ const BannerComponent = (props) => {
     let width ="500px";
     let height = "500px"
    if(matchesLGUp){
-     width ="600px";
-     height = "600px"
+     width ="800px";
+     height = "800px"
    }
    if(matchesXL){
     width ="1000px";
@@ -79,7 +96,7 @@ const BannerComponent = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="row" className={classes.bannerWrap}>
-                <Grid item container direction="column" lg={3} md={5} xl={5}>
+                <Grid item container direction="column" lg={5} md={5} xl={5}>
                     <Grid item>
                         <Typography gutterBottom variant="h1" className={classes.bannerText}>Katha Utsav 2021</Typography>
                     </Grid>
@@ -95,7 +112,7 @@ const BannerComponent = (props) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item container direction="row" xl={7} lg={9} md={7} justifyContent="center">
+                <Grid item container direction="row" xl={7} lg={7} md={7} justifyContent="center">
                     <img src={HeroImg} alt="hero" width={width} height={height} />
                 </Grid>
             </Grid>
