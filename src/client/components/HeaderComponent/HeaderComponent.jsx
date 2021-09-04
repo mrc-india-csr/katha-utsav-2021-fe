@@ -134,12 +134,12 @@ const useStyles = makeStyles(theme => ({
     tab: {
         minWidth: 10,
         fontFamily: "Poppins",
-        fontSize: "0.75rem",
-        color: "#000",
+        fontSize: "0.76rem",
+        color: "#212832",
         fontWeight:"500",
         [theme.breakpoints.up("lg")]: {
-            fontSize: "1.5rem",
-            minWidth: 15
+            fontSize: "1.15rem",
+            minWidth: 10
         },
         [theme.breakpoints.up("xl")]: {
             fontSize: "1.5rem",

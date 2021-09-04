@@ -15,12 +15,12 @@ const useStyles = makeStyles(theme => ({
         color: "#98248D",
         fontFamily: 'Fredoka One',
         [theme.breakpoints.up("lg")]: {
-            padding: "1.5rem",
-            fontSize: "1.75rem"
+            padding: "1rem",
+            fontSize: "1.5rem"
         },
         [theme.breakpoints.up("xl")]: {
-            padding: "2rem",
-            fontSize: "1.75rem"
+            padding: "1.5rem",
+            fontSize: "1.5rem"
         }
     },
     menuRegistration: {
@@ -90,7 +90,7 @@ const DropDownButton = (props) => {
             >
                 {
                     props.menuServiceProperties.map((option, index) => {
-                        return <MenuItem style={{fontSize: matchesXL?"2.75rem": matchesLG?"2.5rem":"inherit", paddingLeft: "1.8rem", paddingRight:"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
+                        return <MenuItem style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"3rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"3rem":"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
                     })
                 }
             </Menu>

@@ -11,7 +11,8 @@ import CardContent from '@material-ui/core/CardContent';
 import InputField from '../common/TextField/InputField';
 import PaymentButton from '../common/Button/PayButton';
 import Comment from '../common/TextField/Comment';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +26,13 @@ const useStyles = makeStyles(theme => ({
     RegistrationForm: {
         color: "#66645E",
         fontWeight: "400",
-        fontSize: "1rem"
+        fontSize: "1rem",
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "1.5rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "2rem"
+        },
     },
     registrationCard: {
 
@@ -61,6 +68,14 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         fontSize: "0.65rem",
         textTransform: "none",
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "1rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            width: 520,
+            fontSize: "1.25rem"
+        },
         [theme.breakpoints.down("sm")]: {
             width: 320
         },
@@ -185,28 +200,39 @@ const Contact = (props) => {
     }
 
     const theme = useTheme();
+    let history = useHistory()
 
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+    const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+
+    let logoWidth = "168";
+    let logoHeight = "90";
+    if (matchesLG) {
+        logoWidth = "198";
+        logoHeight = "120"
+    }
+    if (matchesXL) {
+        logoWidth = "218";
+        logoHeight = "140"
+    }
 
     return (
 
         <Grid container direction="column" className={classes.background}>
             {/*---Cross Mark---*/}
             <Grid item container justifyContent="flex-end">
-                <Grid item component={Link} to="/">
-                    <img alt src={close} alt="crossmark" width="20" height="20" />
+                <Grid item component={Button}  onClick={() => {history.goBack(); history.clear}} >
+                    <img alt src={close} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
                 </Grid>
             </Grid>
 
             {/*---Title and subtitle---*/}
             <Grid item container alignItems="center" direction="column">
                 <Grid item>
-                    <img alt src={Logo} alt="title" width="168" height="90" />
-                </Grid>
-                <Grid item>
-                    <Typography gutterBottom variant="subtitle2" className={classes.RegistrationForm}>Registration Form for Students</Typography>
+                    <img alt src={Logo} alt="title" width={logoWidth} height={logoHeight} />
                 </Grid>
             </Grid>
 
@@ -215,9 +241,10 @@ const Contact = (props) => {
                 <Card className={classes.registrationCard}>
                     <CardContent>
                         <Grid spacing={1} container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? 240 : matchesSM ? 350 : "inherit" }}>
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit" }}>
-                                <Typography gutterBottom variant="body1" style={{ fontSize: "1rem" }} className={classes.RegistrationForm}>Contact Us</Typography>
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+                                <Typography gutterBottom variant="body1" className={classes.RegistrationForm}>Contact Us</Typography>
                             </Grid>
+
 
                             <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit", marginBottom: "0.75rem" }}>
                                 <InputField errorMessage={nameMessage} isError={nameMessage.length > 0} fieldName={"Name"} onChangeFunc={setName} eventValidation={ContactValidation} value={name} />
@@ -239,7 +266,7 @@ const Contact = (props) => {
                                 <PaymentButton onButtonClick={Validate} name={"Submit"} />
                             </Grid>
 
-                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? 220 : "inherit" }}>
+                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                 <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>
                             </Grid>
 

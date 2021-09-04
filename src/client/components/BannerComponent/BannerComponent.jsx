@@ -14,8 +14,9 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "normal",
         fontSize: "1.25rem",
         marginTop: "10px",
+        textDecoration: "none",
         [theme.breakpoints.up("lg")]: {
-            fontSize: "2.35rem",
+            fontSize: "2rem",
         },
         [theme.breakpoints.up("xl")]: {
             fontSize: "2.85rem",
@@ -24,14 +25,14 @@ const useStyles = makeStyles(theme => ({
     bannerWrap: {
         width: "100%",
         padding: "1rem 0rem",
-        [theme.breakpoints.up("xl")]: {
-           paddingLeft: "5rem",
-           paddingRight: "5rem"
-        },
         [theme.breakpoints.up("lg")]: {
+            paddingLeft: "2rem",
+            paddingRight: "2rem"
+         },
+         [theme.breakpoints.up("xl")]: {
             paddingLeft: "5rem",
             paddingRight: "5rem"
-         }
+         },
     },
     bannerImage: {
         textAlign: "center"
@@ -41,11 +42,11 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Fredoka One',
         fontSize: "2rem",
         margin: "0.5rem 0",
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "2rem",
+        },
         [theme.breakpoints.up("xl")]: {
             fontSize: "4rem",
-        },
-        [theme.breakpoints.up("lg")]: {
-            fontSize: "3rem",
         }
     },
     bannerText: {
@@ -85,8 +86,8 @@ const BannerComponent = (props) => {
     let width ="500px";
     let height = "500px"
    if(matchesLGUp){
-     width ="800px";
-     height = "800px"
+     width ="600px";
+     height = "600px"
    }
    if(matchesXL){
     width ="1000px";

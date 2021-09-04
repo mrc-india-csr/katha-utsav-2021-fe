@@ -4,6 +4,8 @@ import React from 'react';
 import {
     makeStyles, useTheme, createStyles,
 } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 
 const useStyles = makeStyles(theme => ({
@@ -39,9 +41,13 @@ const useStyles = makeStyles(theme => ({
         width: 400,
         [theme.breakpoints.up("lg")]: {
             width:450,
+            height:30,
+            fontSize: "1.5rem"
         },
         [theme.breakpoints.up("xl")]: {
             width:500,
+            height: 35,
+            fontSize: "1.75rem"
         },
         [theme.breakpoints.down("sm")]: {
             width: 300
@@ -56,12 +62,17 @@ const useStyles = makeStyles(theme => ({
 const InputField = (props) => {
     const classes = useStyles();
     const { fieldName,value, isError, errorMessage,eventValidation } = props;
+    const theme = useTheme();
+    const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+    const labelName = matchesLG? <Typography variant="body1" style={{fontSize: matchesXL?"1.5rem":matchesLG?"1.25rem":"inherit"}}>{fieldName}</Typography> : fieldName;
+    const helperText = matchesLG? <Typography variant="body1" style={{fontSize: matchesXL?"1.25rem":matchesLG?"1rem":"inherit"}}>{errorMessage}</Typography> : errorMessage;
 
     return (
-        <TextField id={fieldName} variant="outlined" label={fieldName}
+        <TextField id={fieldName} variant="outlined" label={labelName}
             value={value}
             error={isError}
-            helperText={isError ? errorMessage : ''}
+            helperText={isError ? helperText : ''}
             onChange={event => { eventValidation(event) }}
              InputLabelProps={{
                 classes: {
