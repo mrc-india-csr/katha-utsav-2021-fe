@@ -27,7 +27,13 @@ const useStyles = makeStyles(theme => ({
     RegistrationForm: {
         color: "#66645E",
         fontWeight: "400",
-        fontSize: "1rem"
+        fontSize: "1rem",
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "1.5rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "2rem"
+        }
     },
     registrationCard: {
         [theme.breakpoints.down("xs")]: {
@@ -71,13 +77,13 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         fontSize: "0.65rem",
         textTransform: "none",
-        [theme.breakpoints.up("xl")]: {
-            width: 520,
-            fontSize: "1.25rem"
-        },
         [theme.breakpoints.up("lg")]: {
             width: 470,
             fontSize: "1rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            width: 520,
+            fontSize: "1.25rem"
         },
         [theme.breakpoints.down("sm")]: {
             width: 320
@@ -92,7 +98,7 @@ const useStyles = makeStyles(theme => ({
         lineHeight: "1.25rem",
     },
     errorMessage: {
-        color: "#f44336",
+        color:"#FF0000",
         fontWeight: 400,
         lineHeight: "1rem",
     }
@@ -188,7 +194,7 @@ const IndividualRegistration = (props) => {
         props.showPopUp(false);
     }
 
-    const onDropDown = (id,event) => {
+    const onDropDown = (id, event) => {
         IndividualRegistrationValidation({ target: { id: `${id}`, value: `${event.target.value}`, } });
     }
 
@@ -309,9 +315,16 @@ const IndividualRegistration = (props) => {
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
 
-
-    console.log('matchesLG', matchesLG);
-    console.log('matchesxl', matchesXL);
+    let logoWidth = "168";
+    let logoHeight = "90";
+    if (matchesLG) {
+        logoWidth = "198";
+        logoHeight = "120"
+    }
+    if (matchesXL) {
+        logoWidth = "218";
+        logoHeight = "140"
+    }
 
 
 
@@ -322,14 +335,14 @@ const IndividualRegistration = (props) => {
                 {/*---Cross Mark---*/}
                 <Grid item container justifyContent="flex-end">
                     <Grid item component={Button} onClick={closePopUp} >
-                        <img alt src={close} alt="crossmark" width={matchesXL?"50": matchesLG ? "50" : "30"} height={matchesXL?"50": matchesLG ? "50" : "30"} />
+                        <img alt src={close} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
                     </Grid>
                 </Grid>
 
                 {/*---Title and subtitle---*/}
                 <Grid item container alignItems="center" direction="column">
                     <Grid item>
-                        <img alt src={Logo} alt="title" width="168" height="90" />
+                        <img alt src={Logo} alt="title" width={logoWidth} height={logoHeight} />
                     </Grid>
                     <Grid item>
                         <Typography gutterBottom variant="subtitle2" className={classes.RegistrationForm}>Registration Form for Students</Typography>
@@ -342,7 +355,7 @@ const IndividualRegistration = (props) => {
                         <CardContent>
                             <Grid spacing={1} item container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? 350 : "inherit" }}>
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <Typography gutterBottom variant="body1" style={{ fontSize: "1rem" }} className={classes.RegistrationForm}>Student Details</Typography>
+                                    <Typography gutterBottom variant="body1"  className={classes.RegistrationForm}>Student Details</Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
@@ -374,12 +387,12 @@ const IndividualRegistration = (props) => {
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <FileUploader onFileUpload={onFileUpload} style={classes.UploadFile} buttonName={fileName} />
-                                    <Typography align="left" gutterBottom variant="body1" style={{ fontSize: "0.75rem" }} className={classes.errorMessage}>{fileDataMessage}</Typography>
+                                    <Typography align="left" gutterBottom variant="body1" style={{fontSize: matchesXL?"1.25rem":matchesLG?"1rem":"0.75rem"}} className={classes.errorMessage}>{fileDataMessage}</Typography>
                                 </Grid>
 
 
-                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS? "0rem":0}} >
-                                    <Typography  gutterBottom variant="h6" style={{ fontSize: matchesXL?"0.85rem":"0.65rem", color:"#000" }} className={classes.supportedDocument}>Note : Supported Document types: word, pdf, jpg, jpeg,png & maxium file size is 10mb.</Typography>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth:matchesLG?"30rem":"inherit",fontSize: matchesXL ? "1rem" :matchesLG?"1rem": "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : Supported Document types: word, pdf, jpg, jpeg,png & maxium file size is 10mb.</Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
