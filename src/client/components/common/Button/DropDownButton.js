@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "2em",
         color: "#98248D",
         fontFamily: 'Fredoka One',
+        [theme.breakpoints.up("lg")]: {
+            padding: "1.5rem",
+            fontSize: "1.75rem"
+        },
         [theme.breakpoints.up("xl")]: {
             padding: "2rem",
             fontSize: "1.75rem"
@@ -55,6 +59,8 @@ const DropDownButton = (props) => {
         <Button className={classes.buttonArrow} aria-haspopup={anchorEl ? "true" : undefined} aria-owns={anchorEl ? "simple-menu" : undefined} variant="contained" onClick={handleClick}><span style={{ marginRight: "10px" }}>Register Now </span><img src={downarrow} alt="down arrow" /> </Button>
     );
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+    const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+
 
     return (
         <React.Fragment>
@@ -84,7 +90,7 @@ const DropDownButton = (props) => {
             >
                 {
                     props.menuServiceProperties.map((option, index) => {
-                        return <MenuItem style={{fontSize: matchesXL?"2.75rem":"inherit", paddingLeft: "1.8rem", paddingRight:"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
+                        return <MenuItem style={{fontSize: matchesXL?"2.75rem": matchesLG?"2.5rem":"inherit", paddingLeft: "1.8rem", paddingRight:"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
                     })
                 }
             </Menu>

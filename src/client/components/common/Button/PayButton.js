@@ -9,6 +9,10 @@ const useStyles = makeStyles(theme => ({
         width: 400,
         height: 40,
         textTransform: "none",
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "1rem"
+        },
         [theme.breakpoints.up("xl")]: {
             width: 520,
             fontSize: "1.25rem"

@@ -50,6 +50,10 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             backgroundColor: "#FDF6D8"
         },
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "1.25rem"
+        },
         [theme.breakpoints.up("xl")]: {
             width: 520,
             fontSize: "1.5rem"
@@ -70,6 +74,10 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("xl")]: {
             width: 520,
             fontSize: "1.25rem"
+        },
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "1rem"
         },
         [theme.breakpoints.down("sm")]: {
             width: 320
@@ -314,7 +322,7 @@ const IndividualRegistration = (props) => {
                 {/*---Cross Mark---*/}
                 <Grid item container justifyContent="flex-end">
                     <Grid item component={Button} onClick={closePopUp} >
-                        <img alt src={close} alt="crossmark" width={matchesXL?"40": matchesLG ? "35" : "20"} height={matchesXL?"40": matchesLG ? "35" : "20"} />
+                        <img alt src={close} alt="crossmark" width={matchesXL?"50": matchesLG ? "50" : "30"} height={matchesXL?"50": matchesLG ? "50" : "30"} />
                     </Grid>
                 </Grid>
 

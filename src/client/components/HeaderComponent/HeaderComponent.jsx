@@ -137,6 +137,10 @@ const useStyles = makeStyles(theme => ({
         fontSize: "0.75rem",
         color: "#000",
         fontWeight:"500",
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "1.5rem",
+            minWidth: 15
+        },
         [theme.breakpoints.up("xl")]: {
             fontSize: "1.5rem",
             minWidth: 20
@@ -154,8 +158,15 @@ const HeaderComponent = (props) => {
     let imageWidth = "inherit";
     let imageHeight = "inherit";
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+    const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+
 
     if(matchesXL)
+    {
+        imageWidth ="250px";
+        imageHeight = "133px";
+    }
+    if(matchesLG)
     {
         imageWidth ="250px";
         imageHeight = "133px";
@@ -186,7 +197,7 @@ const HeaderComponent = (props) => {
             <div className='header-container'>
                 <Grid container direction="column" className={classes.container}>
                     <Grid item container direction="row" justifyContent="space-between" alignItems="center" style={{ width: "100%", paddingTop: "1rem", paddingBottom: "1rem" }}>
-                        <Grid item style={{marginLeft: "30px"}}>
+                        <Grid item style={{marginLeft: "40px"}}>
                             <img src={Logo} alt="logo" width={imageWidth} height={imageHeight} />
                         </Grid>
                         <Grid item >
