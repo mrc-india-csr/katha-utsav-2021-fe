@@ -10,8 +10,14 @@ https://www.figma.com/proto/A3B6c6710hpLvDUNvDrJcc/Katha-Utsav?node-id=1%3A2&sta
 # Pre-requisites:
   *  Node v14.17.5
 
-# Development
+# Development locally
   * source setenv.dev.sh
   * npm install
   * npm run start / npm start
+
+# Running via Docker for local development
+  * `docker-compose up`
+  *  Open localhost:9002 in your browser.
+  * `docker-compose stop`
+  *  Kills the container
 

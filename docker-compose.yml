@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  web:
+    build: .
+    ports:
+      - 9002:9002
+    environment:
+      - NODE_ENV=dev
+      - PORT=9002
+
