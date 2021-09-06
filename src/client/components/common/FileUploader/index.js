@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 //Sample Usage
 //<FileUploader onFileUpload={callBackToStoreFileData} buttonName="FileUpload"
 //style={classes.Style} acceptedFormat=".jpg,.png"/>
-const FileUploader = ({onFileUpload,buttonName,style,acceptedFormat}) => {
+const FileUploader = ({onFileUpload,buttonName,style,acceptedFormat=".jpg,.png,.pdf,.docx,.doc,.jpeg"}) => {
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = ()  => {
