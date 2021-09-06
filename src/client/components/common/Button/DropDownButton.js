@@ -13,14 +13,16 @@ const useStyles = makeStyles(theme => ({
         padding: "1em",
         marginBottom: "2em",
         color: "#98248D",
+        textTransform: "none",
         fontFamily: 'Fredoka One',
+        fontSize: "1.15rem",
         [theme.breakpoints.up("lg")]: {
             padding: "1rem",
             fontSize: "1.5rem"
         },
         [theme.breakpoints.up("xl")]: {
             padding: "1.5rem",
-            fontSize: "1.5rem"
+            fontSize: "2rem"
         }
     },
     menuRegistration: {
