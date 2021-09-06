@@ -18,3 +18,7 @@ export {
     validateSuccessSchoolStepTwo,
     validateFailSchoolStepTwo,
 } from './SchoolRegistrationStepTwoAction'
+
+export {
+    showResponsePopUp
+} from './RegistrationReponseAction'

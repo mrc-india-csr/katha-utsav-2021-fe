@@ -15,3 +15,6 @@ export const VALID_INITIATE_SCHOOL_STEPTWO = 'VALID_INITIATE_SCHOOL_STEPTWO';
 
 // Contact Page
 export const Upload_Data_Initiate ='Upload_Data_Initiate'
+
+// Registration Response
+export const SHOW_RESPONSE_POPUP = 'SHOW_RESPONSE_POPUP';
