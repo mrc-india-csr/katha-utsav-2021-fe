@@ -18,10 +18,19 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
     background: {
         backgroundColor: '#FEDB50',
-        height: "500vh",
+        height: "200vh",
         padding: 0,
         width: "100%",
         backgroundRepeat: "no-repeat",
+        [theme.breakpoints.up("xl")]: {
+            height: "150vh",
+        },
+        [theme.breakpoints.down("sm")]: {
+            height: "250vh",
+        },
+        [theme.breakpoints.down("xs")]: {
+            height: "140vh",
+        },
     },
     RegistrationForm: {
         color: "#66645E",
@@ -64,6 +73,7 @@ const useStyles = makeStyles(theme => ({
 
     },
     Reset: {
+        fontFamily: 'Fredoka One',
         lineHeight: '24px',
         fontWeight: 'bold',
         fontSize: "0.65rem",
@@ -77,10 +87,10 @@ const useStyles = makeStyles(theme => ({
             fontSize: "1.25rem"
         },
         [theme.breakpoints.down("sm")]: {
-            width: 320
+            
         },
         [theme.breakpoints.down("xs")]: {
-            width: 260
+            
         },
     },
     supportedDocument: {
@@ -151,6 +161,8 @@ const Contact = (props) => {
     }
 
     const ContactValidation = (event) => {
+        if(_.includes(['Email ID','Name','Phone Number','Message'], event.target.id) &&event.target.value[0]==' ') return;
+
         switch (event.target.id) {
             case 'Email ID':
                 let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
@@ -240,34 +252,35 @@ const Contact = (props) => {
             {true && <Grid item container alignItems={matchesXS ? "center" : "center"} direction="column" >
                 <Card className={classes.registrationCard}>
                     <CardContent>
-                        <Grid spacing={1} container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? 240 : matchesSM ? 350 : "inherit" }}>
+                        <Grid spacing={1} item container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                 <Typography gutterBottom variant="body1" className={classes.RegistrationForm}>Contact Us</Typography>
                             </Grid>
 
 
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit", marginBottom: "0.75rem" }}>
-                                <InputField errorMessage={nameMessage} isError={nameMessage.length > 0} fieldName={"Name"} onChangeFunc={setName} eventValidation={ContactValidation} value={name} />
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginBottom: "0.75rem" }}>
+                                <InputField errorMessage={nameMessage} isError={nameMessage.length !== 0} fieldName={"Name"} onChangeFunc={setName} eventValidation={ContactValidation} value={name} />
                             </Grid>
 
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit", marginBottom: "0.75rem" }}>
-                                <InputField errorMessage={phoneNumberMessage} isError={phoneNumberMessage.length > 0} fieldName={"Phone Number"} onChangeFunc={setPhoneNumber} eventValidation={ContactValidation} value={phoneNumber} />
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginBottom: "0.75rem" }}>
+                                <InputField errorMessage={phoneNumberMessage} isError={phoneNumberMessage.length !== 0} fieldName={"Phone Number"} onChangeFunc={setPhoneNumber} eventValidation={ContactValidation} value={phoneNumber} />
                             </Grid>
 
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit", marginBottom: "0.75rem" }}>
-                                <InputField errorMessage={emailIdMessage} isError={emailIdMessage.length > 0} fieldName={"Email ID"} onChangeFunc={setEmailId} eventValidation={ContactValidation} value={emailId} />
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginBottom: "0.75rem" }}>
+                                <InputField errorMessage={emailIdMessage} isError={emailIdMessage.length !== 0} fieldName={"Email ID"} onChangeFunc={setEmailId} eventValidation={ContactValidation} value={emailId} />
                             </Grid>
 
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 320 : "inherit", marginBottom: "0.75rem" }}>
-                                <Comment errorMessage={commentMessage} isError={commentMessage.length > 0} fieldName={"Message"} eventValidation={ContactValidation} />
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginBottom: "0.75rem" }}>
+                                <Comment errorMessage={commentMessage} isError={commentMessage.length !== 0} fieldName={"Message"} eventValidation={ContactValidation} value={comment}/>
                             </Grid>
 
-                            <Grid item style={{ width: matchesXS ? 220 : matchesSM ? 350 : "inherit" }}>
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                 <PaymentButton onButtonClick={Validate} name={"Submit"} />
                             </Grid>
 
-                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
-                                <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>
+
+                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit"}}>
+                                <Typography component={Button} onClick={onReset} gutterBottom variant="body2" className={classes.Reset}>Reset</Typography>
                             </Grid>
 
                         </Grid>
