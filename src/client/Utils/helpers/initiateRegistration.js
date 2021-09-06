@@ -36,7 +36,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
     'currency': razorPayOrderData.currency,
     'name': 'Katha Utsav',
     'description': 'Registration Fees',
-    'image': 'http://localhost:3002/katha_utsav/v1/logo.png',
+    'image': '/logo.png',
     'order_id': razorPayOrderData.id,
     'handler': async function (response) {
       const { razorpay_payment_id, razorpay_signature } = response

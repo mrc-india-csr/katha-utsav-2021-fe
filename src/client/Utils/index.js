@@ -1,3 +1,5 @@
+const _mergeWith = require('lodash/mergeWith');
+
 export const renderIf = (condition, componentCallback, falseCallback) => {
   if (condition()) {
     return componentCallback();
@@ -81,3 +83,5 @@ export const SchoolRegistrationStepOneValidation = (schoolName,emailId,phoneNumb
   }
   return errorObject;
 }
+
+export const MergeIgnoringUndefined = (A, B) => _mergeWith({}, A, B, (a, b) => b === undefined ? a : undefined);
