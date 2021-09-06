@@ -105,6 +105,14 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+const closePopUp = () => {
+    props.showResponsePopUp(false);
+    props.showPopUp(false);
+}
+
+
+const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
+
 const PaymentStatus = (props) => {
     const classes = useStyles(props);
     
@@ -124,56 +132,59 @@ const PaymentStatus = (props) => {
  
     return (
         <div className={classes.pageBackground} >
-        <Grid container direction="column" >
-            {/*---Cross Mark---*/}
-            <Grid item container justifyContent="flex-end">
-                <Grid item component={Button} >
-                    <img alt src={crossMark} alt="crossmark" width="28px" height="28px" />
-                </Grid>
-            </Grid>
-
-            {/*---Title and subtitle---*/}
-            <Grid item container  direction="column" style={{ textAlign: "center" }}>
-                <Grid item >
-                    <img alt src={kathautsav} alt="Katha Utsav logo" className={classes.KathaUtsavLogo} />
-                </Grid>
-            </Grid>
-            
-            <Grid item container alignItems="center" direction="column">
-                <Card className={classes.StatusPaymentCard}>
-                    <CardContent>
-                        <Grid spacing={1} container item direction="column" style={{ textAlign: "center" }}>
-                            <Grid item>
-                                <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
-                            </Grid>
-                            
-                            
-                            <Grid item>
-                                <img alt src={statusLogo} alt="StatusLogo.png" className={classes.TickMarkLogo} />
-                            </Grid>
-
-                            <Grid item>
-                                <Typography gutterBottom variant="body1" className={classes.StatusContentTag}>
-                                   {statusContent}
-                                </Typography>
-                            </Grid>
-                            { ('' + props.payStatus) === "SUCCESS" ? 
-                                    <Grid item className={classes.homeButton}><HomeButton textColor="white"/></Grid> 
-                                :
-                                <div>
-                                    <Grid item className={classes.cancelButton}>
-                                        <ContactUsButton textColor="white" />
-                                    </Grid>
-                                     <Grid item className={classes.homeButton}>
-                                         <HomeButton textColor="purple" />
-                                     </Grid> 
-                                 </div>
-                            }
+            <Dialog fullScreen TransitionComponent={Transition} open={props.showResponsePopUp} onClose={closePopUp}>
+                <Grid container direction="column" >
+                    {/*---Cross Mark---*/}
+                    <Grid item container justifyContent="flex-end">
+                        <Grid item component={Button} onClick={closePopUp} >
+                            <img alt src={crossMark} alt="crossmark" width="28px" height="28px" />
                         </Grid>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
+                    </Grid>
+
+                    {/*---Title and subtitle---*/}
+                    <Grid item container  direction="column" style={{ textAlign: "center" }}>
+                        <Grid item >
+                            <img alt src={kathautsav} alt="Katha Utsav logo" className={classes.KathaUtsavLogo} />
+                        </Grid>
+                    </Grid>
+                    
+                    <Grid item container alignItems="center" direction="column">
+                        <Card className={classes.StatusPaymentCard}>
+                            <CardContent>
+                                <Grid spacing={1} container item direction="column" style={{ textAlign: "center" }}>
+                                    <Grid item>
+                                        <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
+                                    </Grid>
+                                    
+                                    
+                                    <Grid item>
+                                        <img alt src={statusLogo} alt="StatusLogo.png" className={classes.TickMarkLogo} />
+                                    </Grid>
+
+                                    <Grid item>
+                                        <Typography gutterBottom variant="body1" className={classes.StatusContentTag}>
+                                        {statusContent}
+                                        </Typography>
+                                    </Grid>
+                                    { ('' + props.payStatus) === "SUCCESS" ? 
+                                            <Grid item className={classes.homeButton}><HomeButton textColor="white"/></Grid> 
+                                        :
+                                        <div>
+                                            <Grid item className={classes.cancelButton}>
+                                                <ContactUsButton textColor="white" />
+                                            </Grid>
+                                            <Grid item className={classes.homeButton}>
+                                                <HomeButton textColor="purple" />
+                                            </Grid> 
+                                        </div>
+                                    }
+                                </Grid>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Dialog>
+
         </div>
 
     );

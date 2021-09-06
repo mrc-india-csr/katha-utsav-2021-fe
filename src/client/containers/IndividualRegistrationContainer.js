@@ -14,7 +14,8 @@ const mapStateToProps = (state) => {
     ClassMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.ClassMessage,
     StoryCategoryMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.StoryCategoryMessage,
     fileDataMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.fileDataMessage,
-    showPopUp: state.IndividualRegistrationReducer.showPopUp
+    showPopUp: state.IndividualRegistrationReducer.showPopUp,
+    showResponsePopUp: state.RegistrationResponseReducer.showResponsePopUp
   }};
 
 const mapDispatchToProps = (dispatch) => {
