@@ -17,6 +17,7 @@ import DropDownButton from '../common/Button/DropDownButton';
 import { Link } from 'react-scroll';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import ContactText from '../common/Text/ContactText';
 
 function ElevationScroll(props) {
     const { children } = props;
@@ -80,9 +81,8 @@ const useStyles = makeStyles(theme => ({
     },
     headerContainerMobile: {
         backgroundColor: "#FEDB50",
-        padding: "0 1rem",
+        paddingLeft: "0.25rem",
         width: "100%",
-
     },
     bannerText: {
         marginTop: "2rem",
@@ -102,9 +102,11 @@ const useStyles = makeStyles(theme => ({
     },
     styleFormat: {
         color: "#66645E",
-        fontFamily: "Poppins-Regular",
-        fontSize: "1rem",
+        fontFamily: "Poppins",
+        textAlign:"center",
+        fontSize: "1.2rem",
         marginLeft: "1rem",
+        marginBottom: "1rem"
     },
     buttonArrow: {
         backgroundColor: "#fff",
@@ -136,7 +138,7 @@ const useStyles = makeStyles(theme => ({
         fontFamily: "Poppins",
         fontSize: "0.76rem",
         color: "#212832",
-        fontWeight:"500",
+        fontWeight: "500",
         textTransform: "none",
         [theme.breakpoints.up("lg")]: {
             fontSize: "1.15rem",
@@ -162,14 +164,12 @@ const HeaderComponent = (props) => {
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
 
 
-    if(matchesXL)
-    {
-        imageWidth ="250px";
+    if (matchesXL) {
+        imageWidth = "250px";
         imageHeight = "133px";
     }
-    if(matchesLG)
-    {
-        imageWidth ="250px";
+    if (matchesLG) {
+        imageWidth = "250px";
         imageHeight = "133px";
     }
 
@@ -198,7 +198,7 @@ const HeaderComponent = (props) => {
             <div className='header-container'>
                 <Grid container direction="column" className={classes.container}>
                     <Grid item container direction="row" justifyContent="space-between" alignItems="center" style={{ width: "100%", paddingTop: "1rem", paddingBottom: "1rem" }}>
-                        <Grid item style={{marginLeft: "40px"}}>
+                        <Grid item style={{ marginLeft: "40px" }}>
                             <img src={Logo} alt="logo" width={imageWidth} height={imageHeight} />
                         </Grid>
                         <Grid item >
@@ -272,7 +272,7 @@ const HeaderComponent = (props) => {
                 </Grid>
                 <Grid item container alignItems="center" direction="column">
                     <Grid item>
-                        <img src={HeroImg} width="250" height="200" alt="heroimg" className={classes.bannerImage} />
+                        <img src={HeroImg} width="300" height="300" alt="heroimg" className={classes.bannerImage} />
                     </Grid>
                 </Grid>
 
@@ -285,7 +285,7 @@ const HeaderComponent = (props) => {
                         {<DropDownButton menuServiceProperties={menuServiceProperties} />}
                     </Grid>
                     <Grid item>
-                        {ContactUs}
+                        <ContactText contactUsClassName={classes.contactUs} />
                     </Grid>
                 </Grid>
             </Grid>
