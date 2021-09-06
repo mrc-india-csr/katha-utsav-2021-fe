@@ -58,22 +58,21 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         fontSize: "0.65rem",
         textTransform: "none",
+        fontFamily: 'Fredoka One',
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "1rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            width: 520,
+            fontSize: "1.25rem"
+        },
         [theme.breakpoints.down("sm")]: {
             width: 320
         },
         [theme.breakpoints.down("xs")]: {
             width: 260
         },
-    },
-    supportedDocument: {
-        fontWeight: 400,
-        color: "#000000",
-        lineHeight: "1.25rem",
-    },
-    errorMessage: {
-        color: "#f44336",
-        fontWeight: 400,
-        lineHeight: "1rem",
     }
 }));
 
@@ -98,12 +97,13 @@ const StepOne = (props) => {
         let isError = false
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(schoolEmailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
+        let cityValid = /^[a-zA-Z ]*$/.test(city)
       
         if (_.isNull(schoolEmailId) || _.isEmpty(schoolEmailId) || !emailValid) {
           setEmailIdMessage("Please enter a valid email")
           isError = true;
         }
-        if (_.isNull(schoolName) || _.isNull(schoolName)) {
+        if (_.isNull(schoolName) || _.isEmpty(schoolName)) {
           setSchoolNameMessage("Please enter a valid school name")
           isError = true;
         }
@@ -116,7 +116,7 @@ const StepOne = (props) => {
           isError = true;
         }
       
-        if (_.isEmpty(city) || _.isNull(city)) {
+        if (_.isEmpty(city) || _.isNull(city) || !cityValid) {
           setCityMessage ("Please Provide a valid city")
           isError = true;
         }
@@ -144,57 +144,61 @@ const StepOne = (props) => {
 
     const SchoolRegistrationStepOneValidation = (event) => {
 
+        const id = event.target.id
+        let value = event.target.value
+        if(value[0] == ' ') return
 
-        switch (event.target.id) {
+        switch (id) {
             case 'Email Id':
-                let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
-                if (_.isNull(event.target.value) || _.isEmpty(event.target.value) || !emailValid) {
+                let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
+                if (_.isNull(value) || _.isEmpty(value) || !emailValid) {
                     setEmailIdMessage("Please enter a valid email")
-                    setSchoolEmailId(event.target.value);
+                    setSchoolEmailId(value);
                 }
                 else {
-                    setSchoolEmailId(event.target.value);
+                    setSchoolEmailId(value);
                     setEmailIdMessage("")
                 }
                 break;
             case 'School Coordinator Name':
-                if (_.isEmpty(event.target.value) || _.isNull(event.target.value)) {
+                if (_.isEmpty(value) || _.isNull(value)) {
                     setSchoolCoordinatorNameMessage("Please enter a valid name");
-                    setSchoolCoordinatorName(event.target.value);
+                    setSchoolCoordinatorName(value);
                 }
                 else {
-                    setSchoolCoordinatorName(event.target.value);
+                    setSchoolCoordinatorName(value);
                     setSchoolCoordinatorNameMessage("");
                 }
                 break;
             case 'School Name':
-                if (_.isEmpty(event.target.value) || _.isNull(event.target.value)) {
+                if (_.isEmpty(value) || _.isNull(value)) {
                     setSchoolNameMessage("Please enter a valid school");
-                    setSchoolName(event.target.value);
+                    setSchoolName(value)
                 }
                 else {
-                    setSchoolName(event.target.value);
+                    setSchoolName(value);
                     setSchoolNameMessage("");
                 }
                 break;
             case 'Phone Number':
-                let phoneNumberValid = /^\d+$/.test(event.target.value);
-                if (_.isNull(event.target.value) || _.isEmpty(event.target.value) || !phoneNumberValid) {
+                let phoneNumberValid = /^\d+$/.test(value);
+                if (_.isNull(value) || _.isEmpty(value) || !phoneNumberValid) {
                     setPhoneNumberMessage("Please enter a valid phoneNumber");
-                    setPhoneNumber(event.target.value);
+                    setPhoneNumber(value);
                 }
                 else {
-                    setPhoneNumber(event.target.value);
+                    setPhoneNumber(value);
                     setPhoneNumberMessage("");
                 }
                 break;
             case 'City':
-                if (_.isEmpty(event.target.value) || _.isNull(event.target.value)) {
+                let cityValid = /^[a-zA-Z ]*$/.test(value)
+                if (_.isEmpty(value) || _.isNull(value) || !cityValid) {
                     setCityMessage("Please Provide a valid city");
-                    setCity(event.target.value)
+                    setCity(value)
                 }
                 else {
-                    setCity(event.target.value);
+                    setCity(value);
                     setCityMessage("");
                 }
                 break;
@@ -217,7 +221,7 @@ const StepOne = (props) => {
                     <img alt src={Logo} alt="title" width="168" height="90" />
                 </Grid>
                 <Grid item>
-                    <Typography gutterBottom variant="subtitle2" className={classes.RegistrationForm}>Registration Form for School</Typography>
+                    <Typography gutterBottom variant="subtitle2" className={classes.RegistrationForm}>Registration Form for Schools</Typography>
                 </Grid>
             </Grid>
 
@@ -225,35 +229,30 @@ const StepOne = (props) => {
                 <Grid item container alignItems= {matchesXS?"center":"center"} direction="column" >
                     <Card className={classes.registrationCard}>
                         <CardContent>
-                            <Grid spacing={1} container alignItems="center"  direction="column" style={{ textAlign: "center", width: matchesXS? 240 : matchesSM? 350 : "inherit" }}>
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                            <Grid spacing={1} container alignItems="center"  direction="column" style={{ textAlign: "center", width: matchesXS? "100%" : matchesSM? 350 : "inherit" }}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <Typography gutterBottom variant="body1" style={{ fontSize: "1rem" }} className={classes.RegistrationForm}>School Details</Typography>
                                 </Grid>
-
-
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <InputField errorMessage={schoolNameMessage}  isError={schoolNameMessage.length > 0} fieldName={"School Name"} onChangeFunc={setSchoolName} eventValidation={SchoolRegistrationStepOneValidation} value={schoolName}  />
                                 </Grid>
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <InputField errorMessage={cityMessage} isError={cityMessage.length > 0} fieldName={"City"} onChangeFunc={setCity} eventValidation={SchoolRegistrationStepOneValidation} value={city} />
                                 </Grid>
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <InputField errorMessage={schoolCoordinatorNameMessage} isError={ schoolCoordinatorNameMessage.length > 0} fieldName={"School Coordinator Name"} onChangeFunc={setSchoolCoordinatorName} eventValidation={SchoolRegistrationStepOneValidation} value={schoolCoordinatorName} />
                                 </Grid>
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <InputField errorMessage={phoneNumberMessage} isError={phoneNumberMessage.length > 0} fieldName={"Phone Number"} onChangeFunc={setPhoneNumber} eventValidation={SchoolRegistrationStepOneValidation} value={phoneNumber} />
                                 </Grid>
-
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <InputField errorMessage={emailIdMessage} isError={emailIdMessage.length > 0} fieldName={"Email Id"} onChangeFunc={setSchoolEmailId} eventValidation={SchoolRegistrationStepOneValidation} value={schoolEmailId} />
                                 </Grid>
-
-                                <Grid item style={{width: matchesXS? 220 : matchesSM? 320 : "inherit"}}>
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <PaymentButton onButtonClick = {validate} name="Continue" />
                                 </Grid>
-
-                                <Grid item component={Button} onClick={onReset} style={{width: matchesXS? 220 : "inherit"}}>
-                                    <Typography gutterBottom variant="body2" className={classes.Reset}>Reset</Typography>
+                                <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
+                                    <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>
                                 </Grid>
                             </Grid>
                         </CardContent>
