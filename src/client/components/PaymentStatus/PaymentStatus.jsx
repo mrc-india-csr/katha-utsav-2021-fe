@@ -129,7 +129,7 @@ const PaymentStatus = (props) => {
 
   const closePopUp = () => {
     props.showResponsePopUp(false);
-    props.showPopUp(false);
+    // props.showPopUp(false);
   }
 
   return ReactDOM.createPortal(

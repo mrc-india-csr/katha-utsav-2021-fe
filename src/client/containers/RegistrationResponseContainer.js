@@ -16,9 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         showPopUp: (value) => dispatch(action.showPopUp(value)),
         showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
-        setRegistrationStatus: (value) => dispatch(action.setRegistrationStatus(value)),
-        setRegistrationComments: (value) => dispatch(action.setRegistrationComments(value))
-
+        setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message))
     }
 }
 

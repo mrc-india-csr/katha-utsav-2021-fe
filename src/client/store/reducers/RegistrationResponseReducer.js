@@ -13,20 +13,12 @@ const RegistrationResponseReducer = (state = initialState, action) => {
         ...state,
         showPopUp: action.showPopUp
       }
-
-    case actionTypes.SET_REGISTRATION_STATUS:
+    case actionTypes.SET_REGISTRATION_DATA:
       return {
         ...state,
-        registrationStatus: action.setRegistrationStatus
+        registrationStatus: action.status,
+        registrationComment: action.message
       }
-      
-      
-    case actionTypes.SET_REGISTRATION_COMMENT:
-      return {
-        ...state,
-        registrationComment: action.setRegistrationComments
-      }
-      
     default:
       return state;
   }

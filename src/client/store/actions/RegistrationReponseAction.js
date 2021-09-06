@@ -7,19 +7,10 @@ export const showResponsePopUp = (showPopUp) => {
   }
 }
 
-
-export const setRegistrationStatus = (registrationStatus) => {
+export const setRegistrationData = (status, message) => {
   return {
-    type: actionTypes.SET_REGISTRATION_STATUS,
-    registrationStatus
+    type: actionTypes.SET_REGISTRATION_DATA,
+    status,
+    message
   }
 }
-
-
-export const setRegistrationComments = (registrationComment) => {
-  return {
-    type: actionTypes.SET_REGISTRATION_COMMENT,
-    registrationComment
-  }
-}
-

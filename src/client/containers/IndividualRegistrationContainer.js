@@ -22,7 +22,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     validateDetails: (name, emailId, phoneNumber,School,City,Class,StoryCategory,fileData) => dispatch(action.validate(name, emailId, phoneNumber,School,City,Class, StoryCategory,fileData)),
     showPopUp: (value) => dispatch(action.showPopUp(value)),
-    showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value))
+    showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
+    setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message))
   }
 }
 

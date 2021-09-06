@@ -373,16 +373,12 @@ const IndividualRegistration = (props) => {
     const paymentStateHandler = (paymentState, statusMessage) => {
         console.log(paymentState);
         console.log(statusMessage);
-        props.setRegistrationStatus(paymentState);
-        props.setRegistrationComments(paymentMessage);
-    
     };
 
     const handleClick = async() => {
         props.showResponsePopUp(true);
-        props.setRegistrationStatus("SUCCESS");
-        props.setRegistrationComments("Your registration is successful");
-    
+        props.setRegistrationData("SUCCESS", "success message");
+
         // await displayPayment(sampleFormData, paymentStateHandler);
     };
 
