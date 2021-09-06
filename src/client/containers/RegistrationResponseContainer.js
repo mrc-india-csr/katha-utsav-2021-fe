@@ -6,7 +6,7 @@ import PaymentStatus from '../components/PaymentStatus';
 
 const mapStateToProps = (state) => {
     return {
-        showResponsePopUp: state.RegistrationResponseReducer.showResponsePopUp
+        displayResponsePopUp: state.RegistrationResponseReducer.showPopUp
     }
 };
 
@@ -16,8 +16,6 @@ const mapDispatchToProps = (dispatch) => {
         showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value))
     }
 }
-
-
 
 const RegistrationResponseContainer = connect(
     mapStateToProps,

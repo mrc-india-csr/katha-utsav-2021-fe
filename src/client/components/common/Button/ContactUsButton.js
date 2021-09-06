@@ -27,7 +27,7 @@ const ContactUsButton = (props) => {
     const classes = useStyles(props);
 
     return (
-        <Button component={Link} to="/contact-us" className={classes.ContactButton}>Contact Us</Button>
+        <Button component={Link} to="/contact" className={classes.ContactButton}>Contact Us</Button>
     );
 };
 
