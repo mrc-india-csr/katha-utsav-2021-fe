@@ -1,7 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  showPopUp: false
+  showPopUp: false,
+  registrationStatus: '',
+  registrationComment: ''
 }
 
 const RegistrationResponseReducer = (state = initialState, action) => {
@@ -11,6 +13,20 @@ const RegistrationResponseReducer = (state = initialState, action) => {
         ...state,
         showPopUp: action.showPopUp
       }
+
+    case actionTypes.SET_REGISTRATION_STATUS:
+      return {
+        ...state,
+        registrationStatus: action.setRegistrationStatus
+      }
+      
+      
+    case actionTypes.SET_REGISTRATION_COMMENT:
+      return {
+        ...state,
+        registrationComment: action.setRegistrationComments
+      }
+      
     default:
       return state;
   }

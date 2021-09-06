@@ -7,12 +7,10 @@ import '../../../styles/main.scss';
 const useStyles = makeStyles(theme => ({
     ContactButton: props => ({
         position: "absolute",
-        // backgroundColor:"#98248D",
-        // color: "#ffffff",
-        width: "200px",
-        height: "24px",
-        top: "18px",
-        left: "180px",
+        width: "551px",
+        height: "60px",
+        top: "0px",
+        left: "0px",
         fontFamily: "Fredoka One",
         fontStyle: "normal",
         fontWeight: "normal",

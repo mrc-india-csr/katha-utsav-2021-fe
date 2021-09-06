@@ -6,14 +6,19 @@ import PaymentStatus from '../components/PaymentStatus';
 
 const mapStateToProps = (state) => {
     return {
-        displayResponsePopUp: state.RegistrationResponseReducer.showPopUp
+        displayResponsePopUp: state.RegistrationResponseReducer.showPopUp,
+        registrationStatus: state.RegistrationResponseReducer.registrationStatus,
+        registrationComment: state.RegistrationResponseReducer.registractionComment
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         showPopUp: (value) => dispatch(action.showPopUp(value)),
-        showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value))
+        showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
+        setRegistrationStatus: (value) => dispatch(action.setRegistrationStatus(value)),
+        setRegistrationComments: (value) => dispatch(action.setRegistrationComments(value))
+
     }
 }
 

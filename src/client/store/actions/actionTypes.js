@@ -18,3 +18,5 @@ export const Upload_Data_Initiate ='Upload_Data_Initiate'
 
 // Registration Response
 export const SHOW_RESPONSE_POPUP = 'SHOW_RESPONSE_POPUP';
+export const SET_REGISTRATION_STATUS = 'SET_REGISTRATION_STATUS'
+export const SET_REGISTRATION_COMMENT = 'SET_REGISTRATION_COMMENT'

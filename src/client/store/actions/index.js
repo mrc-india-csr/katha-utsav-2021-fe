@@ -20,5 +20,7 @@ export {
 } from './SchoolRegistrationStepTwoAction'
 
 export {
-    showResponsePopUp
+    showResponsePopUp,
+    setRegistrationStatus,
+    setRegistrationComments
 } from './RegistrationReponseAction'

@@ -8,12 +8,10 @@ import '../../../styles/main.scss';
 const useStyles = makeStyles(theme => ({
     HomeButton: props => ({
         position: "absolute",
-        // backgroundColor:"#98248D",
-        // color: "#ffffff",
-        width: "200px",
-        height: "24px",
-        top: "18px",
-        left: "180px",
+        width: "540px",
+        height: "60px",
+        top: "0px",
+        left: "0px",
         fontFamily: "Fredoka One",
         fontStyle: "normal",
         fontWeight: "normal",
@@ -27,9 +25,14 @@ const useStyles = makeStyles(theme => ({
 const HomeButton = (props) => {
     const classes = useStyles(props);
 
+    const closePopUp = () => {
+        props.showResponsePopUp(false);
+        props.showPopUp(false);
+    }
+
     return (
-        
-        <Button component={Link} to="/" className={classes.HomeButton}>Back to Home</Button>
+
+        <Button className={classes.HomeButton}>Back to Home</Button>
     );
 };
 

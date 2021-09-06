@@ -6,3 +6,20 @@ export const showResponsePopUp = (showPopUp) => {
     showPopUp
   }
 }
+
+
+export const setRegistrationStatus = (registrationStatus) => {
+  return {
+    type: actionTypes.SET_REGISTRATION_STATUS,
+    registrationStatus
+  }
+}
+
+
+export const setRegistrationComments = (registrationComment) => {
+  return {
+    type: actionTypes.SET_REGISTRATION_COMMENT,
+    registrationComment
+  }
+}
+

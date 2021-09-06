@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import crossMark from "../../assets/images/crossmark.png"
 import kathautsav from "../../assets/images/kathautsav.png"
@@ -13,13 +13,15 @@ import CardContent from '@material-ui/core/CardContent';
 import HomeButton from '../common/Button/HomeButton';
 import ContactUsButton from '../common/Button/ContactUsButton';
 import '../../styles/main.scss';
-import {Dialog, Slide} from "@material-ui/core";
+import { Dialog, Slide } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   pageBackground: {
-    backgroundColor: '#FECB50',
-    position: "relative",
-    height: "calc(100vh + 100px)",
+    backgroundColor: '#FEDB50',
+    height: "500vh",
+    padding: 0,
+    width: "100%",
+    backgroundRepeat: "no-repeat",
 
   },
   KathaUtsavLogo: {
@@ -108,53 +110,56 @@ const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="
 
 const PaymentStatus = (props) => {
   const classes = useStyles(props);
-  const {displayResponsePopUp} = props;
+  const { displayResponsePopUp, registrationStatus, registrationComment } = props;
 
-  let statusMsg = "Payment Failed ⛔";
+    console.log(registrationStatus + "  ====  " + registrationComment);
+
+  let statusMsg = registrationStatus;
+  // "Payment Failed ⛔";
   let statusLogo = failMark;
-  let statusContent = props.stsContent;
+  let statusContent = registrationComment;
 
   const status = '' + props.payStatus
 
   if (status === 'SUCCESS') {
-    statusMsg = "Payment Success 🎉";
+    // statusMsg = "Payment Success 🎉";
     statusLogo = tickMark;
-    statusContent = props.stsContent;
+    // statusContent = props.stsContent;
   }
 
   const closePopUp = () => {
     props.showResponsePopUp(false);
-    // props.showPopUp(false);
+    props.showPopUp(false);
   }
 
   return ReactDOM.createPortal(
     <Dialog fullScreen TransitionComponent={Transition} open={displayResponsePopUp} onClose={closePopUp}>
-      <Grid container direction="column">
+      <Grid container direction="column" className={classes.pageBackground}>
         {/*---Cross Mark---*/}
         <Grid item container justifyContent="flex-end">
           <Grid item component={Button} onClick={closePopUp}>
-            <img src={crossMark} alt="crossmark" width="28px" height="28px"/>
+            <img src={crossMark} alt="crossmark" width="28px" height="28px" />
           </Grid>
         </Grid>
 
         {/*---Title and subtitle---*/}
-        <Grid item container direction="column" style={{textAlign: "center"}}>
+        <Grid item container direction="column" style={{ textAlign: "center" }}>
           <Grid item>
-            <img src={kathautsav} alt="Katha Utsav logo" className={classes.KathaUtsavLogo}/>
+            <img src={kathautsav} alt="Katha Utsav logo" className={classes.KathaUtsavLogo} />
           </Grid>
         </Grid>
 
         <Grid item container alignItems="center" direction="column">
           <Card className={classes.StatusPaymentCard}>
             <CardContent>
-              <Grid spacing={1} container item direction="column" style={{textAlign: "center"}}>
+              <Grid spacing={1} container item direction="column" style={{ textAlign: "center" }}>
 
                 <Grid item>
                   <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
                 </Grid>
 
                 <Grid item>
-                  <img src={statusLogo} alt="StatusLogo.png" className={classes.TickMarkLogo}/>
+                  <img src={statusLogo} alt="StatusLogo.png" className={classes.TickMarkLogo} />
                 </Grid>
 
                 <Grid item>
@@ -164,14 +169,14 @@ const PaymentStatus = (props) => {
                 </Grid>
 
                 {('' + props.payStatus) === "SUCCESS" ?
-                  <Grid item className={classes.homeButton}><HomeButton textColor="white"/></Grid>
+                  <Grid item className={classes.homeButton} onClick={closePopUp}><HomeButton textColor="white" /></Grid>
                   :
                   <div>
-                    <Grid item className={classes.cancelButton}>
-                      <ContactUsButton textColor="white"/>
+                    <Grid item className={classes.cancelButton} onClick={closePopUp}>
+                      <ContactUsButton textColor="white" />
                     </Grid>
-                    <Grid item className={classes.homeButton}>
-                      <HomeButton textColor="purple"/>
+                    <Grid item className={classes.homeButton} onClick={closePopUp}>
+                      <HomeButton textColor="purple" />
                     </Grid>
                   </div>
                 }
