@@ -77,6 +77,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         fontSize: "0.65rem",
         textTransform: "none",
+        fontFamily: 'Fredoka One',
         [theme.breakpoints.up("lg")]: {
             width: 470,
             fontSize: "1rem"
