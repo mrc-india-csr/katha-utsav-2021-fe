@@ -8,6 +8,14 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
+    ContactUsGrid: {
+        [theme.breakpoints.up("lg")]: {
+            marginBottom:"3rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            marginBottom:"4rem"
+        }
+    },
     contactUs: {
         fontFamily: 'Fredoka One',
         color: "#98248D",
@@ -16,10 +24,10 @@ const useStyles = makeStyles(theme => ({
         marginTop: "10px",
         textDecoration: "none",
         [theme.breakpoints.up("lg")]: {
-            fontSize: "2rem",
+            fontSize: "1.5rem",
         },
         [theme.breakpoints.up("xl")]: {
-            fontSize: "2.85rem",
+            fontSize: "2rem",
         }
     },
     bannerWrap: {
@@ -28,11 +36,19 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("lg")]: {
             paddingLeft: "2rem",
             paddingRight: "2rem"
-         },
-         [theme.breakpoints.up("xl")]: {
+        },
+        [theme.breakpoints.up("xl")]: {
             paddingLeft: "5rem",
-            paddingRight: "5rem"
-         },
+            paddingRight: "5rem",
+        },
+    },
+    leftBannerScreen: {
+        [theme.breakpoints.up("lg")]: {
+            paddingTop: "3rem"
+        },
+        [theme.breakpoints.up("xl")]: {
+            paddingTop: "6rem"
+        },
     },
     bannerImage: {
         textAlign: "center"
@@ -41,12 +57,11 @@ const useStyles = makeStyles(theme => ({
         color: " #000000",
         fontFamily: 'Fredoka One',
         fontSize: "2rem",
-        margin: "0.5rem 0",
         [theme.breakpoints.up("lg")]: {
             fontSize: "2rem",
         },
         [theme.breakpoints.up("xl")]: {
-            fontSize: "4rem",
+            fontSize: "2.5rem",
         }
     },
     bannerText: {
@@ -54,25 +69,25 @@ const useStyles = makeStyles(theme => ({
         color: "#98248D",
         fontSize: "2.9rem",
         fontFamily: 'Fredoka One',
-        [theme.breakpoints.up("xl")]: {
-            fontSize: "7rem",
-        },
         [theme.breakpoints.up("lg")]: {
-            fontSize: "5rem",
+            fontSize: "4rem",
+        },
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "6rem",
         }
     },
     styleFormat: {
         color: "#66645E",
         fontSize: "1.5rem",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins",
         [theme.breakpoints.up("xl")]: {
             fontSize: "3rem",
         },
         [theme.breakpoints.up("lg")]: {
-            fontSize: "2rem",
+            fontSize: "1.5rem",
         },
 
-      }
+    }
 }));
 
 const BannerComponent = (props) => {
@@ -83,32 +98,32 @@ const BannerComponent = (props) => {
     )
     const matchesLGUp = useMediaQuery(theme.breakpoints.up('lg'));
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
-    let width ="500px";
+    let width = "500px";
     let height = "500px"
-   if(matchesLGUp){
-     width ="600px";
-     height = "600px"
-   }
-   if(matchesXL){
-    width ="1000px";
-    height = "1000px"
-   }
+    if (matchesLGUp) {
+        width = "600px";
+        height = "600px"
+    }
+    if (matchesXL) {
+        width = "1000px";
+        height = "1000px"
+    }
 
     return (
         <React.Fragment>
             <Grid container direction="row" className={classes.bannerWrap}>
-                <Grid item container direction="column" lg={5} md={5} xl={5}>
+                <Grid item container className={classes.leftBannerScreen} direction="column" lg={5} md={5} xl={5}>
                     <Grid item>
-                        <Typography gutterBottom variant="h1" className={classes.bannerText}>Katha Utsav 2021</Typography>
+                        <Typography variant="h1" className={classes.bannerText}>Katha Utsav 2021</Typography>
                     </Grid>
                     <Typography gutterBottom variant="h4" className={classes.storyText}>Celebrating Story!</Typography>
                     <Typography gutterBottom variant="h6" className={classes.styleFormat}>Search for Excellence in Creative <br /> Writing is here...</Typography>
 
-                    <Grid item container direction="row">
+                    <Grid item container direction="row" alignItems="center">
                         <Grid item style={{ marginRight: "2rem" }}>
                             <DropDownButton menuServiceProperties={props.menuServiceProperties} />
                         </Grid>
-                        <Grid item style={{ marginTop: "0.5rem" }}>
+                        <Grid item className={classes.ContactUsGrid}>
                             {ContactUs}
                         </Grid>
                     </Grid>
