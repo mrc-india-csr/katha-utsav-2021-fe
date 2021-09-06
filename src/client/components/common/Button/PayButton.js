@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
         color: "#ffffff",
         width: 400,
         height: 40,
+        fontFamily: 'Fredoka One',
         textTransform: "none",
         [theme.breakpoints.up("lg")]: {
             width: 470,

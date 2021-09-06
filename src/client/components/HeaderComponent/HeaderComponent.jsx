@@ -137,6 +137,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "0.76rem",
         color: "#212832",
         fontWeight:"500",
+        textTransform: "none",
         [theme.breakpoints.up("lg")]: {
             fontSize: "1.15rem",
             minWidth: 10
@@ -174,7 +175,7 @@ const HeaderComponent = (props) => {
 
 
     const tabProperties = [
-        { name: "Why Katha", url: "whykatha" },
+        { name: "Why Katha?", url: "whykatha" },
         { name: "Process", url: "process" },
         { name: "About Katha 21", url: "about-us" },
         { name: "Schedule", url: "schedule" },
