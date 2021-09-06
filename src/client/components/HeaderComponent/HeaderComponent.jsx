@@ -32,7 +32,7 @@ function ElevationScroll(props) {
 
 const useStyles = makeStyles(theme => ({
     menu: {
-        backgroundColor: "#FECB05",
+        backgroundColor: "#FEDB50",
         color: "white",
 
         borderRadius: "0"
@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     headerContainerMobile: {
-        backgroundColor: "#FECB05",
+        backgroundColor: "#FEDB50",
         padding: "0 1rem",
         width: "100%",
 
