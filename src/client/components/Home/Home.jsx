@@ -7,6 +7,7 @@ import Mentors from '../Mentors/Mentors';
 import Process from '../Process/Process';
 import Timer from '../Timer/Timer';
 import Schedule from '../Schedule/Schedule';
+import Footer from '../Footer/Footer'
 
 const Home = (props) => {
     return (
@@ -19,6 +20,7 @@ const Home = (props) => {
             <Schedule/>
             <KathaHistory />
             <Mentors />
+            <Footer />
         </React.Fragment>
     );
 };
