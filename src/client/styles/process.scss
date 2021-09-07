@@ -158,16 +158,19 @@
     }
   }
 
-  .small {
-    @include breakpoint-large-up {
-      display: none;
-    }
-  }
+  &__footer {
+    font-size: 1.125rem;
+    margin-top: 2.5rem;
 
-  .desktop {
-    background-color: #FEDB50;
-    @include breakpoint-medium-down {
-      display: none;
+    &--header {
+      font-weight: 700;
+      line-height: 1.5rem;
+    }
+
+    li {
+      font-weight: 400;
+      line-height: 2rem;
+      margin: .75rem 0;
     }
   }
 }
