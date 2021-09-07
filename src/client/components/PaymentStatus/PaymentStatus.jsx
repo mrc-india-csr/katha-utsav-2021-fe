@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
-import crossMark from "../../assets/images/crossmark.png"
+import crossMark from '../../assets/images/close.png'
 import kathautsav from "../../assets/images/kathautsav.png"
 import tickMark from "../../assets/images/tickmark.gif"
 import failMark from "../../assets/images/failmark.png"
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     backgroundSize: "cover",
     backgroundPosition: "center",
-},
+  },
   StatusContentTag: {
     height: "67px",
     top: "423px",
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "16px",
     },
-    
+
   },
   StatusPaymentCard: props => ({
     position: "relative",
@@ -93,6 +93,29 @@ const useStyles = makeStyles(theme => ({
       height: props.registrationStatus === "SUCCESS" ? "400px" : "470px",
     },
   }),
+  HomeButton: {
+    color: "purple",
+    width: 500,
+    height: 50,
+    fontFamily: 'Fredoka One',
+    fontSize: "18px",
+    textTransform: "none",
+    [theme.breakpoints.up("lg")]: {
+      width: 470,
+      fontSize: "18px"
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: 520,
+      fontSize: "18px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: 320
+    },
+
+    [theme.breakpoints.down("xs")]: {
+      width: 260
+    },
+  }
 
 }));
 
@@ -103,7 +126,7 @@ const PaymentStatus = (props) => {
   const { displayResponsePopUp, registrationStatus, registrationComment } = props;
 
   console.log(registrationStatus + "  ====  " + registrationComment);
-  
+
   const theme = useTheme();
 
 
@@ -115,12 +138,12 @@ const PaymentStatus = (props) => {
   let logoWidth = "168";
   let logoHeight = "90";
   if (matchesLG) {
-      logoWidth = "198";
-      logoHeight = "120"
+    logoWidth = "198";
+    logoHeight = "120"
   }
   if (matchesXL) {
-      logoWidth = "218";
-      logoHeight = "140"
+    logoWidth = "218";
+    logoHeight = "140"
   }
 
   let statusMsg = "Payment Failed ⛔";
@@ -146,7 +169,9 @@ const PaymentStatus = (props) => {
         {/*---Cross Mark---*/}
         <Grid item container justifyContent="flex-end">
           <Grid item component={Button} onClick={closePopUp}>
-            <img src={crossMark} alt="crossmark" width="28px" height="28px" />
+            {/* <img src={crossMark} alt="crossmark" width="28px" height="28px" /> */}
+
+            <img alt src={crossMark} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
           </Grid>
         </Grid>
 
@@ -183,8 +208,9 @@ const PaymentStatus = (props) => {
                     <Grid item onClick={closeAllPopUp}>
                       <ContactUsButton textColor="white" />
                     </Grid>
-                    <Grid item onClick={closeAllPopUp}>
-                      <HomeButton textColor="purple" bgColor="white"/>
+                    <br />
+                    <Grid item component={Button} onClick={closeAllPopUp} >
+                      <Typography gutterBottom className={classes.HomeButton} style={{ "textAlign": "center" }} variant="body2">Back to Home</Typography>
                     </Grid>
                   </div>
                 }

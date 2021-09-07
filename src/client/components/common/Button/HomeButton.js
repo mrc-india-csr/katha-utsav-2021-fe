@@ -7,7 +7,7 @@ import '../../../styles/main.scss';
 
 const useStyles = makeStyles(theme => ({
     HomeButton: props => ({
-        
+
         color: props.textColor,
         backgroundColor: props.bgColor,
         width: 500,
@@ -30,20 +30,14 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("xs")]: {
             width: 260
         },
-        "&:hover":{
-            backgroundColor:"#9D4395"
+        "&:hover": {
+            backgroundColor: "#9D4395"
         },
     })
 }));
 
 const HomeButton = (props) => {
     const classes = useStyles(props);
-
-    const closePopUp = () => {
-        props.showResponsePopUp(false);
-        props.showPopUp(false);
-    }
-
     return (
 
         <Button className={classes.HomeButton}>Back to Home</Button>

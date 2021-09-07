@@ -6,7 +6,7 @@ import '../../../styles/main.scss';
 
 const useStyles = makeStyles(theme => ({
     ContactButton: props => ({
-        backgroundColor:"#98248D",
+        backgroundColor: "#98248D",
         color: props.textColor,
         width: 500,
         height: 60,
@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("xs")]: {
             width: 260
         },
-        "&:hover":{
-            backgroundColor:"#9D4395"
+        "&:hover": {
+            backgroundColor: "#9D4395"
         },
     })
 }));
