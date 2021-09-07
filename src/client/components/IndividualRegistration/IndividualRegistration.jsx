@@ -382,7 +382,7 @@ const IndividualRegistration = (props) => {
 
     const handleClick = async() => {
         props.showResponsePopUp(true);
-        props.setRegistrationData("F", "Status message");
+        props.setRegistrationData("SUCCESS", "Status message");
 
         // await displayPayment(sampleFormData, paymentStateHandler);
     };

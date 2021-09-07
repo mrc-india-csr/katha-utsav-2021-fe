@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     HomeButton: props => ({
         
         color: props.textColor,
+        backgroundColor: props.bgColor,
         width: 500,
         height: 60,
         fontFamily: 'Fredoka One',

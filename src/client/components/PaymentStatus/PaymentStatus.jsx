@@ -64,9 +64,7 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: "center",
 },
   StatusContentTag: {
-    // position: "absolute",
     height: "67px",
-    // left: "25px",
     top: "423px",
     alignItems: "center",
     textAlign: "center",
@@ -75,16 +73,16 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     fontSize: "20px",
     lineHeight: "26px",
-    // display: "flex",
     letterSpacing: "-0.02em",
     color: "#18191F",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "16px",
+    },
     
   },
   StatusPaymentCard: props => ({
     position: "relative",
-    // width: "600px",
     height: props.registrationStatus === "SUCCESS" ? "600px" : "670px",
-    // left: "420px",
     top: "20px",
     borderRadius: "8px",
     background: "#FFFFFF",
@@ -95,29 +93,6 @@ const useStyles = makeStyles(theme => ({
       height: props.registrationStatus === "SUCCESS" ? "400px" : "470px",
     },
   }),
-  homeButton: props => ({
-    // position: "absolute",
-    width: "551px",
-    height: "60px",
-    top: props.registrationStatus == "SUCCESS" ? "511px" : "587px",
-    left: "32px",
-    backgroundColor: props.registrationStatus === "SUCCESS" ? "#98248D" : "#FFFFFF",
-    borderRadius: "4px",
-    [theme.breakpoints.down("xs")]: {
-      width: "85%",
-      position: "relative",
-    },
-  }),
-  cancelButton: {
-    width: "551px",
-    height: "60px",
-    backgroundColor: "#98248D",
-    borderRadius: "4px",
-    [theme.breakpoints.down("xs")]: {
-      width: "85%",
-      position: "relative",
-    },
-  }
 
 }));
 
@@ -155,12 +130,14 @@ const PaymentStatus = (props) => {
   if (registrationStatus === 'SUCCESS') {
     statusMsg = "Payment Success 🎉";
     statusLogo = tickMark;
-    // statusContent = props.stsContent;
   }
 
   const closePopUp = () => {
     props.showResponsePopUp(false);
-    // props.showPopUp(false);
+  }
+  const closeAllPopUp = () => {
+    props.showResponsePopUp(false);
+    props.showPopUp(false);
   }
 
   return ReactDOM.createPortal(
@@ -200,14 +177,14 @@ const PaymentStatus = (props) => {
                 </Grid>
 
                 {(props.registrationStatus) === "SUCCESS" ?
-                  <Grid item onClick={closePopUp}><HomeButton textColor="white" /></Grid>
+                  <Grid item onClick={closeAllPopUp} ><HomeButton textColor="white" bgColor="purple" /></Grid>
                   :
                   <div>
-                    <Grid item onClick={closePopUp}>
+                    <Grid item onClick={closeAllPopUp}>
                       <ContactUsButton textColor="white" />
                     </Grid>
-                    <Grid item onClick={closePopUp}>
-                      <HomeButton textColor="purple" />
+                    <Grid item onClick={closeAllPopUp}>
+                      <HomeButton textColor="purple" bgColor="white"/>
                     </Grid>
                   </div>
                 }
