@@ -65,7 +65,6 @@ const useStyles = makeStyles(theme => ({
 },
   StatusContentTag: {
     // position: "absolute",
-    width: "555px",
     height: "67px",
     // left: "25px",
     top: "423px",
@@ -86,7 +85,6 @@ const useStyles = makeStyles(theme => ({
     // width: "600px",
     height: props.registrationStatus === "SUCCESS" ? "600px" : "670px",
     // left: "420px",
-    alignItems: "center",
     top: "20px",
     borderRadius: "8px",
     background: "#FFFFFF",
@@ -185,7 +183,7 @@ const PaymentStatus = (props) => {
         <Grid item container alignItems="center" direction="column">
           <Card className={classes.StatusPaymentCard}>
             <CardContent>
-              <Grid spacing={1} alignItems="center" container item direction="column" >
+              <Grid spacing={1} alignItems="center" container item direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
 
                 <Grid item >
                   <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
