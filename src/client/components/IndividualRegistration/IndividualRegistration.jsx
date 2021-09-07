@@ -10,8 +10,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import InputField from '../common/TextField/InputField';
 import DropDown from '../common/Select/DropDown';
-import PaymentButton from '../common/Button/PayButton';
-import FileUploader from '../common/FileUploader';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import _ from 'lodash';
