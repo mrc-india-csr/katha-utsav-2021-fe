@@ -7,18 +7,31 @@ import '../../../styles/main.scss';
 
 const useStyles = makeStyles(theme => ({
     HomeButton: props => ({
-        position: "absolute",
-        width: "540px",
-        height: "60px",
-        top: "0px",
-        left: "0px",
-        fontFamily: "Fredoka One",
-        fontStyle: "normal",
-        fontWeight: "normal",
+        
+        color: props.textColor,
+        width: 500,
+        height: 60,
+        fontFamily: 'Fredoka One',
         fontSize: "18px",
-        lineHeight: "24px",
-        textAlign: "center",
-        color: props.textColor
+        textTransform: "none",
+        [theme.breakpoints.up("lg")]: {
+            width: 470,
+            fontSize: "18px"
+        },
+        [theme.breakpoints.up("xl")]: {
+            width: 520,
+            fontSize: "18px"
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: 320
+        },
+
+        [theme.breakpoints.down("xs")]: {
+            width: 260
+        },
+        "&:hover":{
+            backgroundColor:"#9D4395"
+        },
     })
 }));
 

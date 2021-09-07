@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
 import crossMark from "../../assets/images/crossmark.png"
 import kathautsav from "../../assets/images/kathautsav.png"
@@ -38,7 +39,8 @@ const useStyles = makeStyles(theme => ({
     height: "320px",
     [theme.breakpoints.down("xs")]: {
       position: "relative",
-      left: 0,
+      width: "140px",
+      height: "140px"
     },
   },
   StatusMsgTag: {
@@ -62,50 +64,61 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: "center",
 },
   StatusContentTag: {
-    position: "absolute",
+    // position: "absolute",
     width: "555px",
     height: "67px",
-    left: "25px",
+    // left: "25px",
     top: "423px",
     alignItems: "center",
     textAlign: "center",
     fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "bold",
-    fontSize: "16px",
+    fontSize: "20px",
     lineHeight: "26px",
     // display: "flex",
     letterSpacing: "-0.02em",
-    color: "#18191F"
+    color: "#18191F",
+    
   },
   StatusPaymentCard: props => ({
-    width: "600px",
-    height: props.payStatus === "SUCCESS" ? "600px" : "670px",
+    position: "relative",
+    // width: "600px",
+    height: props.registrationStatus === "SUCCESS" ? "600px" : "670px",
     // left: "420px",
     alignItems: "center",
-    top: "178px",
+    top: "20px",
     borderRadius: "8px",
     background: "#FFFFFF",
     boxShadow: theme.shadows[2],
     [theme.breakpoints.down("xs")]: {
       width: "85%",
       position: "relative",
+      height: props.registrationStatus === "SUCCESS" ? "400px" : "470px",
     },
   }),
   homeButton: props => ({
-    position: "absolute",
+    // position: "absolute",
     width: "551px",
     height: "60px",
-    top: props.payStatus == "SUCCESS" ? "511px" : "587px",
+    top: props.registrationStatus == "SUCCESS" ? "511px" : "587px",
     left: "32px",
-    backgroundColor: props.payStatus === "SUCCESS" ? "#98248D" : "#FFFFFF",
+    backgroundColor: props.registrationStatus === "SUCCESS" ? "#98248D" : "#FFFFFF",
     borderRadius: "4px",
+    [theme.breakpoints.down("xs")]: {
+      width: "85%",
+      position: "relative",
+    },
   }),
   cancelButton: {
     width: "551px",
     height: "60px",
     backgroundColor: "#98248D",
     borderRadius: "4px",
+    [theme.breakpoints.down("xs")]: {
+      width: "85%",
+      position: "relative",
+    },
   }
 
 }));
@@ -117,16 +130,32 @@ const PaymentStatus = (props) => {
   const { displayResponsePopUp, registrationStatus, registrationComment } = props;
 
   console.log(registrationStatus + "  ====  " + registrationComment);
+  
+  const theme = useTheme();
 
-  let statusMsg = registrationStatus;
-  // "Payment Failed ⛔";
+
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+  const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+
+  let logoWidth = "168";
+  let logoHeight = "90";
+  if (matchesLG) {
+      logoWidth = "198";
+      logoHeight = "120"
+  }
+  if (matchesXL) {
+      logoWidth = "218";
+      logoHeight = "140"
+  }
+
+  let statusMsg = "Payment Failed ⛔";
   let statusLogo = failMark;
   let statusContent = registrationComment;
 
-  const status = '' + props.payStatus
-
-  if (status === 'SUCCESS') {
-    // statusMsg = "Payment Success 🎉";
+  if (registrationStatus === 'SUCCESS') {
+    statusMsg = "Payment Success 🎉";
     statusLogo = tickMark;
     // statusContent = props.stsContent;
   }
@@ -149,16 +178,16 @@ const PaymentStatus = (props) => {
         {/*---Title and subtitle---*/}
         <Grid item container direction="column" style={{ textAlign: "center" }}>
           <Grid item>
-            <img src={kathautsav} alt="Katha Utsav logo" className={classes.KathaUtsavLogo} />
+            <img src={kathautsav} alt="Katha Utsav logo" width={logoWidth} height={logoHeight} />
           </Grid>
         </Grid>
 
         <Grid item container alignItems="center" direction="column">
           <Card className={classes.StatusPaymentCard}>
             <CardContent>
-              <Grid spacing={1} alignItems="center" container item direction="column" style={{ textAlign: "center" }}>
+              <Grid spacing={1} alignItems="center" container item direction="column" >
 
-                <Grid item>
+                <Grid item >
                   <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
                 </Grid>
 
@@ -172,14 +201,14 @@ const PaymentStatus = (props) => {
                   </Typography>
                 </Grid>
 
-                {('' + props.payStatus) === "SUCCESS" ?
-                  <Grid item className={classes.homeButton} onClick={closePopUp}><HomeButton textColor="white" /></Grid>
+                {(props.registrationStatus) === "SUCCESS" ?
+                  <Grid item onClick={closePopUp}><HomeButton textColor="white" /></Grid>
                   :
                   <div>
-                    <Grid item className={classes.cancelButton} onClick={closePopUp}>
+                    <Grid item onClick={closePopUp}>
                       <ContactUsButton textColor="white" />
                     </Grid>
-                    <Grid item className={classes.homeButton} onClick={closePopUp}>
+                    <Grid item onClick={closePopUp}>
                       <HomeButton textColor="purple" />
                     </Grid>
                   </div>
