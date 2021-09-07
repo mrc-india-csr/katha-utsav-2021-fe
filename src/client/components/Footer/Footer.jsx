@@ -27,6 +27,7 @@ import football from '../../assets/images/football.png';
 
 const useStyles = makeStyles(theme => ({
     background: {
+        padding: '2rem',
         backgroundColor: "#F3F0EA",
         width: "100%",
     },
@@ -87,7 +88,6 @@ const useStyles = makeStyles(theme => ({
 const Footer = () => {
     const theme = useTheme();
     const classes = useStyles();
-
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));

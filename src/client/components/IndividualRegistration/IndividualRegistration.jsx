@@ -7,6 +7,8 @@ import close from '../../assets/images/close.png';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Card from '@material-ui/core/Card';
+import PaymentButton from '../common/Button/PayButton';
+import FileUploader from '../common/FileUploader';
 import CardContent from '@material-ui/core/CardContent';
 import InputField from '../common/TextField/InputField';
 import DropDown from '../common/Select/DropDown';
