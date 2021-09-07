@@ -150,7 +150,7 @@ const IndividualRegistration = (props) => {
         }
     }
 
-    useEffect(() => { if(previousValues.current.name!=fileData.name && previousValues.current.size!=fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
+    useEffect(() => { if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
 
     const Validate = () => {
         let errorObject = { emailError: "", nameError: "", phoneNumberError: "", SchoolError: "", CityError: "", ClassError: "", StoryCategoryError: "", fileError: "", isError: false }
@@ -223,7 +223,7 @@ const IndividualRegistration = (props) => {
     }
 
     const IndividualRegistrationValidation = (event) => {
-        if(_.includes(['Email ID','Name','Phone Number','School','City'], event.target.id) &&event.target.value[0]==' ') return;
+        if (_.includes(['Email ID', 'Name', 'Phone Number', 'School', 'City'], event.target.id) && event.target.value[0] == ' ') return;
         switch (event.target.id) {
             case 'Email ID':
                 let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
@@ -389,6 +389,11 @@ const IndividualRegistration = (props) => {
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <DropDown errorMessage={StoryCategoryMessage} isError={StoryCategoryMessage.length !== 0} fieldName={"Story Category"} options={["Fiction", "Non-Fiction", "Poetry"]} onChangeFunc={setStoryCategory} eventValidation={onDropDown} value={storyCategory} />
+                                </Grid>
+
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
+                                    </Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
