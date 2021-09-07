@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -15,6 +15,7 @@ import FileUploader from '../common/FileUploader';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import {displayPayment} from "../../Utils/helpers/initiateRegistration";
+import _ from 'lodash';
 
 
 const useStyles = makeStyles(theme => ({
@@ -100,7 +101,7 @@ const useStyles = makeStyles(theme => ({
         lineHeight: "1.25rem",
     },
     errorMessage: {
-        color:"#FF0000",
+        color: "#FF0000",
         fontWeight: 400,
         lineHeight: "1rem",
     }
@@ -136,6 +137,7 @@ const IndividualRegistration = (props) => {
     const [fileDataMessage, setfileDataMessage] = useState(props.nameMessage);
 
     const [fileName, setFileName] = useState('Upload File');
+    const previousValues = useRef({ fileData });
 
 
 
@@ -144,16 +146,17 @@ const IndividualRegistration = (props) => {
         if (name) {
             const splitPath = name.split("\\");
             setFileName(`File Uploaded: ${splitPath[splitPath.length - 1]}`);
-            setFileData(selectedFile);
-            IndividualRegistrationValidation({ target: { id: 'file' } });
+            setFileData(event.target.files[0]);
+            setfileDataMessage("");
         }
     }
+
+    useEffect(() => { if(previousValues.current.name!=fileData.name && previousValues.current.size!=fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
 
     const Validate = () => {
         let errorObject = { emailError: "", nameError: "", phoneNumberError: "", SchoolError: "", CityError: "", ClassError: "", StoryCategoryError: "", fileError: "", isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
-        console.log('school', school);
         if (_.isNull(emailId) || _.isEmpty(emailId) || !emailValid) {
             setEmailIdMessage("Please enter a valid email")
             errorObject.isError = true;
@@ -221,7 +224,7 @@ const IndividualRegistration = (props) => {
     }
 
     const IndividualRegistrationValidation = (event) => {
-
+        if(_.includes(['Email ID','Name','Phone Number','School','City'], event.target.id) &&event.target.value[0]==' ') return;
         switch (event.target.id) {
             case 'Email ID':
                 let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
@@ -287,8 +290,10 @@ const IndividualRegistration = (props) => {
                 }
                 break;
             case 'file':
-                if (_.isEmpty(fileName) || fileData.size > 10000000) {
+                if (_.isEqual({}, fileData) || fileData.size > 10000000) {
                     setfileDataMessage("Please Upload file less than 10mb");
+                    setFileName("Upload File");
+                    setFileData({});
                 }
                 else {
                     setfileDataMessage("");
@@ -408,46 +413,46 @@ const IndividualRegistration = (props) => {
                 {true && <Grid item container alignItems={matchesXS ? "center" : "center"} direction="column" >
                     <Card className={classes.registrationCard}>
                         <CardContent>
-                            <Grid spacing={1} item container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? 350 : "inherit" }}>
+                            <Grid spacing={1} item container alignItems="center" direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <Typography gutterBottom variant="body1"  className={classes.RegistrationForm}>Student Details</Typography>
+                                    <Typography gutterBottom variant="body1" className={classes.RegistrationForm}>Student Details</Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <InputField errorMessage={nameMessage} isError={nameMessage.length > 0} fieldName={"Name"} onChangeFunc={setName} eventValidation={IndividualRegistrationValidation} value={name} />
+                                    <InputField errorMessage={nameMessage} isError={nameMessage.length !== 0} fieldName={"Name"} onChangeFunc={setName} eventValidation={IndividualRegistrationValidation} value={name} />
                                 </Grid>
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <InputField errorMessage={emailIdMessage} isError={emailIdMessage.length > 0} fieldName={"Email ID"} onChangeFunc={setEmailId} eventValidation={IndividualRegistrationValidation} value={emailId} />
+                                    <InputField errorMessage={emailIdMessage} isError={emailIdMessage.length !== 0} fieldName={"Email ID"} onChangeFunc={setEmailId} eventValidation={IndividualRegistrationValidation} value={emailId} />
                                 </Grid>
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <InputField errorMessage={phoneNumberMessage} isError={phoneNumberMessage.length > 0} fieldName={"Phone Number"} onChangeFunc={setPhoneNumber} eventValidation={IndividualRegistrationValidation} value={phoneNumber} />
-                                </Grid>
-
-                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <InputField errorMessage={SchoolMessage} isError={SchoolMessage.length > 0} fieldName={"School"} onChangeFunc={setSchool} eventValidation={IndividualRegistrationValidation} value={school} />
+                                    <InputField errorMessage={phoneNumberMessage} isError={phoneNumberMessage.length !== 0} fieldName={"Phone Number"} onChangeFunc={setPhoneNumber} eventValidation={IndividualRegistrationValidation} value={phoneNumber} />
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <InputField errorMessage={CityMessage} isError={CityMessage.length > 0} fieldName={"City"} onChangeFunc={setCity} eventValidation={IndividualRegistrationValidation} value={city} />
+                                    <InputField errorMessage={SchoolMessage} isError={SchoolMessage.length !== 0} fieldName={"School"} onChangeFunc={setSchool} eventValidation={IndividualRegistrationValidation} value={school} />
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <DropDown errorMessage={ClassMessage} isError={ClassMessage.length > 0} fieldName={"Class"} options={["IV to VI", "VII to IX", "X to XII"]} onChangeFunc={setClassStandard} eventValidation={onDropDown} value={classStandard} />
+                                    <InputField errorMessage={CityMessage} isError={CityMessage.length !== 0} fieldName={"City"} onChangeFunc={setCity} eventValidation={IndividualRegistrationValidation} value={city} />
+                                </Grid>
+
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+                                    <DropDown errorMessage={ClassMessage} isError={ClassMessage.length !== 0} fieldName={"Class"} options={["IV to VI", "VII to IX", "X to XII"]} onChangeFunc={setClassStandard} eventValidation={onDropDown} value={classStandard} />
                                 </Grid>
 
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <DropDown errorMessage={StoryCategoryMessage} isError={StoryCategoryMessage.length > 0} fieldName={"Story Category"} options={["Fiction", "Non-Fiction", "Poetry"]} onChangeFunc={setStoryCategory} eventValidation={onDropDown} value={storyCategory} />
+                                    <DropDown errorMessage={StoryCategoryMessage} isError={StoryCategoryMessage.length !== 0} fieldName={"Story Category"} options={["Fiction", "Non-Fiction", "Poetry"]} onChangeFunc={setStoryCategory} eventValidation={onDropDown} value={storyCategory} />
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <FileUploader onFileUpload={onFileUpload} style={classes.UploadFile} buttonName={fileName} />
-                                    <Typography align="left" gutterBottom variant="body1" style={{fontSize: matchesXL?"1.25rem":matchesLG?"1rem":"0.75rem"}} className={classes.errorMessage}>{fileDataMessage}</Typography>
+                                    <Typography align="left" gutterBottom variant="body1" style={{ fontSize: matchesXL ? "1.25rem" : matchesLG ? "1rem" : "0.75rem" }} className={classes.errorMessage}>{fileDataMessage}</Typography>
                                 </Grid>
 
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
-                                    <Typography gutterBottom variant="h6" style={{ maxWidth:matchesLG?"30rem":"inherit",fontSize: matchesXL ? "1rem" :matchesLG?"1rem": "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : Supported Document types: word, pdf, jpg, jpeg,png & maxium file size is 10mb.</Typography>
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : Supported Document types: doc,docx, pdf, jpg, jpeg, png & maxium file size is 10mb.</Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>

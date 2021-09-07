@@ -18,7 +18,7 @@ import { Dialog, Slide } from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
   pageBackground: {
     backgroundColor: '#FEDB50',
-    height: "500vh",
+    height: "600vh",
     padding: 0,
     width: "100%",
     backgroundRepeat: "no-repeat",
@@ -34,18 +34,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   TickMarkLogo: {
-    top: "89px",
-    left: "140px",
     width: "320px",
     height: "320px",
-    position: "absolute"
+    [theme.breakpoints.down("xs")]: {
+      position: "relative",
+      left: 0,
+    },
   },
   StatusMsgTag: {
-    position: "absolute",
-    width: "600px",
     height: "45px",
-    left: "calc(400px/2)",
-    top: "31px",
     alignItems: "center",
     textAlign: "center",
     fontFamily: "Poppins",
@@ -57,6 +54,13 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: "-0.02em",
     color: "#66645E"
   },
+  registrationDivBackground: {
+    backgroundColor: '#FEDB50',
+    height: "25vh",
+    width: "100%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+},
   StatusContentTag: {
     position: "absolute",
     width: "555px",
@@ -75,7 +79,6 @@ const useStyles = makeStyles(theme => ({
     color: "#18191F"
   },
   StatusPaymentCard: props => ({
-    position: "absolute",
     width: "600px",
     height: props.payStatus === "SUCCESS" ? "600px" : "670px",
     // left: "420px",
@@ -84,6 +87,10 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "8px",
     background: "#FFFFFF",
     boxShadow: theme.shadows[2],
+    [theme.breakpoints.down("xs")]: {
+      width: "85%",
+      position: "relative",
+    },
   }),
   homeButton: props => ({
     position: "absolute",
@@ -95,11 +102,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "4px",
   }),
   cancelButton: {
-    position: "absolute",
     width: "551px",
     height: "60px",
-    top: "511px",
-    left: "32px",
     backgroundColor: "#98248D",
     borderRadius: "4px",
   }
@@ -112,7 +116,7 @@ const PaymentStatus = (props) => {
   const classes = useStyles(props);
   const { displayResponsePopUp, registrationStatus, registrationComment } = props;
 
-    console.log(registrationStatus + "  ====  " + registrationComment);
+  console.log(registrationStatus + "  ====  " + registrationComment);
 
   let statusMsg = registrationStatus;
   // "Payment Failed ⛔";
@@ -152,7 +156,7 @@ const PaymentStatus = (props) => {
         <Grid item container alignItems="center" direction="column">
           <Card className={classes.StatusPaymentCard}>
             <CardContent>
-              <Grid spacing={1} container item direction="column" style={{ textAlign: "center" }}>
+              <Grid spacing={1} alignItems="center" container item direction="column" style={{ textAlign: "center" }}>
 
                 <Grid item>
                   <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
@@ -183,6 +187,7 @@ const PaymentStatus = (props) => {
               </Grid>
             </CardContent>
           </Card>
+          <div className={classes.registrationDivBackground} />
         </Grid>
       </Grid>
     </Dialog>,

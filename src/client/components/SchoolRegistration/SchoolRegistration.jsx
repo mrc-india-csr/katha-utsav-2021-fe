@@ -56,9 +56,21 @@ const SchoolRegistration = (props) => {
     }
 
 
-
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+    const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
+    const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
+
+    let logoWidth = "168";
+    let logoHeight = "90";
+    if (matchesLG) {
+        logoWidth = "198";
+        logoHeight = "120"
+    }
+    if (matchesXL) {
+        logoWidth = "218";
+        logoHeight = "140"
+    }
 
     return (
         <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp}>
@@ -66,7 +78,7 @@ const SchoolRegistration = (props) => {
                 {/*---Cross Mark---*/}
                 <Grid item container justifyContent="flex-end">
                     <Grid item component={Button} onClick={closePopUp}>
-                    <img alt src={close} alt="crossmark" width="20" height="20" />
+                    <img alt src={close} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
                     </Grid>
                 </Grid>
                     { renderIf

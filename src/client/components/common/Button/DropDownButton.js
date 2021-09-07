@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import downarrow from "../../../assets/images/downarrow.png"
+import downarrow from "../../../assets/images/downarrow.png";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import MenuList from '@material-ui/core/MenuList';
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 
 const useStyles = makeStyles(theme => ({
     buttonArrow: {
@@ -29,77 +35,83 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#fff",
         color: "#000",
     },
-    root:{
+    root: {
         fontSize: "3rem"
     }
 
 }));
 
-const DropDownButton = (props) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [openMenu, setOpenMenu] = useState(false);
-    const [page, setPage] = useState('');
-    const [open, setOpen] = useState(false);
+
+export default function DropDownButton(props) {
+    const {menuServiceProperties} =props;
     const classes = useStyles();
     const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-    const handleClick = (event) => {
-        event.persist();
-        setAnchorEl(event.currentTarget);
-        setOpenMenu(true);
+    const handleClick = () => {
+        console.info(`You clicked ${options[selectedIndex]}`);
     };
 
-    const onMenuClick = () => {
-    }
-    const handleClose = () => {
-        setPage('');
-        setOpenMenu(false);
-        setAnchorEl(null);
-    };
-
-    const RegisterNow = (
-        <Button className={classes.buttonArrow} aria-haspopup={anchorEl ? "true" : undefined} aria-owns={anchorEl ? "simple-menu" : undefined} variant="contained" onClick={handleClick}><span style={{ marginRight: "10px" }}>Register Now </span><img src={downarrow} alt="down arrow" /> </Button>
-    );
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
 
+    const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+        setOpen(false);
+    };
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     return (
-        <React.Fragment>
-            {RegisterNow}
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={openMenu}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                getContentAnchorEl={null}
+        <Grid container direction="column" alignItems="center">
+            <Grid item xs={12}>
+            <Button className={classes.buttonArrow}    
+            ref={anchorRef} 
+                        aria-controls={open ? 'split-button-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-label="select merge strategy"
+                        aria-haspopup="menu"
+                        onClick={handleToggle} variant="contained"><span style={{ marginRight: "10px" }}>Register Now </span><img src={downarrow} alt="down arrow" /> </Button>
 
-                classes={{ paper: classes.menuRegistration}}
-                MenuListProps={{
-                    onMouseLeave: handleClose,
-                }}
-                elevation={0}
-
-            >
-                {
-                    props.menuServiceProperties.map((option, index) => {
-                        return <MenuItem style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"3rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"3rem":"1.8rem"}} key={option.name + index} onClick={() => option.showPopUpFun(true)}>{option.name}</MenuItem>
-                    })
-                }
-            </Menu>
-        </React.Fragment>
-    )
-
-};
-
-
-export default DropDownButton;
+                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                    {({ TransitionProps, placement }) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{
+                                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                            }}
+                        >
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList id="split-button-menu">
+                                        {props.menuServiceProperties.map((option, index) => (
+                                            <MenuItem
+                                                key={option.name}
+                                                style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem"}}
+                                                onClick={() => option.showPopUpFun(true)}
+                                            >
+                                                {option.name}
+                                            </MenuItem>
+                                        ))}
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
+            </Grid>
+        </Grid>
+    );
+}
