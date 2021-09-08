@@ -7,7 +7,6 @@ import '../../../styles/main.scss';
 
 const useStyles = makeStyles(theme => ({
     HomeButton: props => ({
-
         color: props.textColor,
         backgroundColor: props.bgColor,
         width: 500,
@@ -39,8 +38,7 @@ const useStyles = makeStyles(theme => ({
 const HomeButton = (props) => {
     const classes = useStyles(props);
     return (
-
-        <Button className={classes.HomeButton}>Back to Home</Button>
+        <Button className={classes.HomeButton}>Go Back to Home</Button>
     );
 };
 

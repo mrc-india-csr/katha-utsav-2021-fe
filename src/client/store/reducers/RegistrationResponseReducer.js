@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   showPopUp: false,
   registrationStatus: '',
-  registrationComment: ''
+  registrationComment: '',
+  orderId: ''
 }
 
 const RegistrationResponseReducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const RegistrationResponseReducer = (state = initialState, action) => {
       return {
         ...state,
         registrationStatus: action.status,
-        registrationComment: action.message
+        registrationComment: action.message,
+        orderId: action.orderId
       }
     default:
       return state;

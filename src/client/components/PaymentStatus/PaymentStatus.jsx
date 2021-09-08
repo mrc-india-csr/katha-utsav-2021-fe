@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {makeStyles, useTheme} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
 import crossMark from '../../assets/images/close.png'
@@ -14,16 +14,14 @@ import CardContent from '@material-ui/core/CardContent';
 import HomeButton from '../common/Button/HomeButton';
 import ContactUsButton from '../common/Button/ContactUsButton';
 import '../../styles/main.scss';
-import { Dialog, Slide } from "@material-ui/core";
+import {Dialog, Slide} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   pageBackground: {
-    backgroundColor: '#FEDB50',
     height: "600vh",
     padding: 0,
     width: "100%",
-    backgroundRepeat: "no-repeat",
-
   },
   KathaUtsavLogo: {
     top: "40px",
@@ -35,8 +33,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   TickMarkLogo: {
-    width: "320px",
-    height: "320px",
+    marginTop: "20px",
+    width: "280px",
+    height: "280px",
     [theme.breakpoints.down("xs")]: {
       position: "relative",
       width: "140px",
@@ -47,24 +46,23 @@ const useStyles = makeStyles(theme => ({
     height: "45px",
     alignItems: "center",
     textAlign: "center",
-    fontFamily: "Poppins",
+    fontFamily: 'Fredoka One',
     fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "24px",
+    fontWeight: "normal",
+    fontSize: "36px",
     lineHeight: "32px",
     display: "flex",
-    letterSpacing: "-0.02em",
-    color: "#66645E"
+    color: "#1C1C1C",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "28px",
+    },
   },
   registrationDivBackground: {
-    backgroundColor: '#FEDB50',
-    height: "25vh",
+    height: "80px",
     width: "100%",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
   },
   StatusContentTag: {
-    height: "67px",
+    maxWidth: "522px",
     top: "423px",
     alignItems: "center",
     textAlign: "center",
@@ -78,19 +76,34 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "16px",
     },
-
+  },
+  StatusInfoTag: {
+    maxWidth: "522px",
+    marginTop: "12px",
+    marginBottom: "24px",
+    alignItems: "center",
+    textAlign: "center",
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: "16px",
+    lineHeight: "26px",
+    color: "#808080",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px",
+    },
   },
   StatusPaymentCard: props => ({
     position: "relative",
-    height: props.registrationStatus === "SUCCESS" ? "600px" : "670px",
-    top: "20px",
-    borderRadius: "8px",
+    width: "600px",
+    top: "50px",
+    borderRadius: "22px",
     background: "#FFFFFF",
     boxShadow: theme.shadows[2],
     [theme.breakpoints.down("xs")]: {
       width: "85%",
       position: "relative",
-      height: props.registrationStatus === "SUCCESS" ? "400px" : "470px",
+      top: "20px",
     },
   }),
   HomeButton: {
@@ -115,20 +128,42 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       width: 260
     },
+  },
+  secondaryAction: {
+    textDecoration: "none",
+    alignItems: "center",
+    textAlign: "center",
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: 400,
+    fontSize: "16px",
+    lineHeight: "26px",
+    color: "#404040"
   }
-
 }));
 
 const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
 
+const SuccessHeader = () => {
+  return <div>Payment <span style={{color: '#00AB88'}}>Successful!</span></div>;
+};
+
+const FailureHeader = () => {
+  return <div>Oops, Payment <span style={{color: '#00AB88'}}>Failed.</span></div>;
+};
+
+const SuccessMessage = ({orderId}) => {
+  return <div>Your registration ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
+};
+
+const FailureMessage = ({orderId}) => {
+  return <div>No worries, Your registration ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
+};
+
 const PaymentStatus = (props) => {
   const classes = useStyles(props);
-  const { displayResponsePopUp, registrationStatus, registrationComment } = props;
-
-  console.log(registrationStatus + "  ====  " + registrationComment);
-
+  const {displayResponsePopUp, registrationStatus, orderId} = props;
   const theme = useTheme();
-
 
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
@@ -136,88 +171,109 @@ const PaymentStatus = (props) => {
   const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
 
   let logoWidth = "168";
-  let logoHeight = "90";
+  let logoHeight = "80";
   if (matchesLG) {
-    logoWidth = "198";
-    logoHeight = "120"
+    logoWidth = "188";
+    logoHeight = "100"
   }
   if (matchesXL) {
     logoWidth = "218";
-    logoHeight = "140"
-  }
-
-  let statusMsg = "Payment Failed ⛔";
-  let statusLogo = failMark;
-  let statusContent = registrationComment;
-
-  if (registrationStatus === 'success') {
-    statusMsg = "Payment Success 🎉";
-    statusLogo = tickMark;
+    logoHeight = "130"
   }
 
   const closePopUp = () => {
     props.showResponsePopUp(false);
   }
+
   const closeAllPopUp = () => {
     props.showResponsePopUp(false);
     props.showPopUp(false);
   }
 
   return ReactDOM.createPortal(
-    <Dialog fullScreen TransitionComponent={Transition} open={displayResponsePopUp} onClose={closePopUp}>
+    <Dialog fullScreen TransitionComponent={Transition} open={displayResponsePopUp}
+            PaperProps={{style: {backgroundColor: '#FEDB50'}}} onClose={closePopUp}>
       <Grid container direction="column" className={classes.pageBackground}>
         {/*---Cross Mark---*/}
         <Grid item container justifyContent="flex-end">
           <Grid item component={Button} onClick={closePopUp}>
-            {/* <img src={crossMark} alt="crossmark" width="28px" height="28px" /> */}
-
-            <img alt src={crossMark} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
+            <img src={crossMark} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"}
+                 height={matchesXL ? "50" : matchesLG ? "50" : "30"}/>
           </Grid>
         </Grid>
 
         {/*---Title and subtitle---*/}
-        <Grid item container direction="column" style={{ textAlign: "center" }}>
+        <Grid item container direction="column" style={{textAlign: "center"}}>
           <Grid item>
-            <img src={kathautsav} alt="Katha Utsav logo" width={logoWidth} height={logoHeight} />
+            <img src={kathautsav} alt="Katha Utsav logo" width={logoWidth} height={logoHeight}/>
           </Grid>
         </Grid>
 
         <Grid item container alignItems="center" direction="column">
           <Card className={classes.StatusPaymentCard}>
             <CardContent>
-              <Grid spacing={1} alignItems="center" container item direction="column" style={{ textAlign: "center", width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+              <Grid spacing={1} alignItems="center" container item direction="column"
+                    style={{textAlign: "center", width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit"}}>
 
-                <Grid item >
-                  <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}> {statusMsg} </Typography>
+                <Grid item>
+                  <img src={(registrationStatus === 'success') ? tickMark : failMark} alt="Status Logo"
+                       className={classes.TickMarkLogo}/>
                 </Grid>
 
                 <Grid item>
-                  <img src={statusLogo} alt="StatusLogo.png" className={classes.TickMarkLogo} />
+                  <Typography gutterBottom variant="body1" className={classes.StatusMsgTag}>
+                    {(registrationStatus === 'success') ? <SuccessHeader/> : <FailureHeader/>}
+                  </Typography>
                 </Grid>
 
                 <Grid item>
                   <Typography gutterBottom variant="body1" className={classes.StatusContentTag}>
-                    {statusContent}
+                    {(registrationStatus === 'success') ? <SuccessMessage orderId={orderId}/> :
+                      <FailureMessage orderId={orderId}/>}
                   </Typography>
                 </Grid>
 
-                {(props.registrationStatus) === "SUCCESS" ?
-                  <Grid item onClick={closeAllPopUp} ><HomeButton textColor="white" bgColor="purple" /></Grid>
+                <Grid item>
+                  <Typography gutterBottom variant="body1" className={classes.StatusInfoTag}>
+                    {(registrationStatus === 'success') ? 'You’ll recevie an e-mail notification with registration details from our team within 24 hours.' : 'Please reach out to us with the registration ID if amount detected from your account. Else, Please try again later.'}
+                  </Typography>
+                </Grid>
+
+                {(props.registrationStatus) === "success" ?
+                  <div>
+                    <Grid item onClick={closeAllPopUp}>
+                      <HomeButton textColor="white" bgColor="purple"/>
+                    </Grid>
+                    <br/>
+                    <Typography component={Link} to="/contact" onClick={closePopUp} gutterBottom className={classes.secondaryAction} variant="body2">In
+                      case of any queries <span style={{
+                        "textDecoration": "underline",
+                        "color": "#98248D",
+                        "cursor": "pointer",
+                        "fontWeight": 400
+                      }}>contact us</span></Typography>
+                  </div>
                   :
                   <div>
                     <Grid item onClick={closeAllPopUp}>
-                      <ContactUsButton textColor="white" />
+                      <ContactUsButton textColor="white"/>
                     </Grid>
-                    <br />
-                    <Grid item component={Button} onClick={closeAllPopUp} >
-                      <Typography gutterBottom className={classes.HomeButton} style={{ "textAlign": "center" }} variant="body2">Back to Home</Typography>
-                    </Grid>
+                    <br/>
+                    <Typography onClick={closePopUp} gutterBottom className={classes.secondaryAction}
+                                variant="body2"><span style={{
+                      "textDecoration": "underline",
+                      "color": "#98248D",
+                      "cursor": "pointer",
+                      "fontWeight": 400
+                    }}>Take me back to registration form</span></Typography>
                   </div>
                 }
               </Grid>
             </CardContent>
           </Card>
-          <div className={classes.registrationDivBackground} />
+        </Grid>
+        <Grid item container alignItems="center" direction="column">
+          <div className={classes.registrationDivBackground}/>
         </Grid>
       </Grid>
     </Dialog>,

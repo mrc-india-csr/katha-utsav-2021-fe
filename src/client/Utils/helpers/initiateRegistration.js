@@ -10,23 +10,23 @@ export const displayPayment = async (formData, paymentStateHandler) => {
 
   const res = await LoadScript();
   if (!res) {
-    paymentStateHandler('failed', 'Something went wrong, Make sure you have stable internet connection!');
+    paymentStateHandler('failed', 'Something went wrong, Make sure you have stable internet connection!', '');
     return;
   }
 
   const razorPayOrderResponse = await FetchData('POST', formData, '/katha_utsav/v1/register/generate_order');
 
   if(razorPayOrderResponse === 'error') {
-    paymentStateHandler('failed', 'Something went wrong, Try Again');
+    paymentStateHandler('failed', 'Something went wrong, Try Again', '');
     return;
   }
 
   let razorPayOrderData = await razorPayOrderResponse.json();
   if(razorPayOrderResponse.status !== 200) {
     if (razorPayOrderResponse.status === 400 || razorPayOrderResponse.status === 500) {
-        paymentStateHandler(razorPayOrderData.status, razorPayOrderData.message);
+        paymentStateHandler(razorPayOrderData.status, razorPayOrderData.message, '');
     } else {
-      paymentStateHandler('failed', 'Something went wrong, Try Again');
+      paymentStateHandler('failed', 'Something went wrong, Try Again', '');
     }
     return;
   }
@@ -46,15 +46,15 @@ export const displayPayment = async (formData, paymentStateHandler) => {
         signature: razorpay_signature,
         ...razorPayOrderData,
       };
-      await RegistrationSuccessHandler(jsonData, paymentStateHandler);
+      await RegistrationSuccessHandler(jsonData, paymentStateHandler, razorPayOrderData.id);
     },
     'modal': {
       'ondismiss': async function () {
         if(paymentFailed) {
           await FetchData('POST', razorPayOrderData, '/katha_utsav/v1/register/registration_failed');
-          paymentStateHandler('failed', `No worries, Your payment order ID is ${razorPayOrderData.id}.`);
+          paymentStateHandler('failed', `No worries, Your payment order ID is ${razorPayOrderData.id}.`, razorPayOrderData.id);
         } else {
-          paymentStateHandler('failed', `Payment cancelled, Your payment order ID is ${razorPayOrderData.id}.`);
+          paymentStateHandler('failed', `Payment cancelled, Your payment order ID is ${razorPayOrderData.id}.`, razorPayOrderData.id);
         }
       }
     },

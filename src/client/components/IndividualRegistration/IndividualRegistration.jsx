@@ -315,8 +315,6 @@ const IndividualRegistration = (props) => {
     }
 
     const theme = useTheme();
-
-
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
@@ -333,59 +331,56 @@ const IndividualRegistration = (props) => {
         logoHeight = "140"
     }
 
-    const sampleFormData =
-      {
-          "userName": "register names",
-          "userEmail": "nizarahammed14@gmail.com",
-          "userPhone": "911234567909",
-          "userSchool": "bharathi",
-          "userCity": "tanjore",
-          "studentsList": [
-              {
-                  "studentName": "Student Name 1",
-                  "studentEmail": "student@gmail.com",
-                  "studentPhone": "911234567889",
-                  "studentClass": "4 to 6",
-                  "storyCategory": "Non-Fiction",
-                  "storyPath": "samples3path"
-              },
-              {
-                  "studentName": "Student Name 2",
-                  "studentEmail": "student@gmail.com",
-                  "studentPhone": "9112345678",
-                  "studentClass": "7 to 9",
-                  "storyCategory": "Fiction",
-                  "storyPath": "samples3path"
-              },
-              {
-                  "studentName": "Student Name 3",
-                  "studentEmail": "student@gmail.com",
-                  "studentPhone": "911234567889",
-                  "studentClass": "10 to 12",
-                  "storyCategory": "Fiction",
-                  "storyPath": "samples3path"
-              },
-              {
-                  "studentName": "Student Name 4",
-                  "studentEmail": "student@gmail.com",
-                  "studentPhone": "911234567908",
-                  "studentClass": "4 to 6",
-                  "storyCategory": "Poetry",
-                  "storyPath": "samples3path"
-              }
-          ]
-      }
+    const sampleFormData = {
+        "userName": "register names",
+        "userEmail": "nizarahammed14@gmail.com",
+        "userPhone": "911234567909",
+        "userSchool": "bharathi",
+        "userCity": "tanjore",
+        "studentsList": [
+            {
+                "studentName": "Student Name 1",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567889",
+                "studentClass": "IV to VI",
+                "storyCategory": "Non-Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 2",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "9112345678",
+                "studentClass": "VII to IX",
+                "storyCategory": "Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 3",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567889",
+                "studentClass": "X to XII",
+                "storyCategory": "Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 4",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567908",
+                "studentClass": "IV to VI",
+                "storyCategory": "Poetry",
+                "storyPath": "samples3path"
+            }
+        ]
+    }
 
-
-    const paymentStateHandler = (paymentState, statusMessage) => {
+    const paymentStateHandler = (paymentState, statusMessage, orderId) => {
         props.showResponsePopUp(true);
-        props.setRegistrationData(paymentState, statusMessage);
+        props.setRegistrationData(paymentState, statusMessage, orderId);
     };
 
     const handleClick = async() => {
         await displayPayment(sampleFormData, paymentStateHandler);
     };
-
 
     return (
         <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp}>
@@ -458,9 +453,9 @@ const IndividualRegistration = (props) => {
                                     <PaymentButton onButtonClick={Validate} name={"Pay"} />
                                 </Grid>
 
-                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
-                                </Grid>
+                                {/*<Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>*/}
+                                {/*    <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />*/}
+                                {/*</Grid>*/}
 
                                 <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                     <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>

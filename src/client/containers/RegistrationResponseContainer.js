@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
     return {
         displayResponsePopUp: state.RegistrationResponseReducer.showPopUp,
         registrationStatus: state.RegistrationResponseReducer.registrationStatus,
-        registrationComment: state.RegistrationResponseReducer.registrationComment
+        registrationComment: state.RegistrationResponseReducer.registrationComment,
+        orderId: state.RegistrationResponseReducer.orderId
     }
 };
 
