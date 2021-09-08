@@ -27,6 +27,7 @@ import football from '../../assets/images/football.png';
 
 const useStyles = makeStyles(theme => ({
     background: {
+        padding: '2rem',
         backgroundColor: "#F3F0EA",
         width: "100%",
     },
@@ -88,7 +89,6 @@ const Footer = () => {
     const theme = useTheme();
     const classes = useStyles();
 
-
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
@@ -96,16 +96,16 @@ const Footer = () => {
 
     const groupIcons = (
         <Grid item container direction="row" className={classes.groupIcons}>
-            <Grid item>
+            <Grid item component={"a"} href="#">
                 <img alt="Instagram" width={20} height={20} src={instagram} />
             </Grid>
-            <Grid item>
+            <Grid item component={"a"} href="#">
                 <img alt="football" width={20} height={20} src={football} className={classes.icon} />
             </Grid>
-            <Grid item>
+            <Grid item component={"a"} href="#">
                 <img alt="twitter" width={20} height={20} src={twitter} className={classes.icon} />
             </Grid>
-            <Grid item>
+            <Grid item component={"a"} href="#">
                 <img alt="youtube" width={20} height={20} src={youtube} className={classes.icon} />
             </Grid>
         </Grid>
