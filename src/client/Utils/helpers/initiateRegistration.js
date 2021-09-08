@@ -5,6 +5,7 @@ import LoadScript from './loadScript';
 export const displayPayment = async (formData, paymentStateHandler) => {
 
   const {studentsList, userName, userEmail, userPhone} = formData;
+  let paymentFailed = false;
   if (!studentsList || studentsList.length <= 0 || !userName || !userEmail || !userPhone) return;
 
   const res = await LoadScript();
@@ -49,7 +50,12 @@ export const displayPayment = async (formData, paymentStateHandler) => {
     },
     'modal': {
       'ondismiss': async function () {
-        paymentStateHandler('failed', 'Payment cancelled, Please try again');
+        if(paymentFailed) {
+          await FetchData('POST', razorPayOrderData, '/katha_utsav/v1/register/registration_failed');
+          paymentStateHandler('failed', `No worries, Your payment order ID is ${razorPayOrderData.id}.`);
+        } else {
+          paymentStateHandler('failed', `Payment cancelled, Your payment order ID is ${razorPayOrderData.id}.`);
+        }
       }
     },
     'prefill': {
@@ -68,8 +74,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
 
   const razorpayWindow = new window.Razorpay(options);
   razorpayWindow.on('payment.failed', async function (response){
-    await FetchData('POST', razorPayOrderData, '/katha_utsav/v1/register/registration_failed');
-    paymentStateHandler('failed', `Payment failed, Due to ${response.error.description} at ${response.error.source}`);
+    paymentFailed = true;
   });
   razorpayWindow.open();
 };
