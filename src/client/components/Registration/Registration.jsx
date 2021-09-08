@@ -24,7 +24,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#FECB05',
         fontWeight: 400,
         textTransform: 'capitalize',
-        alignItems: 'center'
+        alignItems: 'center',
+        "&:hover":{
+            backgroundColor:"#FEC000"
+        },
     },
     header: {
         width: '378px',
