@@ -57,8 +57,9 @@ export const displayPayment = async (formData, paymentStateHandler) => {
       'email': userEmail,
       'contact': userPhone
     },
-    'notes': {
-      'address': 'Razorpay Corporate Office'
+    'notify': {
+      'sms': true,
+      'email': true
     },
     'theme': {
       'color': '#ffdb50'

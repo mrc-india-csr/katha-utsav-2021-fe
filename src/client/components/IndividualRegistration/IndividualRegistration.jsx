@@ -333,58 +333,57 @@ const IndividualRegistration = (props) => {
         logoHeight = "140"
     }
 
-    const sampleFormData = {
-        "userName": "register name",
-        "userEmail": "user@gmail.com",
-        "userPhone": "911234567890",
-        "userSchool": "school name",
-        "userCity": "user city",
-        "studentsList": [
-            {
-                "studentName": "Student Name 1",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567890",
-                "studentClass": "student class",
-                "storyCategory": "sample category",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 2",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567890",
-                "studentClass": "student class",
-                "storyCategory": "sample category",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 3",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567890",
-                "studentClass": "student class",
-                "storyCategory": "sample category",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 3",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567890",
-                "studentClass": "student class",
-                "storyCategory": "sample category",
-                "storyPath": "samples3path"
-            }
-        ]
-    }
+    const sampleFormData =
+      {
+          "userName": "register names",
+          "userEmail": "nizarahammed14@gmail.com",
+          "userPhone": "911234567909",
+          "userSchool": "bharathi",
+          "userCity": "tanjore",
+          "studentsList": [
+              {
+                  "studentName": "Student Name 1",
+                  "studentEmail": "student@gmail.com",
+                  "studentPhone": "911234567889",
+                  "studentClass": "4 to 6",
+                  "storyCategory": "Non-Fiction",
+                  "storyPath": "samples3path"
+              },
+              {
+                  "studentName": "Student Name 2",
+                  "studentEmail": "student@gmail.com",
+                  "studentPhone": "9112345678",
+                  "studentClass": "7 to 9",
+                  "storyCategory": "Fiction",
+                  "storyPath": "samples3path"
+              },
+              {
+                  "studentName": "Student Name 3",
+                  "studentEmail": "student@gmail.com",
+                  "studentPhone": "911234567889",
+                  "studentClass": "10 to 12",
+                  "storyCategory": "Fiction",
+                  "storyPath": "samples3path"
+              },
+              {
+                  "studentName": "Student Name 4",
+                  "studentEmail": "student@gmail.com",
+                  "studentPhone": "911234567908",
+                  "studentClass": "4 to 6",
+                  "storyCategory": "Poetry",
+                  "storyPath": "samples3path"
+              }
+          ]
+      }
+
 
     const paymentStateHandler = (paymentState, statusMessage) => {
-        console.log(paymentState);
-        console.log(statusMessage);
+        props.showResponsePopUp(true);
+        props.setRegistrationData(paymentState, statusMessage);
     };
 
     const handleClick = async() => {
-        props.showResponsePopUp(true);
-        props.setRegistrationData("SUCCESS", "Status message");
-
-        // await displayPayment(sampleFormData, paymentStateHandler);
+        await displayPayment(sampleFormData, paymentStateHandler);
     };
 
 

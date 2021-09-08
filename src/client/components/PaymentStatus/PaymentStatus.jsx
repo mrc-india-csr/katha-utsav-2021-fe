@@ -150,7 +150,7 @@ const PaymentStatus = (props) => {
   let statusLogo = failMark;
   let statusContent = registrationComment;
 
-  if (registrationStatus === 'SUCCESS') {
+  if (registrationStatus === 'success') {
     statusMsg = "Payment Success 🎉";
     statusLogo = tickMark;
   }
