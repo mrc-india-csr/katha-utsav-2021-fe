@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
         displayResponsePopUp: state.RegistrationResponseReducer.showPopUp,
         registrationStatus: state.RegistrationResponseReducer.registrationStatus,
         registrationComment: state.RegistrationResponseReducer.registrationComment,
-        orderId: state.RegistrationResponseReducer.orderId
+        orderId: state.RegistrationResponseReducer.orderId,
+        displayShowLoader: state.RegistrationResponseReducer.displayShowLoader
     }
 };
 
@@ -17,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         showPopUp: (value) => dispatch(action.showPopUp(value)),
         showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
-        setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message))
+        setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message)),
+        showLoader: (value) => dispatch(action.showLoader(value))
     }
 }
 

@@ -190,8 +190,13 @@ const PaymentStatus = (props) => {
     props.showPopUp(false);
   }
 
+  const closeLoader = () => {
+    props.showLoader(false);
+    return true;
+  }
+
   return ReactDOM.createPortal(
-    <Dialog fullScreen TransitionComponent={Transition} open={displayResponsePopUp}
+    <Dialog fullScreen TransitionComponent={Transition} open={displayResponsePopUp && closeLoader()}
             PaperProps={{style: {backgroundColor: '#FEDB50'}}} onClose={closePopUp}>
       <Grid container direction="column" className={classes.pageBackground}>
         {/*---Cross Mark---*/}

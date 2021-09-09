@@ -21,5 +21,6 @@ export {
 
 export {
     showResponsePopUp,
-    setRegistrationData
+    setRegistrationData,
+    showLoader,
 } from './RegistrationReponseAction'

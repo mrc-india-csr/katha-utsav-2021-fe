@@ -14,3 +14,10 @@ export const setRegistrationData = (status, message) => {
     message
   }
 }
+
+export const showLoader = (showLoader) => {
+  return {
+    type: actionTypes.SHOW_LOADER,
+    showLoader
+  }
+}

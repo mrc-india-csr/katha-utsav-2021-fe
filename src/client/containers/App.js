@@ -12,6 +12,7 @@ import HomePage from '../containers/HomeContainer';
 import SchoolRegistration from '../components/SchoolRegistration';
 import Contact from '../components/Contact';
 import RegistrationResponseContainer from './RegistrationResponseContainer';
+import Loader from '../components/Loader/Loader';
 
 
 const AppContainer = (props) => {
@@ -24,6 +25,7 @@ const AppContainer = (props) => {
                                 {props.showSchoolPopUp && <Route exact path="/" render={() => <SchoolRegistration/> } />}
                                 {<Route exact path="/contact" render={(props) => <Contact/> } />}
                         </Switch>
+                        <Loader />
                         <RegistrationResponseContainer />
                 </Router>
         );

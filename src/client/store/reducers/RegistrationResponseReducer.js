@@ -4,7 +4,8 @@ const initialState = {
   showPopUp: false,
   registrationStatus: '',
   registrationComment: '',
-  orderId: ''
+  orderId: '',
+  displayShowLoader: false
 }
 
 const RegistrationResponseReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const RegistrationResponseReducer = (state = initialState, action) => {
         registrationStatus: action.status,
         registrationComment: action.message,
         orderId: action.orderId
+      }
+    case actionTypes.SHOW_LOADER:
+      return {
+        ...state,
+        displayShowLoader: action.showLoader
       }
     default:
       return state;
