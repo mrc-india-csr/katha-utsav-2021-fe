@@ -6,7 +6,7 @@ import '../../styles/main.scss';
 const Loader = () => {
     const showLoadingAnimation = useSelector(state => state.RegistrationResponseReducer.displayShowLoader);
     return (
-        showLoadingAnimation ? ReactDOM.createPortal(<div id='loader-wrapper'><div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>,document.getElementById('loader')) : ''
+      showLoadingAnimation ? ReactDOM.createPortal(<div id='loader-overlay'><div id='loader-wrapper'><div className="lds-default"><div/><div/><div/><div/><div/><div/><div/><div/><div/><div/><div/><div/></div></div></div>,document.getElementById('loader')) : ''
         );
 };
 
