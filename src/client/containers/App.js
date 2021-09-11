@@ -10,20 +10,20 @@ import _ from 'lodash';
 import IndividualRegistrationContainer from '../containers/IndividualRegistrationContainer';
 import HomePage from '../containers/HomeContainer';
 import SchoolRegistration from '../components/SchoolRegistration';
-import Contact from '../components/Contact';
 import RegistrationResponseContainer from './RegistrationResponseContainer';
 import Loader from '../components/Loader/Loader';
 
 
+import ContactContainer from './ContactContainer';
+import PaymentStatus from '../components/PaymentStatus';
 const AppContainer = (props) => {
         return (
                 <Router>
                         <Switch>
                                 {(!props.showIndividualPopUp && !props.showSchoolPopUp) && <Route exact path="/" render={() => <div className='home-page'> <HomePage />  </div>} />}
                                 {props.showIndividualPopUp && <Route exact path="/" render={() => <IndividualRegistrationContainer />} />}
-                                <Route exact path="/payment" render={() => <div> Welcome To Payment Page </div>} />
                                 {props.showSchoolPopUp && <Route exact path="/" render={() => <SchoolRegistration/> } />}
-                                {<Route exact path="/contact" render={(props) => <Contact/> } />}
+                                {<Route exact path="/contact" render={(props) => <ContactContainer/> } />}
                         </Switch>
                         <Loader />
                         <RegistrationResponseContainer />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroImg from '../../assets/images/hero-bg.png';
+import cians from '../../assets/images/cians.png';
 import DropDownButton from '../common/Button/DropDownButton';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -9,12 +10,12 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
     ContactUsGrid: {
-        [theme.breakpoints.up("lg")]: {
-            marginBottom:"3rem"
-        },
-        [theme.breakpoints.up("xl")]: {
-            marginBottom:"4rem"
-        }
+        // [theme.breakpoints.up("lg")]: {
+        //     marginBottom: "3rem"
+        // },
+        // [theme.breakpoints.up("xl")]: {
+        //     marginBottom: "4rem"
+        // }
     },
     contactUs: {
         fontFamily: 'Fredoka One',
@@ -86,7 +87,29 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("lg")]: {
             fontSize: "1.5rem",
         },
-
+    },
+    registrationFee: {
+        color: "#000000",
+        fontSize: "1.15rem",
+        fontFamily: "Poppins",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.75rem",
+        },
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "1.5rem",
+        },
+    },
+    coSponseredBy: {
+        color: "#000000",
+        fontSize: "1.15rem",
+        fontFamily: "Poppins",
+        fontWeight: "500",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.75rem",
+        },
+        [theme.breakpoints.up("lg")]: {
+            fontSize: "1.5rem",
+        },
     }
 }));
 
@@ -126,6 +149,19 @@ const BannerComponent = (props) => {
                         <Grid item className={classes.ContactUsGrid}>
                             {ContactUs}
                         </Grid>
+                    </Grid>
+
+                    <Grid item style={{marginTop: "1rem"}}>
+                        <Typography gutterBottom variant="body1" className={classes.registrationFee}>NOTE : Rs 150/- per registration</Typography>
+                    </Grid>
+                    <Grid item style={{marginTop: "2rem"}}>
+                        <Typography gutterBottom variant="body1" className={classes.coSponseredBy}>Co-sponsored by
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        <img src={cians} alt="hero" width="180" height="30" />
+
                     </Grid>
                 </Grid>
                 <Grid item container direction="row" xl={7} lg={7} md={7} justifyContent="center">

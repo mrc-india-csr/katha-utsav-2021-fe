@@ -1,3 +1,3 @@
 module.exports = {
-  baseUrl: 'http://localhost:3002'
+  baseUrl: 'https://kathautsav-reg-dev.gcchqims.in'
 }

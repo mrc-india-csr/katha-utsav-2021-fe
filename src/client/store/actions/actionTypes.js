@@ -23,3 +23,4 @@ export const SET_REGISTRATION_DATA = 'SET_REGISTRATION_DATA';
 //Registration loader
 
 export const SHOW_LOADER = 'SHOW_LOADER';
+export const IS_UPLOAD_SUCCESS='IS_UPLOAD_SUCCESS';

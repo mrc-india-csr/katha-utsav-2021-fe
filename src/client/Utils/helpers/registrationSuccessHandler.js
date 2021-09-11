@@ -1,7 +1,10 @@
 import FetchData from "./fetchData";
 
 const RegistrationSuccessHandler = async (jsonData = {}, callback, orderId) => {
-  const registrationResponse = await FetchData('POST', jsonData, '/katha_utsav/v1/register/complete_registration');
+  const body =jsonData;
+  const registrationResponse = await axios.post('/api/complete_registration', body);
+  console.log('tessfasdf');
+  //const registrationResponse = await FetchData('POST', jsonData, '/katha_utsav/v1/register/complete_registration');
 
   if(registrationResponse === 'error') {
     callback('failed', 'Something went wrong, Try Again', orderId);

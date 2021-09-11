@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#fff",
         borderRadius: 10,
         padding: "1em",
-        marginBottom: "2em",
         color: "#98248D",
         textTransform: "none",
         fontFamily: 'Fredoka One',

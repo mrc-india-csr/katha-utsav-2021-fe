@@ -14,7 +14,8 @@ import PaymentButton from '../common/Button/PayButton';
 import FileUploader from '../common/FileUploader';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
-import {displayPayment} from "../../Utils/helpers/initiateRegistration";
+import { displayPayment } from "../../Utils/helpers/initiateRegistration";
+import {PrepareRequest} from "../../Utils/index";
 import _ from 'lodash';
 
 
@@ -151,9 +152,9 @@ const IndividualRegistration = (props) => {
         }
     }
 
-    useEffect(() => { if(previousValues.current.name!=fileData.name && previousValues.current.size!=fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
+    useEffect(() => { if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
 
-    const Validate = () => {
+    const Validate =async () => {
         let errorObject = { emailError: "", nameError: "", phoneNumberError: "", SchoolError: "", CityError: "", ClassError: "", StoryCategoryError: "", fileError: "", isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
@@ -189,9 +190,10 @@ const IndividualRegistration = (props) => {
             setCityMessage("Please enter a valid city");
             errorObject.isError = true;
         }
-
         if (!errorObject.isError) {
-            props.validateDetails(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileData)
+            const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory)
+            await props.showLoader(true);
+            await displayPayment(data, paymentStateHandler);
         }
     }
 
@@ -224,7 +226,7 @@ const IndividualRegistration = (props) => {
     }
 
     const IndividualRegistrationValidation = (event) => {
-        if(_.includes(['Email ID','Name','Phone Number','School','City'], event.target.id) &&event.target.value[0]==' ') return;
+        if (_.includes(['Email ID', 'Name', 'Phone Number', 'School', 'City'], event.target.id) && event.target.value[0] == ' ') return;
         switch (event.target.id) {
             case 'Email ID':
                 let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
@@ -378,7 +380,7 @@ const IndividualRegistration = (props) => {
         props.setRegistrationData(paymentState, statusMessage, orderId);
     };
 
-    const handleClick = async() => {
+    const handleClick = async () => {
         await props.showLoader(true);
         await displayPayment(sampleFormData, paymentStateHandler);
     };
@@ -454,9 +456,9 @@ const IndividualRegistration = (props) => {
                                     <PaymentButton onButtonClick={Validate} name={"Pay"} />
                                 </Grid>
 
-                                {/*<Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                   <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
-                                </Grid>*/}
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+                                    <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
+                                </Grid>
 
                                 <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                     <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>
