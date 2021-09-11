@@ -14,6 +14,7 @@ vault:
   name: katha-utsav-fe
   envs:
     - NODE_ENV
+    - KATHA_API 
 #    - DB_USER
 #    - DB_PWD
 #    - DB_NAME
