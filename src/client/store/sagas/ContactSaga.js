@@ -11,7 +11,6 @@ import axios from 'axios';
 
 
 export function* UploadContactData(action) {
-    console.log('saga');
     try {
         let body = {
             name: action.name,

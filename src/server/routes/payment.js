@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const axios = require('axios');
+const { parse, stringify, toJSON, fromJSON } = require('flatted');
 
 
 router.post('/complete_registration', async function (req, res) {
@@ -23,7 +24,6 @@ router.post('/complete_registration', async function (req, res) {
             return res.status(500).json('error');
         }
     } catch (error) {
-        console.log('error', error.message);
         return res.status(500).json('error');
     }
 });
@@ -50,7 +50,6 @@ router.post('/registration_failed', async function (req, res) {
             return res.status(500).json('error');
         }
     } catch (error) {
-        console.log('error', error.message);
         return res.status(500).json('error');
     }
 });
@@ -65,19 +64,16 @@ router.post('/generate_order', async function (req, res) {
         }
         const data = JSON.stringify(body);
 
-
         const response = await axios.post(url, data, {
             headers: headers
         });
-
         if (response.status === 200) {
             return res.status(200).json(response.data);
         }
         else {
-            return res.status(500).json('error');
+            return res.status(response.status).json('error');
         }
     } catch (error) {
-        console.log('error', error.message);
         return res.status(500).json('error');
     }
 });

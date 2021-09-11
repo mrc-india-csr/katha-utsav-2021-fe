@@ -161,10 +161,9 @@ const Contact = (props) => {
     }
 
     useEffect(() => { 
-        console.log('propserror', props.isError);
         if (!_.isNil(props.isError) && !props.isError) {
             props.showResponsePopUp(true);
-            props.setRegistrationData("SUCCESS", "Query Submitted Successfully!");
+            props.setRegistrationData("success", "Query Submitted Successfully!");
         }else if(props.isError){
             props.showResponsePopUp(true);
             props.setRegistrationData("Fail", "Query Submitted Successfully!");

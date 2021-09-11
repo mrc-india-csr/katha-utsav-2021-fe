@@ -14,7 +14,6 @@ const FetchData = async(method = 'POST', jsonData = {}, route = '') => {
   return await fetch(baseUrl + route, fetchOptions).then((res) => {
     return res;
   }).catch(error => {
-    console.log(error);
     return 'error';
   });
 }

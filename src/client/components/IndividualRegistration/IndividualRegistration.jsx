@@ -456,9 +456,9 @@ const IndividualRegistration = (props) => {
                                     <PaymentButton onButtonClick={Validate} name={"Pay"} />
                                 </Grid>
 
-                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+                                {/* <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                     <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>

@@ -15,8 +15,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
     return;
   }
   const body = formData;
-  const razorPayOrderResponse = await axios.post('/api/generate_order', body);
- //const razorPayOrderResponse = await FetchData('POST', formData, '/katha_utsav/v1/register/generate_order');
+  const razorPayOrderResponse = (await axios.post('/api/generate_order', body)).data;
 
   if(razorPayOrderResponse === 'error') {
     paymentStateHandler('failed', 'Something went wrong, Try Again', '');
@@ -24,14 +23,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
   }
 
   let razorPayOrderData = razorPayOrderResponse
-  // if(razorPayOrderResponse.status !== 200) {
-  //   if (razorPayOrderResponse.status === 400 || razorPayOrderResponse.status === 500) {
-  //       paymentStateHandler(razorPayOrderResponse.data.status, 'error', '');
-  //   } else {
-  //     paymentStateHandler('failed', 'Something went wrong, Try Again', '');
-  //   }
-  //   return;
-  // }
+
 
   const options = {
     'key': razorPayOrderData.key,
@@ -76,7 +68,6 @@ export const displayPayment = async (formData, paymentStateHandler) => {
       'color': '#ffdb50'
     }
   };
-
   const razorpayWindow = new window.Razorpay(options);
   razorpayWindow.on('payment.failed', async function (response){
     paymentFailed = true;
