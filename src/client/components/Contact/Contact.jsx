@@ -13,7 +13,8 @@ import PaymentButton from '../common/Button/PayButton';
 import Comment from '../common/TextField/Comment';
 import { Link,Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-
+import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
             height: "250vh",
         },
         [theme.breakpoints.down("xs")]: {
-            height: "140vh",
+            height: "150vh",
         },
     },
     RegistrationForm: {
@@ -119,7 +120,9 @@ const Contact = (props) => {
     const [comment, setComment] = useState('');
     const [commentMessage, setCommentMessage] = useState('');
 
-    const Validate = () => {
+    const [loading,setLoading] = useState(false);
+
+    const Validate = async() => {
         let errorObject = { isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
@@ -140,8 +143,18 @@ const Contact = (props) => {
             setCommentMessage("Please enter a valid message");
             errorObject.isError = true;
         }
-        if (!errorObject.isError) {
-            console.log('entered');
+        if (!errorObject.isError && !loading) {
+            setLoading(true);
+            props.UploadDetails(name,emailId,phoneNumber,comment);
+            setLoading(false);
+            setName("");
+            setNameMessage("");
+            setComment("");
+            setCommentMessage("");
+            setEmailId("");
+            setEmailIdMessage("");
+            setPhoneNumber("");
+            setPhoneNumberMessage("");
         }
     }
 
@@ -231,6 +244,8 @@ const Contact = (props) => {
         logoHeight = "140"
     }
 
+    const displayButton = loading? <CircularProgress size={30} style={{color:"#fff"}}/> : "Submit";
+
     return (
 
         <Grid container direction="column" className={classes.background}>
@@ -275,7 +290,7 @@ const Contact = (props) => {
                             </Grid>
 
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                <PaymentButton onButtonClick={Validate} name={"Submit"} />
+                                <PaymentButton onButtonClick={Validate} name={displayButton} />
                             </Grid>
 
 

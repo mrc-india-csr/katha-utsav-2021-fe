@@ -15,3 +15,4 @@ export const VALID_INITIATE_SCHOOL_STEPTWO = 'VALID_INITIATE_SCHOOL_STEPTWO';
 
 // Contact Page
 export const Upload_Data_Initiate ='Upload_Data_Initiate'
+export const IS_UPLOAD_SUCCESS='IS_UPLOAD_SUCCESS';

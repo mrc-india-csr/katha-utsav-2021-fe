@@ -4,7 +4,7 @@ import App from './containers/App';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from "redux-saga";
-import {watchIndividualRegistrationCall,watchSchoolStepOneRegistrationCall} from './store/sagas/index';
+import {watchIndividualRegistrationCall,watchSchoolStepOneRegistrationCall,watchContactRegistrationCall} from './store/sagas/index';
 import RootReducer from './store/reducers/index';
 import './styles/main.scss'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -13,8 +13,7 @@ const store = createStore(RootReducer, composeEnhancers(applyMiddleware(sagaMidd
 
 sagaMiddleware.run(watchIndividualRegistrationCall);
 sagaMiddleware.run(watchSchoolStepOneRegistrationCall);
-
-
+sagaMiddleware.run(watchContactRegistrationCall);
 
 ReactDOM.render(
         <Provider store={store}>

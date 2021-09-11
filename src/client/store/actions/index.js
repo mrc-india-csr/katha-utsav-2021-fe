@@ -17,4 +17,9 @@ export {
     validateStepTwo,
     validateSuccessSchoolStepTwo,
     validateFailSchoolStepTwo,
-} from './SchoolRegistrationStepTwoAction'
+} from './SchoolRegistrationStepTwoAction';
+
+export {
+    UploadContactForm,
+    isUploadSuccess
+} from './ContactAction';
