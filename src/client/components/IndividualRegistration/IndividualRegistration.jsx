@@ -205,6 +205,23 @@ const IndividualRegistration = (props) => {
             const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileResponseData.path)
             await props.showLoader(true);
             await displayPayment(data, paymentStateHandler);
+            setName('');
+            setNameMessage('');
+            setEmailId('');
+            setEmailIdMessage('');
+            setSchool('');
+            setSchoolMessage('');
+            setPhoneNumber('');
+            setPhoneNumberMessage('');
+            setCity('');
+            setCityMessage('');
+            setStoryCategory('');
+            setStoryCategoryMessage('');
+            setClassStandard('');
+            setClassMessage('');
+            setFileData({});
+            setFileName('Upload File');
+            setfileDataMessage('');
         }
     }
 
