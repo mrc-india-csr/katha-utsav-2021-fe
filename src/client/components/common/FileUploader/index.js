@@ -10,10 +10,19 @@ const FileUploader = ({onFileUpload,buttonName,style,acceptedFormat=".jpg,.png,.
   const handleClick = ()  => {
     hiddenFileInput.current.click();
   };
- 
+
   const handleChange = event => {
-    const fileUploaded = event.target.files[0];
-    onFileUpload(fileUploaded,event.target.value,event);
+    const selectedFile = event.target.files[0];
+    const fileSize = selectedFile.size/1024/1024;
+    const formats = acceptedFormat.split(",")
+    let  errorMessage = ""
+    if(!formats.includes(getExtension(selectedFile.name))){
+        errorMessage = "File format not supported.Please upload a valid file"
+    }
+    if(fileSize > 10){
+        errorMessage = "Please Upload file less than 10mb"
+    }
+    onFileUpload(selectedFile,event.target.value,event,errorMessage);
   };
   return (
     <>
@@ -30,5 +39,9 @@ const FileUploader = ({onFileUpload,buttonName,style,acceptedFormat=".jpg,.png,.
       />
     </>
   );
+}
+
+function getExtension(file){
+    return file.substring(file.lastIndexOf('.')+1, file.length) || file
 }
 export default FileUploader
