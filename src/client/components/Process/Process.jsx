@@ -61,11 +61,6 @@ const Process = () => {
                                 <img src={Step1} alt="" />
                                 <div><h5>STAGE 1</h5><p>Upload Stories</p></div></div>
                         </button>
-                        <div className='small'>
-                            <div className='process__content'>
-                                <TableOfContents context={contents[option].context} header={contents[option].header} content={contents[option].content}/>
-                            </div>
-                        </div>
                         <button className={`process__buttons--button ${option == 1 && 'yellow'}`} onClick={() => setOption(1)}>
                             <div className='button-box'>
                                 <img src={Step2} alt="" />
@@ -78,11 +73,17 @@ const Process = () => {
                             </div>
                         </button>
                     </div>
-                    <div className='desktop'>
-                        <div className='process__content'>
-                            <TableOfContents context={contents[option].context} header={contents[option].header} content={contents[option].content}/>
-                        </div>
+                    <div className='process__content'>
+                        <TableOfContents context={contents[option].context} header={contents[option].header} content={contents[option].content}/>
                     </div>
+                </div>
+                <div className='process__footer'>
+                    <ol>
+                        <div className='process__footer--header'>Note:</div>
+                        <li>Each submission at STAGE 1 - "STORY UPLOAD" requires a fee of Rs 150/- for each writing piece.</li>
+                        <li>When shortlisted to STAGE 2 - "MASTER YOUR STORY", to confirm participation, each student will need to pay Rs 2500/- for  (Regional + finale), which is non-refundable. This fee takes care of complete 10-day digital workshop experience.</li>
+                        <li>Paying the registration fee (Rs. 150/- for each submission), does not automatically guarantee a berth in STAGE 2 - "MASTER YOUR STORY" - it will happen after a stringent process of shortlisting.</li>
+                    </ol>
                 </div>
             </div>
 

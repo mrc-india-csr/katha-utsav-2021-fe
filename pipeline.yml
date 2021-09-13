@@ -11,9 +11,10 @@ traefik_https_enable: true
 traefik_ssl_provider: letsencrypt
 vault:
   enabled: true
-  name: katha-utsav
+  name: katha-utsav-fe
   envs:
     - NODE_ENV
+    - KATHA_API 
 #    - DB_USER
 #    - DB_PWD
 #    - DB_NAME

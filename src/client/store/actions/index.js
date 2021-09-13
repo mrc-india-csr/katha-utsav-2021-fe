@@ -23,4 +23,9 @@ export {
     showResponsePopUp,
     setRegistrationData,
     showLoader,
-} from './RegistrationReponseAction'
+} from './RegistrationReponseAction';
+
+export {
+    UploadContactForm,
+    isUploadSuccess
+} from './ContactAction';

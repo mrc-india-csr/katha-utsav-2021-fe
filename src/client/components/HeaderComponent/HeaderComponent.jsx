@@ -281,7 +281,7 @@ const HeaderComponent = (props) => {
                 </Grid>
 
                 <Grid item container className={classes.cta} alignItems="center" direction="column">
-                    <Grid item>
+                    <Grid item style={{marginBottom: "2em"}}>
                         {<DropDownButton menuServiceProperties={menuServiceProperties} />}
                     </Grid>
                     <Grid item>
