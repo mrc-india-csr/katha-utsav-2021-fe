@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import _ from 'lodash';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -122,6 +123,7 @@ const Contact = (props) => {
     const [commentMessage, setCommentMessage] = useState('');
 
     const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({ open: false, message: "", backgroundColor: "" });
 
     const Validate = async () => {
         let errorObject = { isError: false }
@@ -162,11 +164,12 @@ const Contact = (props) => {
 
     useEffect(() => { 
         if (!_.isNil(props.isError) && !props.isError) {
-            props.showResponsePopUp(true);
-            props.setRegistrationData("success", "Query Submitted Successfully!");
+            // props.showResponsePopUp(true);
+            // props.setRegistrationData("success", "Query Submitted Successfully!");
+            setAlert({ open: true, message: "Query Submitted Successfully! Our team will reply to your query / reach out to you ASASP", backgroundColor: "#4BB543" })
         }else if(props.isError){
-            props.showResponsePopUp(true);
-            props.setRegistrationData("Fail", "Query Submitted Successfully!");
+            //props.showResponsePopUp(true);
+            setAlert({ open: true, message: "Something went wrong, please try again!", backgroundColor: "#FF3232" })
         }
      }, [props.isError]);
 
@@ -302,6 +305,11 @@ const Contact = (props) => {
                                 <Comment errorMessage={commentMessage} isError={commentMessage.length !== 0} fieldName={"Message"} eventValidation={ContactValidation} value={comment} />
                             </Grid>
 
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
+                                    </Typography>
+                                </Grid>
+
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                 <PaymentButton onButtonClick={Validate} name={displayButton} />
                             </Grid>
@@ -316,6 +324,13 @@ const Contact = (props) => {
                 </Card>
                 <div className={classes.registrationDivBackground} />
             </Grid>}
+            <Snackbar
+                autoHideDuration={4000}
+                open={alert.open}
+                message={alert.message}
+                ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
         </Grid>
 
     );

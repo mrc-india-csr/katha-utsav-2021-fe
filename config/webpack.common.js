@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('dotenv').config()
+const webpack = require('webpack');
 
 const srcPath = path.join(__dirname, '../src/client');
 const publicPath = '/';
@@ -95,6 +97,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      KATHA_API: JSON.stringify(process.env.KATHA_API),
+  }), 
     new CopyWebpackPlugin({
       patterns: [
 

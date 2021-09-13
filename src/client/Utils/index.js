@@ -86,7 +86,7 @@ export const SchoolRegistrationStepOneValidation = (schoolName, emailId, phoneNu
 
 export const MergeIgnoringUndefined = (A, B) => _mergeWith({}, A, B, (a, b) => b === undefined ? a : undefined);
 
-export const PrepareRequest = (name, emailId, phoneNumber, School, City, Class, StoryCategory) => {
+export const PrepareRequest = (name, emailId, phoneNumber, School, City, Class, StoryCategory,path) => {
   const sampleFormData = {
     "userName": name,
     "userEmail": emailId,
@@ -100,7 +100,7 @@ export const PrepareRequest = (name, emailId, phoneNumber, School, City, Class, 
         "studentPhone": phoneNumber,
         "studentClass": Class,
         "storyCategory": StoryCategory,
-        "storyPath": "samples3path"
+        "storyPath": path
       },
     ]
   }

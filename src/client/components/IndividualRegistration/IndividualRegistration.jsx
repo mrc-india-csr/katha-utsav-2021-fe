@@ -15,8 +15,10 @@ import DropDown from '../common/Select/DropDown';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import { displayPayment } from "../../Utils/helpers/initiateRegistration";
-import {PrepareRequest} from "../../Utils/index";
+import { PrepareRequest } from "../../Utils/index";
 import _ from 'lodash';
+import axios from 'axios';
+import FormData from 'form-data'
 
 
 const useStyles = makeStyles(theme => ({
@@ -111,6 +113,7 @@ const useStyles = makeStyles(theme => ({
 const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
 
 const IndividualRegistration = (props) => {
+
     const classes = useStyles();
     const [name, setName] = useState('');
     const [nameMessage, setNameMessage] = useState(props.nameMessage);
@@ -152,9 +155,13 @@ const IndividualRegistration = (props) => {
         }
     }
 
-    useEffect(() => { if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
+    useEffect(() => {
+        if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) {
+            IndividualRegistrationValidation({ target: { id: 'file' } })
+        }
+    }, [fileData]);
 
-    const Validate =async () => {
+    const Validate = async () => {
         let errorObject = { emailError: "", nameError: "", phoneNumberError: "", SchoolError: "", CityError: "", ClassError: "", StoryCategoryError: "", fileError: "", isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
@@ -191,7 +198,11 @@ const IndividualRegistration = (props) => {
             errorObject.isError = true;
         }
         if (!errorObject.isError) {
-            const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory)
+            const body = new FormData();
+            body.append('story', fileData);
+            body.append('name', 'testing');
+            const fileResponseData = (await axios.post(`${KATHA_API}/katha_utsav/v1/story/upload_story`, body)).data;
+            const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileResponseData.path)
             await props.showLoader(true);
             await displayPayment(data, paymentStateHandler);
         }

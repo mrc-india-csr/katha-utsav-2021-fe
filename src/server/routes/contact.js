@@ -14,7 +14,6 @@ router.post('/', async function (req, res) {
             return res.status(500).json('Post Request to Contact Endpoint failed');
         }
     } catch (error) {
-        console.log('error', error.message);
         return res.status(500).json('Post Request to Contact Endpoint failed');
     }
 });
