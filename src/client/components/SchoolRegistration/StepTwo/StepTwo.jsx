@@ -246,7 +246,7 @@ const StepTwo = (props) => {
       }
     }
 
-    if(true) {
+    if(!isError) {
       let stepTwoData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         let data = states.stepTwo[step]

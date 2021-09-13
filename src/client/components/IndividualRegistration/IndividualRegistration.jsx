@@ -7,11 +7,11 @@ import close from '../../assets/images/close.png';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Card from '@material-ui/core/Card';
+import PaymentButton from '../common/Button/PayButton';
+import FileUploader from '../common/FileUploader';
 import CardContent from '@material-ui/core/CardContent';
 import InputField from '../common/TextField/InputField';
 import DropDown from '../common/Select/DropDown';
-import PaymentButton from '../common/Button/PayButton';
-import FileUploader from '../common/FileUploader';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import { displayPayment } from "../../Utils/helpers/initiateRegistration";
@@ -440,6 +440,11 @@ const IndividualRegistration = (props) => {
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <DropDown errorMessage={StoryCategoryMessage} isError={StoryCategoryMessage.length !== 0} fieldName={"Story Category"} options={["Fiction", "Non-Fiction", "Poetry"]} onChangeFunc={setStoryCategory} eventValidation={onDropDown} value={storyCategory} />
+                                </Grid>
+
+                                <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
+                                    </Typography>
                                 </Grid>
 
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
