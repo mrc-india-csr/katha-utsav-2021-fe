@@ -98,7 +98,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      'process.env': {
       KATHA_API: JSON.stringify(process.env.KATHA_API),
+      }
   }), 
     new CopyWebpackPlugin({
       patterns: [

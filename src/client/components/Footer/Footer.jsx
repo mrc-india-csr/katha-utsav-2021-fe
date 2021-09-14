@@ -148,7 +148,7 @@ const Footer = () => {
                                 <img src={Mobile} width={15} height={15} />
                             </Grid>
                             <Grid item >
-                                <Typography gutterBottom variant="body1" className={classes.MessageDetails}>Will be updated soon</Typography>
+                                <Typography gutterBottom variant="body1" className={classes.MessageDetails}>+91 9289093393</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
