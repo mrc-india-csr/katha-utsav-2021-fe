@@ -200,7 +200,7 @@ const IndividualRegistration = (props) => {
             const body = new FormData();
             body.append('story', fileData);
             body.append('name', 'testing');
-            const fileResponseData = (await axios.post(`${KATHA_API}/katha_utsav/v1/story/upload_story`, body)).data;
+            const fileResponseData = (await axios.post('/api/story/upload', body)).data;
             const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileResponseData.path)
             await props.showLoader(true);
             await displayPayment(data, paymentStateHandler);
