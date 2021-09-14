@@ -7,11 +7,12 @@ export const showResponsePopUp = (showPopUp) => {
   }
 }
 
-export const setRegistrationData = (status, message) => {
+export const setRegistrationData = (status, message, orderId) => {
   return {
     type: actionTypes.SET_REGISTRATION_DATA,
     status,
-    message
+    message,
+    orderId
   }
 }
 

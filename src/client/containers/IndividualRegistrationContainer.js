@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import IndividualRegistration from '../components/IndividualRegistration';
 import * as action from '../store/actions/index';
 
@@ -23,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     validateDetails: (name, emailId, phoneNumber,School,City,Class,StoryCategory,fileData) => dispatch(action.validate(name, emailId, phoneNumber,School,City,Class, StoryCategory,fileData)),
     showPopUp: (value) => dispatch(action.showPopUp(value)),
     showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
-    setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message)),
+    setRegistrationData: (status, message, orderId) => dispatch(action.setRegistrationData(status, message, orderId)),
     showLoader: (value) => dispatch(action.showLoader(value))
   }
 }
