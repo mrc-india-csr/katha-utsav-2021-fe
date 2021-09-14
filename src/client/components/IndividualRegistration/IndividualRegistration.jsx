@@ -20,7 +20,6 @@ import _ from 'lodash';
 import axios from 'axios';
 import FormData from 'form-data'
 
-
 const useStyles = makeStyles(theme => ({
     background: {
         backgroundColor: '#FEDB50',
@@ -156,7 +155,7 @@ const IndividualRegistration = (props) => {
     }
 
     useEffect(() => {
-        if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) {
+        if (previousValues.current.name !== fileData.name && previousValues.current.size !== fileData.size) {
             IndividualRegistrationValidation({ target: { id: 'file' } })
         }
     }, [fileData]);
@@ -361,56 +360,9 @@ const IndividualRegistration = (props) => {
         logoHeight = "140"
     }
 
-    const sampleFormData = {
-        "userName": "register names",
-        "userEmail": "nizarahammed14@gmail.com",
-        "userPhone": "911234567909",
-        "userSchool": "bharathi",
-        "userCity": "tanjore",
-        "studentsList": [
-            {
-                "studentName": "Student Name 1",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567889",
-                "studentClass": "IV to VI",
-                "storyCategory": "Non-Fiction",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 2",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "9112345678",
-                "studentClass": "VII to IX",
-                "storyCategory": "Fiction",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 3",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567889",
-                "studentClass": "X to XII",
-                "storyCategory": "Fiction",
-                "storyPath": "samples3path"
-            },
-            {
-                "studentName": "Student Name 4",
-                "studentEmail": "student@gmail.com",
-                "studentPhone": "911234567908",
-                "studentClass": "IV to VI",
-                "storyCategory": "Poetry",
-                "storyPath": "samples3path"
-            }
-        ]
-    }
-
     const paymentStateHandler = (paymentState, statusMessage, orderId) => {
-        props.showResponsePopUp(true);
         props.setRegistrationData(paymentState, statusMessage, orderId);
-    };
-
-    const handleClick = async () => {
-        await props.showLoader(true);
-        await displayPayment(sampleFormData, paymentStateHandler);
+        props.showResponsePopUp(true);
     };
 
     return (
@@ -480,7 +432,6 @@ const IndividualRegistration = (props) => {
                                     <Typography align="left" gutterBottom variant="body1" style={{ fontSize: matchesXL ? "1.25rem" : matchesLG ? "1rem" : "0.75rem" }} className={classes.errorMessage}>{fileDataMessage}</Typography>
                                 </Grid>
 
-
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
                                     <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : Supported Document types: doc,docx, pdf, jpg, jpeg, png & maxium file size is 10mb.</Typography>
                                 </Grid>
@@ -488,10 +439,6 @@ const IndividualRegistration = (props) => {
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <PaymentButton onButtonClick={Validate} name={"Pay"} />
                                 </Grid>
-
-                                {/* <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                    <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
-                                </Grid> */}
 
                                 <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                     <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>

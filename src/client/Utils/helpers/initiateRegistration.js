@@ -1,6 +1,6 @@
 import RegistrationSuccessHandler from './registrationSuccessHandler';
-import FetchData from './fetchData';
 import LoadScript from './loadScript';
+
 const axios = require('axios');
 
 export const displayPayment = async (formData, paymentStateHandler) => {
@@ -14,8 +14,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
       paymentStateHandler('failed', 'Something went wrong, Make sure you have stable internet connection!', '');
       return;
     }
-    const body = formData;
-    const razorPayOrderResponse = (await axios.post('/api/generate_order', body)).data;
+    const razorPayOrderResponse = (await axios.post('/api/generate_order', formData)).data;
 
     if (razorPayOrderResponse === 'error') {
       paymentStateHandler('failed', 'Something went wrong, Try Again', '');
@@ -45,13 +44,10 @@ export const displayPayment = async (formData, paymentStateHandler) => {
       'modal': {
         'ondismiss': async function () {
           if (paymentFailed) {
-            const body = razorPayOrderData;
-            await axios.post('/api/registration_failed', body);
-            //await FetchData('POST', razorPayOrderData, '/katha_utsav/v1/register/registration_failed');
-
+            await axios.post('/api/registration_failed', razorPayOrderData);
             paymentStateHandler('failed', `No worries, Your payment order ID is ${razorPayOrderData.id}.`, razorPayOrderData.id);
           } else {
-            paymentStateHandler('failed', 'OOPS, Something went wrong, Please try again sager some time', 'no order id generated');
+            paymentStateHandler('failed', 'OOPS, Something went wrong, Please try again sager some time', '');
           }
         }
       },
@@ -74,6 +70,6 @@ export const displayPayment = async (formData, paymentStateHandler) => {
     });
     razorpayWindow.open();
   } catch (error) {
-    paymentStateHandler('failed', 'Please try again sager some time', '');
+    paymentStateHandler('failed', 'Please try again after some time', '');
   }
 };
