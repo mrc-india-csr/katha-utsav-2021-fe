@@ -1,3 +1,5 @@
+const _mergeWith = require('lodash/mergeWith');
+
 export const renderIf = (condition, componentCallback, falseCallback) => {
   if (condition()) {
     return componentCallback();
@@ -13,7 +15,7 @@ export const IndividualRegistrationValidation = (name, emailId, phoneNumber, Sch
   let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
   let phoneNumberValid = /^\d+$/.test(phoneNumber);
   let schoolValid = /^[a-zA-Z]+$/.test(School);
-  let cityValid  = /^[a-zA-Z]+$/.test(City);
+  let cityValid = /^[a-zA-Z]+$/.test(City);
 
   if (_.isNull(emailId) || _.isEmpty(emailId) || !emailValid) {
     errorObject.emailError = "Please enter a valid email";
@@ -50,13 +52,13 @@ export const IndividualRegistrationValidation = (name, emailId, phoneNumber, Sch
   return errorObject;
 }
 
-export const SchoolRegistrationStepOneValidation = (schoolName,emailId,phoneNumber,schoolCoordinatorName,city) => {
-  let errorObject = {   schoolNameError: "", emailIdError:"", phoneNumberError:"", schoolCoordinatorNameError:"", cityError:"", isError: false }
+export const SchoolRegistrationStepOneValidation = (schoolName, emailId, phoneNumber, schoolCoordinatorName, city) => {
+  let errorObject = { schoolNameError: "", emailIdError: "", phoneNumberError: "", schoolCoordinatorNameError: "", cityError: "", isError: false }
   let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
   let phoneNumberValid = /^\d+$/.test(phoneNumber);
   let schoolValid = /^[a-zA-Z]+$/.test(schoolName);
   let nameValid = /^[a-zA-Z]+$/.test(schoolCoordinatorName);
-  let cityValid  = /^[a-zA-Z]+$/.test(city);
+  let cityValid = /^[a-zA-Z]+$/.test(city);
 
   if (_.isNull(emailId) || _.isEmpty(emailId) || !emailValid) {
     errorObject.emailIdError = "Please enter a valid email";
@@ -80,4 +82,28 @@ export const SchoolRegistrationStepOneValidation = (schoolName,emailId,phoneNumb
     errorObject.isError = true;
   }
   return errorObject;
+}
+
+export const MergeIgnoringUndefined = (A, B) => _mergeWith({}, A, B, (a, b) => b === undefined ? a : undefined);
+
+export const PrepareRequest = (name, emailId, phoneNumber, School, City, Class, StoryCategory,path) => {
+  const sampleFormData = {
+    "userName": name,
+    "userEmail": emailId,
+    "userPhone": phoneNumber,
+    "userSchool": School,
+    "userCity": City,
+    "studentsList": [
+      {
+        "studentName": name,
+        "studentEmail": emailId,
+        "studentPhone": phoneNumber,
+        "studentClass": Class,
+        "storyCategory": StoryCategory,
+        "storyPath": path
+      },
+    ]
+  }
+
+  return sampleFormData;
 }

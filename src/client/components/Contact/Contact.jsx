@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -11,9 +11,12 @@ import CardContent from '@material-ui/core/CardContent';
 import InputField from '../common/TextField/InputField';
 import PaymentButton from '../common/Button/PayButton';
 import Comment from '../common/TextField/Comment';
-import { Link,Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-
+import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import _ from 'lodash';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -29,7 +32,7 @@ const useStyles = makeStyles(theme => ({
             height: "250vh",
         },
         [theme.breakpoints.down("xs")]: {
-            height: "140vh",
+            height: "150vh",
         },
     },
     RegistrationForm: {
@@ -87,10 +90,10 @@ const useStyles = makeStyles(theme => ({
             fontSize: "1.25rem"
         },
         [theme.breakpoints.down("sm")]: {
-            
+
         },
         [theme.breakpoints.down("xs")]: {
-            
+
         },
     },
     supportedDocument: {
@@ -119,7 +122,10 @@ const Contact = (props) => {
     const [comment, setComment] = useState('');
     const [commentMessage, setCommentMessage] = useState('');
 
-    const Validate = () => {
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({ open: false, message: "", backgroundColor: "" });
+
+    const Validate = async () => {
         let errorObject = { isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
@@ -140,10 +146,33 @@ const Contact = (props) => {
             setCommentMessage("Please enter a valid message");
             errorObject.isError = true;
         }
-        if (!errorObject.isError) {
-            console.log('entered');
+        if (!errorObject.isError && !loading) {
+            setLoading(true);
+            props.UploadDetails(name, emailId, phoneNumber, comment);
+            setLoading(false);
+            setName("");
+            setNameMessage("");
+            setComment("");
+            setCommentMessage("");
+            setEmailId("");
+            setEmailIdMessage("");
+            setPhoneNumber("");
+            setPhoneNumberMessage("");
+            
         }
     }
+
+    useEffect(() => { 
+        if (!_.isNil(props.isError) && !props.isError) {
+            // props.showResponsePopUp(true);
+            // props.setRegistrationData("success", "Query Submitted Successfully!");
+            setAlert({ open: true, message: "Query Submitted Successfully! Our team will reply to your query / reach out to you ASASP", backgroundColor: "#4BB543" })
+        }else if(props.isError){
+            //props.showResponsePopUp(true);
+            setAlert({ open: true, message: "Something went wrong, please try again!", backgroundColor: "#FF3232" })
+        }
+     }, [props.isError]);
+
 
     const closePopUp = () => {
         props.showPopUp(false);
@@ -161,7 +190,7 @@ const Contact = (props) => {
     }
 
     const ContactValidation = (event) => {
-        if(_.includes(['Email ID','Name','Phone Number','Message'], event.target.id) &&event.target.value[0]==' ') return;
+        if (_.includes(['Email ID', 'Name', 'Phone Number', 'Message'], event.target.id) && event.target.value[0] == ' ') return;
 
         switch (event.target.id) {
             case 'Email ID':
@@ -231,12 +260,14 @@ const Contact = (props) => {
         logoHeight = "140"
     }
 
+    const displayButton = loading ? <CircularProgress size={30} style={{ color: "#fff" }} /> : "Submit";
+
     return (
 
         <Grid container direction="column" className={classes.background}>
             {/*---Cross Mark---*/}
             <Grid item container justifyContent="flex-end">
-                <Grid item component={Button}  onClick={() => {history.goBack(); history.clear}} >
+                <Grid item component={Button} onClick={() => { history.goBack(); history.clear }} >
                     <img alt src={close} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
                 </Grid>
             </Grid>
@@ -271,15 +302,20 @@ const Contact = (props) => {
                             </Grid>
 
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginBottom: "0.75rem" }}>
-                                <Comment errorMessage={commentMessage} isError={commentMessage.length !== 0} fieldName={"Message"} eventValidation={ContactValidation} value={comment}/>
+                                <Comment errorMessage={commentMessage} isError={commentMessage.length !== 0} fieldName={"Message"} eventValidation={ContactValidation} value={comment} />
                             </Grid>
+
+                            <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
+                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
+                                    </Typography>
+                                </Grid>
 
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
-                                <PaymentButton onButtonClick={Validate} name={"Submit"} />
+                                <PaymentButton onButtonClick={Validate} name={displayButton} />
                             </Grid>
 
 
-                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit"}}>
+                            <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                 <Typography component={Button} onClick={onReset} gutterBottom variant="body2" className={classes.Reset}>Reset</Typography>
                             </Grid>
 
@@ -288,6 +324,13 @@ const Contact = (props) => {
                 </Card>
                 <div className={classes.registrationDivBackground} />
             </Grid>}
+            <Snackbar
+                autoHideDuration={4000}
+                open={alert.open}
+                message={alert.message}
+                ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
         </Grid>
 
     );

@@ -1,4 +1,7 @@
+import config from '../../config'
+
 const FetchData = async(method = 'POST', jsonData = {}, route = '') => {
+  const { baseUrl } = config;
   const fetchOptions = {
     method: method,
     headers: {
@@ -8,10 +11,9 @@ const FetchData = async(method = 'POST', jsonData = {}, route = '') => {
     body: JSON.stringify(jsonData)
   };
 
-  return await fetch(`http://localhost:3002${route}`, fetchOptions).then((res) => {
+  return await fetch(baseUrl + route, fetchOptions).then((res) => {
     return res;
   }).catch(error => {
-    console.log(error);
     return 'error';
   });
 }

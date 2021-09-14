@@ -14,7 +14,11 @@ import InputField from '../common/TextField/InputField';
 import DropDown from '../common/Select/DropDown';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
+import { displayPayment } from "../../Utils/helpers/initiateRegistration";
+import { PrepareRequest } from "../../Utils/index";
 import _ from 'lodash';
+import axios from 'axios';
+import FormData from 'form-data'
 
 
 const useStyles = makeStyles(theme => ({
@@ -109,6 +113,7 @@ const useStyles = makeStyles(theme => ({
 const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
 
 const IndividualRegistration = (props) => {
+
     const classes = useStyles();
     const [name, setName] = useState('');
     const [nameMessage, setNameMessage] = useState(props.nameMessage);
@@ -150,9 +155,13 @@ const IndividualRegistration = (props) => {
         }
     }
 
-    useEffect(() => { if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) IndividualRegistrationValidation({ target: { id: 'file' } }) }, [fileData]);
+    useEffect(() => {
+        if (previousValues.current.name != fileData.name && previousValues.current.size != fileData.size) {
+            IndividualRegistrationValidation({ target: { id: 'file' } })
+        }
+    }, [fileData]);
 
-    const Validate = () => {
+    const Validate = async () => {
         let errorObject = { emailError: "", nameError: "", phoneNumberError: "", SchoolError: "", CityError: "", ClassError: "", StoryCategoryError: "", fileError: "", isError: false }
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
@@ -188,9 +197,31 @@ const IndividualRegistration = (props) => {
             setCityMessage("Please enter a valid city");
             errorObject.isError = true;
         }
-
         if (!errorObject.isError) {
-            props.validateDetails(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileData)
+            const body = new FormData();
+            body.append('story', fileData);
+            body.append('name', 'testing');
+            const fileResponseData = (await axios.post(`${KATHA_API}/katha_utsav/v1/story/upload_story`, body)).data;
+            const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileResponseData.path)
+            await props.showLoader(true);
+            await displayPayment(data, paymentStateHandler);
+            setName('');
+            setNameMessage('');
+            setEmailId('');
+            setEmailIdMessage('');
+            setSchool('');
+            setSchoolMessage('');
+            setPhoneNumber('');
+            setPhoneNumberMessage('');
+            setCity('');
+            setCityMessage('');
+            setStoryCategory('');
+            setStoryCategoryMessage('');
+            setClassStandard('');
+            setClassMessage('');
+            setFileData({});
+            setFileName('Upload File');
+            setfileDataMessage('');
         }
     }
 
@@ -314,8 +345,6 @@ const IndividualRegistration = (props) => {
     }
 
     const theme = useTheme();
-
-
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
@@ -332,7 +361,57 @@ const IndividualRegistration = (props) => {
         logoHeight = "140"
     }
 
+    const sampleFormData = {
+        "userName": "register names",
+        "userEmail": "nizarahammed14@gmail.com",
+        "userPhone": "911234567909",
+        "userSchool": "bharathi",
+        "userCity": "tanjore",
+        "studentsList": [
+            {
+                "studentName": "Student Name 1",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567889",
+                "studentClass": "IV to VI",
+                "storyCategory": "Non-Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 2",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "9112345678",
+                "studentClass": "VII to IX",
+                "storyCategory": "Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 3",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567889",
+                "studentClass": "X to XII",
+                "storyCategory": "Fiction",
+                "storyPath": "samples3path"
+            },
+            {
+                "studentName": "Student Name 4",
+                "studentEmail": "student@gmail.com",
+                "studentPhone": "911234567908",
+                "studentClass": "IV to VI",
+                "storyCategory": "Poetry",
+                "storyPath": "samples3path"
+            }
+        ]
+    }
 
+    const paymentStateHandler = (paymentState, statusMessage, orderId) => {
+        props.showResponsePopUp(true);
+        props.setRegistrationData(paymentState, statusMessage, orderId);
+    };
+
+    const handleClick = async () => {
+        await props.showLoader(true);
+        await displayPayment(sampleFormData, paymentStateHandler);
+    };
 
     return (
         <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp}>
@@ -409,6 +488,10 @@ const IndividualRegistration = (props) => {
                                 <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                     <PaymentButton onButtonClick={Validate} name={"Pay"} />
                                 </Grid>
+
+                                {/* <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
+                                    <PaymentButton onButtonClick={handleClick} name={"Test Payment"} />
+                                </Grid> */}
 
                                 <Grid item component={Button} onClick={onReset} style={{ width: matchesXS ? "100%" : "inherit" }}>
                                     <Typography gutterBottom style={{ "textAlign": "center" }} variant="body2" className={classes.Reset}>Reset</Typography>

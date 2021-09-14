@@ -18,3 +18,14 @@ export {
     validateSuccessSchoolStepTwo,
     validateFailSchoolStepTwo,
 } from './SchoolRegistrationStepTwoAction'
+
+export {
+    showResponsePopUp,
+    setRegistrationData,
+    showLoader,
+} from './RegistrationReponseAction';
+
+export {
+    UploadContactForm,
+    isUploadSuccess
+} from './ContactAction';

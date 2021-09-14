@@ -96,16 +96,13 @@ const Footer = () => {
 
     const groupIcons = (
         <Grid item container direction="row" className={classes.groupIcons}>
-            <Grid item component={"a"} href="#">
+            <Grid item component={"a"} href="https://www.instagram.com/kathaindia/">
                 <img alt="Instagram" width={20} height={20} src={instagram} />
             </Grid>
-            <Grid item component={"a"} href="#">
+            <Grid item component={"a"} href="https://www.facebook.com/kathaindia/">
                 <img alt="football" width={20} height={20} src={football} className={classes.icon} />
             </Grid>
-            <Grid item component={"a"} href="#">
-                <img alt="twitter" width={20} height={20} src={twitter} className={classes.icon} />
-            </Grid>
-            <Grid item component={"a"} href="#">
+            <Grid item component={"a"} href="https://www.linkedin.com/in/katha-india-64aabb84/">
                 <img alt="youtube" width={20} height={20} src={youtube} className={classes.icon} />
             </Grid>
         </Grid>

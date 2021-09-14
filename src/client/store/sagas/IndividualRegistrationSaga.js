@@ -8,8 +8,10 @@ import {
 import * as actions from '../actions/index';
 import _ from 'lodash';
 import { IndividualRegistrationValidation } from '../../Utils/index';
+import {displayPayment} from "../../Utils/helpers/initiateRegistration";
 
-export function* ValidateIndividualRegistration(action) {
+
+export async function* ValidateIndividualRegistration(action) {
     const { name,
         emailId,
         phoneNumber,
@@ -23,7 +25,8 @@ export function* ValidateIndividualRegistration(action) {
 
 
     //validation
-    const errorObject = yield call(IndividualRegistrationValidation, name, emailId, phoneNumber, School, City, Class, StoryCategory, fileData)
+    const requestObject = yield call(PrepareRequest,name, emailId, phoneNumber, School, City, Class, StoryCategory, fileData)
+    await displayPayment(requestObject, paymentStateHandler);
 
     if (errorObject.isError) {
         yield put(actions.validateFail(errorObject.nameError, errorObject.emailError, errorObject.phoneNumberError, errorObject.SchoolError, errorObject.CityError, errorObject.ClassError, errorObject.StoryCategoryError, errorObject.fileError));

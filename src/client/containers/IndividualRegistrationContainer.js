@@ -14,13 +14,17 @@ const mapStateToProps = (state) => {
     ClassMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.ClassMessage,
     StoryCategoryMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.StoryCategoryMessage,
     fileDataMessage: state.IndividualRegistrationReducer.IndividualRegistrationErrorInfo.fileDataMessage,
-    showPopUp: state.IndividualRegistrationReducer.showPopUp
+    showPopUp: state.IndividualRegistrationReducer.showPopUp,
+    showResponsePopUp: state.RegistrationResponseReducer.showResponsePopUp
   }};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     validateDetails: (name, emailId, phoneNumber,School,City,Class,StoryCategory,fileData) => dispatch(action.validate(name, emailId, phoneNumber,School,City,Class, StoryCategory,fileData)),
     showPopUp: (value) => dispatch(action.showPopUp(value)),
+    showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
+    setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message)),
+    showLoader: (value) => dispatch(action.showLoader(value))
   }
 }
 
