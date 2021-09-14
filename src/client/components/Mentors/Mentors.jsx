@@ -18,7 +18,6 @@ const Mentors = () => {
         <React.Fragment>
             <div id='mentors' className='mentors'>
                 <h3>Mentors</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur </p>
                 <div className='mentors__container'>
                     <div className='mentors__container--box'>
                         <Profile image={Mentor1} name='Rachana Kulshrestha' description='Poetry'/>
