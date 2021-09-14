@@ -4,11 +4,11 @@
   letter-spacing: 0;
 
   @media (min-width: 1000px) {
-    padding: 0 2rem;
+    padding: 2rem;
   }
 
   @include breakpoint-xlarge {
-    padding: 0 5rem;
+    padding: 5rem 3rem;
 
   }
 
@@ -30,7 +30,7 @@
 
       @include breakpoint-large-up {
         display: flex;
-        align-items: end;
+        align-items: start;
         position: relative;
         padding: 2rem;
       }

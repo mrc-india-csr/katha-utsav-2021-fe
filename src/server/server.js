@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicPath));
 routes(app);
 app.get('/api/healthy', (req, res) => {
-  res.status(200).json({ message: ' Web is healthy!'+ process.env.NODE_ENV});
+  res.status(200).json({ message: ' Web is healthy!'+ process.env.NODE_ENV + process.env.KATHA_API});
 });
 
 
