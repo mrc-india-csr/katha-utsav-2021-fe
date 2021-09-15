@@ -18,6 +18,10 @@ import PaymentButton from '../../common/Button/PayButton';
 import FileUploader from "../../common/FileUploader";
 import _ from "lodash";
 import Alert from "@material-ui/lab/Alert";
+import FormData from "form-data";
+import axios from "axios";
+import {MultipleFormRequest, PrepareRequest} from "../../../Utils";
+import {displayPayment} from "../../../Utils/helpers/initiateRegistration";
 
 
 const useStyles = makeStyles(theme => ({
@@ -227,14 +231,18 @@ const StepTwo = (props) => {
     }
   }
 
-  const validate = () => {
+  const paymentStateHandler = (paymentState, statusMessage, orderId) => {
+    props.setRegistrationData(paymentState, statusMessage, orderId);
+    props.showResponsePopUp(true);
+  };
+
+  const validate = async () => {
     let isError = false
     for (let step = 0; step < states.dropDownValue; step++) {
       let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(states.stepTwo[step].studentEmail);
       let phoneNumberValid = /^\d+$/.test(states.stepTwo[step].studentPhone);
 
       if (_.isNull(states.stepTwo[step].studentEmail) || _.isEmpty(states.stepTwo[step].studentEmail) || !emailValid) {
-        console.log('email')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentEmail = 'error'
           return {
@@ -243,9 +251,7 @@ const StepTwo = (props) => {
         })
         isError = true;
       }
-      console.log('_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName)',states,_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName))
       if (_.isNull(states.stepTwo[step].studentName) || _.isEmpty(states.stepTwo[step].studentName)) {
-        console.log('name')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentName = 'error'
           return {
@@ -255,7 +261,6 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isNull(states.stepTwo[step].studentPhone) || _.isEmpty(states.stepTwo[step].studentPhone) || !phoneNumberValid) {
-        console.log('phone')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentPhone = 'error'
           return {
@@ -265,7 +270,6 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isEmpty(states.stepTwo[step].storyCategory) || !_.includes(["Fiction", "Non-Fiction", "Poetry"], states.stepTwo[step].storyCategory)) {
-        console.log('story')
         setStates((states) => {
           states.stepTwoErrorMessage[step].storyCategory = 'error'
           return {
@@ -276,7 +280,6 @@ const StepTwo = (props) => {
       }
 
       if (_.isEmpty(states.stepTwo[step].studentClass) || !_.includes(["IV to VI", "VII to IX", "X to XII"], states.stepTwo[step].studentClass)) {
-        console.log('class')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentClass = 'error'
           return {
@@ -286,7 +289,6 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isEmpty(states.stepTwo[step].storyPath.name) || states.stepTwo[step].storyPath.size > 10000000) {
-        console.log('path')
         setStates((states) => {
           states.uploadFile[step].fileName = 'Upload File'
           return {
@@ -298,6 +300,27 @@ const StepTwo = (props) => {
     }
 
     if(!isError) {
+      const body = new FormData();
+      let fileData = []
+      for (let step = 0; step < states.dropDownValue; step++) {
+        fileData.push(states.stepTwo[step].storyPath)
+      }
+      await props.showLoader(true);
+
+      let fileResponse = []
+      for (let step = 0; step < states.dropDownValue; step++) {
+        body.append('story', fileData[step]);
+        body.append('name', 'testing');
+        const fileResponseData = (await axios.post('/api/story/upload', body)).data;
+        fileResponse.push(fileResponseData)
+      }
+
+      await props.showLoader(false);
+
+      const data = MultipleFormRequest(states.stepTwo, fileResponse, props.stepOneData, states.dropDownValue)
+      await props.showLoader(true);
+      await displayPayment(data, paymentStateHandler);
+
       let stepTwoData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         let data = states.stepTwo[step]
@@ -334,7 +357,6 @@ const StepTwo = (props) => {
         }
         break;
       case 'studentName':
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>', event.target.value, _.isEmpty(event.target.value) || _.isNull(event.target.value))
         if (_.isEmpty(event.target.value) || _.isNull(event.target.value)) {
           setStates((states) => {
             states.stepTwo[i][event.target.id] = event.target.value
@@ -386,7 +408,6 @@ const StepTwo = (props) => {
           })
         }
         else {
-          console.log('pass')
           setStates((states) => {
             states.stepTwo[i][event.target.id] = event.target.value
             states.stepTwoErrorMessage[i][event.target.id] = ''
