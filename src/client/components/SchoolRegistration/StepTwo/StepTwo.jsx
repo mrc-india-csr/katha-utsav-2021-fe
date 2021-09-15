@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import DropDown from '../../common/Select/DropDown';
@@ -16,6 +16,8 @@ import TableBody from "@material-ui/core/TableBody";
 import InputField from "../../common/TextField/InputField";
 import PaymentButton from '../../common/Button/PayButton';
 import FileUploader from "../../common/FileUploader";
+import _ from "lodash";
+import Alert from "@material-ui/lab/Alert";
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,11 +55,18 @@ const useStyles = makeStyles(theme => ({
       alignItems: "Center",
     },
     Reset: {
+      width: '49px',
+      fontFamily: 'Fredoka One',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '18px',
       lineHeight: '24px',
-      fontWeight: 'bold',
-      fontSize: '0.65rem',
+      color: '#000000',
       alignItems: "Center",
       marginBottom: '17px'
+    },
+    NoteAlign: {
+      justifyContent: "space-between"
     },
     UploadFile: {
       width: '160px',
@@ -91,6 +100,19 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: '-0.02em',
     color: '#000000',
     paddingRight: '28px'
+  },
+    NoteMandatory: {
+    fontWeight: 500,
+    fontSize: '12px',
+    lineHeight: '32px',
+    textAlign: 'right',
+    letterSpacing: '-0.02em',
+    color: '#000000',
+    paddingRight: '28px',
+    marginLeft: '1rem'
+  },
+  Alert: {
+    padding: '5rem 15rem 0 15rem'
   }
   })
 );
@@ -158,6 +180,21 @@ const StepTwo = (props) => {
       }
     }
 
+    const valueCollection = []
+    for (let step = 0; step < states.dropDownValue; step++) {
+      let rowValue = Object.values(states.stepTwo[step])
+      valueCollection.push(rowValue)
+    }
+
+    if (valueCollection[0].length > 0) {
+      for (let step = 0; step < states.dropDownValue; step++) {
+        values = {
+          ...values,
+          [step]: states.stepTwo[step]
+        }
+      }
+
+    }
     setStates((states) => {
       return {
         ...states,
@@ -170,8 +207,15 @@ const StepTwo = (props) => {
   }
 
   const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY"];
+  const [alertStatus, setAlertStatus] = useState('')
+  const alertBox = () => {
+    return <Alert severity="error" onClose={() => {setAlertStatus(false)}}>{alertStatus}</Alert>
+  }
 
-  const onFileUpload = async (selectedFile, name, event, i) => {
+  const onFileUpload = async (selectedFile, name, event, errorMessage, i) => {
+    if (errorMessage) {
+      setAlertStatus(errorMessage)
+    }
     if (name) {
       setStates((states) => {
         states.uploadFile[i].fileName = 'Uploaded'
@@ -190,6 +234,7 @@ const StepTwo = (props) => {
       let phoneNumberValid = /^\d+$/.test(states.stepTwo[step].studentPhone);
 
       if (_.isNull(states.stepTwo[step].studentEmail) || _.isEmpty(states.stepTwo[step].studentEmail) || !emailValid) {
+        console.log('email')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentEmail = 'error'
           return {
@@ -198,7 +243,9 @@ const StepTwo = (props) => {
         })
         isError = true;
       }
-      if (_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName)) {
+      console.log('_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName)',states,_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName))
+      if (_.isNull(states.stepTwo[step].studentName) || _.isEmpty(states.stepTwo[step].studentName)) {
+        console.log('name')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentName = 'error'
           return {
@@ -208,6 +255,7 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isNull(states.stepTwo[step].studentPhone) || _.isEmpty(states.stepTwo[step].studentPhone) || !phoneNumberValid) {
+        console.log('phone')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentPhone = 'error'
           return {
@@ -217,6 +265,7 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isEmpty(states.stepTwo[step].storyCategory) || !_.includes(["Fiction", "Non-Fiction", "Poetry"], states.stepTwo[step].storyCategory)) {
+        console.log('story')
         setStates((states) => {
           states.stepTwoErrorMessage[step].storyCategory = 'error'
           return {
@@ -227,6 +276,7 @@ const StepTwo = (props) => {
       }
 
       if (_.isEmpty(states.stepTwo[step].studentClass) || !_.includes(["IV to VI", "VII to IX", "X to XII"], states.stepTwo[step].studentClass)) {
+        console.log('class')
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentClass = 'error'
           return {
@@ -236,6 +286,7 @@ const StepTwo = (props) => {
         isError = true;
       }
       if (_.isEmpty(states.stepTwo[step].storyPath.name) || states.stepTwo[step].storyPath.size > 10000000) {
+        console.log('path')
         setStates((states) => {
           states.uploadFile[step].fileName = 'Upload File'
           return {
@@ -283,6 +334,7 @@ const StepTwo = (props) => {
         }
         break;
       case 'studentName':
+        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>', event.target.value, _.isEmpty(event.target.value) || _.isNull(event.target.value))
         if (_.isEmpty(event.target.value) || _.isNull(event.target.value)) {
           setStates((states) => {
             states.stepTwo[i][event.target.id] = event.target.value
@@ -334,6 +386,7 @@ const StepTwo = (props) => {
           })
         }
         else {
+          console.log('pass')
           setStates((states) => {
             states.stepTwo[i][event.target.id] = event.target.value
             states.stepTwoErrorMessage[i][event.target.id] = ''
@@ -416,12 +469,14 @@ const StepTwo = (props) => {
                         eventValidation={(fieldName, e) => studentCount(fieldName, e)} value={states.dropDownValue}/>
             </Grid>
           </Grid>
-          <Grid item container align="right" direction="column">
-            <Grid item>
-              <Typography gutterBottom variant="subtitle2" className={classes.Note}>Note : Supported Document types:
-                word, pdf, jpg, jpeg,png</Typography>
+            <Grid item container className={classes.NoteAlign}>
+              <Grid item align="left" direction="column">
+                <Typography gutterBottom variant="subtitle1" className={classes.NoteMandatory}>Note : All fields are mandatory</Typography>
+              </Grid>
+              <Grid item align="right" direction="column">
+                <Typography gutterBottom variant="subtitle2" className={classes.Note}>Note : Supported Document types: doc,docx, pdf, jpg, jpeg & png & maximum per file size is 10mb.</Typography>
+              </Grid>
             </Grid>
-          </Grid>
 
           <div id='bulk-details'>
             <TableContainer component={Paper}>
@@ -450,7 +505,7 @@ const StepTwo = (props) => {
                       </TableCell>
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
-                                  options={["IV to VI", "VII to IX ", "X to XII"]}
+                                  options={["IV to VI", "VII to IX", "X to XII"]}
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right" >
@@ -459,7 +514,7 @@ const StepTwo = (props) => {
                                     value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right">
-                        <FileUploader onFileUpload={(selectedFile, name, event) => onFileUpload(selectedFile, name, event, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
+                        <FileUploader onFileUpload={(selectedFile, name, event, errorMessage) => onFileUpload(selectedFile, name, event,errorMessage, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
                       </TableCell>
                     </TableRow>
                   })}
@@ -467,6 +522,11 @@ const StepTwo = (props) => {
               </Table>
             </TableContainer>
           </div>
+
+          <Grid item  align="center" className={classes.Alert}>
+            {alertStatus && alertBox()}
+          </Grid>
+
           <Grid item  align="center" className={classes.Payment}>
             <PaymentButton name={"Pay"} onButtonClick={validate}/>
           </Grid>

@@ -46,7 +46,8 @@ const FileUploader = ({ onFileUpload, buttonName, style, acceptedFormat = ".jpg,
   );
 }
 
-function getExtension(file) {
-  return file.substring(file.lastIndexOf('.') + 1, file.length) || file
+function getExtension(file){
+  const fileType = '.' + file.substring(file.lastIndexOf('.')+1, file.length) || file
+  return fileType
 }
 export default FileUploader
