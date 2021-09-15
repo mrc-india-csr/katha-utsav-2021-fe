@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     },
 
   },
-  error: {
+    error: {
     "&.MuiFormHelperText-root.Mui-error": {
       color: theme.palette.common.red,
 
@@ -122,7 +122,7 @@ const useErrorStyles = makeStyles(theme => ({
       }
     },
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#000"
+      borderColor: "red"
     },
     "&:hover .MuiOutlinedInput-input": {
       color: "#000",
