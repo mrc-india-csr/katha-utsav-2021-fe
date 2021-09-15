@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("xs")]: {
             marginTop: "28px",
             paddingBottom: "94px",
+        },
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.125rem"
         }
     },
     events : {
@@ -91,7 +94,7 @@ const Schedule = () => {
                     })}
                 </div>
                 <div className={classes.description}>
-                    <b>Lorem ipsum</b> dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor si
+                    {/*<b>Lorem ipsum</b> dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis et sed nam sem tellus erat.Lorem ipsum dolor si*/}
                 </div>
             </div>
         </React.Fragment>

@@ -41,17 +41,26 @@ const useStyles = makeStyles(theme => ({
     address: {
         fontSize: "0.8rem",
         fontFamily: "Poppins",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.125rem"
+        }
     },
     copyRights: {
         marginTop: "1.5rem",
         marginBottom: "1.5rem",
         fontFamily: "Poppins",
         fontSize: "0.85rem",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.125rem"
+        }
     },
     ReachUs: {
         marginTop: "1rem",
         fontSize: "1.25rem",
         fontFamily: 'Inter',
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.5rem"
+        }
     },
     socialMedia: {
         fontFamily: 'Inter',
@@ -60,7 +69,6 @@ const useStyles = makeStyles(theme => ({
             marginLeft:"2rem",
             marginBottom: "1rem"
         }
-
     },
     IconMessage: {
         marginLeft: "1rem",
@@ -72,7 +80,10 @@ const useStyles = makeStyles(theme => ({
     },
     MessageDetails: {
         marginLeft: "0.5rem",
-        fontWeight: "400"
+        fontWeight: "400",
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.125rem"
+        }
     },
     icon: {
         marginLeft: "0.5rem"

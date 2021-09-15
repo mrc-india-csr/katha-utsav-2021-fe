@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
         "&:hover":{
             backgroundColor:"#FEC000"
         },
+        [theme.breakpoints.up("xl")]: {
+            fontSize: "1.125rem"
+        }
     },
     header: {
         width: '378px',

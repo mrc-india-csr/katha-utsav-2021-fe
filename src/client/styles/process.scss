@@ -37,6 +37,7 @@
       margin-bottom: 1rem;
       background-color: white;
       border: none;
+      cursor: pointer;
 
       @include breakpoint-large-down {
         width: 30rem;
