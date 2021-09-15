@@ -310,9 +310,8 @@ const StepTwo = (props) => {
       let fileResponse = []
       for (let step = 0; step < states.dropDownValue; step++) {
         body.append('story', fileData[step]);
-        body.append('name', 'testing');
         const fileResponseData = (await axios.post('/api/story/upload', body)).data;
-        fileResponse.push(fileResponseData)
+        fileResponse.push(fileResponseData.path)
       }
 
       await props.showLoader(false);
