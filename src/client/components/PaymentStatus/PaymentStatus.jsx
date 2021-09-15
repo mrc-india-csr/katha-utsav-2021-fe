@@ -153,14 +153,14 @@ const FailureHeader = () => {
 };
 
 const SuccessMessage = ({orderId}) => {
-  return <div>Your registration ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
+  return <div>Your transaction ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
 };
 
 const FailureMessage = ({orderId}) => {
   if(orderId === '') {
     return <div>Your registration failed, Please try again.</div>;
   }
-  return <div>No worries, Your registration ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
+  return <div>No worries, Your transaction ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
 };
 
 const PaymentStatus = (props) => {
@@ -243,7 +243,7 @@ const PaymentStatus = (props) => {
 
                 <Grid item>
                   <Typography gutterBottom variant="body1" className={classes.StatusInfoTag}>
-                    {(registrationStatus === 'success') ? 'You’ll recevie an e-mail notification with registration details from our team within 24 hours.' : 'Please reach out to us with the registration ID if amount detected from your account. Else, Please try again later.'}
+                    {(registrationStatus === 'success') ? 'You’ll recevie an e-mail notification with registration details from our team within 24 hours. Incase you didn’t receive any e-mail please check SPAM folder.' : 'Please reach out to us with the transaction ID if any amount got deducted from your account. Else, Please try again later.'}
                   </Typography>
                 </Grid>
 
