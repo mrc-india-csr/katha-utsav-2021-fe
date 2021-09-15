@@ -160,7 +160,7 @@ const FailureMessage = ({orderId}) => {
   if(orderId === '') {
     return <div>Your registration failed, Please try again.</div>;
   }
-  return <div>No worries, Your transaction ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
+  return <div>Your transaction ID is <span style={{color: '#98248D'}}>{orderId}</span></div>;
 };
 
 const PaymentStatus = (props) => {
