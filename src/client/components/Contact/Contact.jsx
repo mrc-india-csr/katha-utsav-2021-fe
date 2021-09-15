@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
             height: "150vh",
         },
         [theme.breakpoints.down("sm")]: {
-            height: "250vh",
+            height: "150vh",
         },
         [theme.breakpoints.down("xs")]: {
             height: "150vh",
@@ -158,20 +158,34 @@ const Contact = (props) => {
             setEmailIdMessage("");
             setPhoneNumber("");
             setPhoneNumberMessage("");
-            
+            if (props.showSnackBar && !_.isNil(props.isError) && !props.isError) {
+                // props.showResponsePopUp(true);
+                // props.setRegistrationData("success", "Query Submitted Successfully!");
+                const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Query Submitted Successfully! Our team will reply to your query / reach out to you ASAP</Typography>
+                setAlert({ open: true, message: info, backgroundColor: "#4BB543" })
+            } else if (props.showSnackBar && props.isError) {
+                //props.showResponsePopUp(true);
+                const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Something went wrong, please try again!</Typography>
+
+                setAlert({ open: true, message: info, backgroundColor: "#FF3232" })
+            }
         }
     }
 
-    useEffect(() => { 
-        if (!_.isNil(props.isError) && !props.isError) {
+    useEffect(() => {
+        console.log('showsnackbar', props.showSnackBar);
+        if (props.showSnackBar && !_.isNil(props.isError) && !props.isError) {
             // props.showResponsePopUp(true);
             // props.setRegistrationData("success", "Query Submitted Successfully!");
-            setAlert({ open: true, message: "Query Submitted Successfully! Our team will reply to your query / reach out to you ASASP", backgroundColor: "#4BB543" })
-        }else if(props.isError){
+            const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Query Submitted Successfully! Our team will reply to your query / reach out to you ASAP</Typography>
+            setAlert({ open: true, message: info, backgroundColor: "#4BB543" })
+        } else if (props.showSnackBar && props.isError) {
             //props.showResponsePopUp(true);
-            setAlert({ open: true, message: "Something went wrong, please try again!", backgroundColor: "#FF3232" })
+            const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Something went wrong, please try again!</Typography>
+
+            setAlert({ open: true, message: info, backgroundColor: "#FF3232" })
         }
-     }, [props.isError]);
+    }, [props.isError]);
 
 
     const closePopUp = () => {
@@ -242,7 +256,7 @@ const Contact = (props) => {
 
     const theme = useTheme();
     let history = useHistory()
-
+    console.log('open', alert);
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
@@ -267,7 +281,7 @@ const Contact = (props) => {
         <Grid container direction="column" className={classes.background}>
             {/*---Cross Mark---*/}
             <Grid item container justifyContent="flex-end">
-                <Grid item component={Button} onClick={() => { history.goBack(); history.clear }} >
+                <Grid item component={Button} onClick={() => { props.showSnackBarFunc(false); history.goBack(); history.clear }} >
                     <img alt src={close} alt="crossmark" width={matchesXL ? "50" : matchesLG ? "50" : "30"} height={matchesXL ? "50" : matchesLG ? "50" : "30"} />
                 </Grid>
             </Grid>
@@ -306,9 +320,9 @@ const Contact = (props) => {
                             </Grid>
 
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit", marginLeft: matchesXS ? "0rem" : 0 }} >
-                                    <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
-                                    </Typography>
-                                </Grid>
+                                <Typography gutterBottom variant="h6" style={{ maxWidth: matchesLG ? "30rem" : "inherit", fontSize: matchesXL ? "1rem" : matchesLG ? "1rem" : "0.65rem", color: "#000" }} className={classes.supportedDocument}>Note : All fields are mandatory
+                                </Typography>
+                            </Grid>
 
                             <Grid item style={{ width: matchesXS ? "100%" : matchesSM ? "100%" : "inherit" }}>
                                 <PaymentButton onButtonClick={Validate} name={displayButton} />
@@ -325,11 +339,11 @@ const Contact = (props) => {
                 <div className={classes.registrationDivBackground} />
             </Grid>}
             <Snackbar
-                autoHideDuration={4000}
+                autoHideDuration={10000}
                 open={alert.open}
                 message={alert.message}
                 ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
         </Grid>
 

@@ -27,5 +27,6 @@ export {
 
 export {
     UploadContactForm,
-    isUploadSuccess
+    isUploadSuccess,
+    isSnackBarVisible
 } from './ContactAction';
