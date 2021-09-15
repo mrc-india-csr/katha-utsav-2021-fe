@@ -19,8 +19,9 @@ import footerkatha from '../../assets/images/footerkatha.png';
 import Message from '../../assets/images/Message.png';
 import Mobile from '../../assets/images/Mobile.png'
 import youtube from '../../assets/images/youtube.png';
-import twitter from '../../assets/images/twitter.png';
 import instagram from '../../assets/images/instagram.png';
+import Fb from '../../assets/images/Fb.png';
+import Linkedin from '../../assets/images/Linkedin.png';
 import football from '../../assets/images/football.png';
 
 
@@ -111,10 +112,10 @@ const Footer = () => {
                 <img alt="Instagram" width={20} height={20} src={instagram} />
             </Grid>
             <Grid item component={"a"} target="_blank" href="https://www.facebook.com/kathaindia/">
-                <img alt="football" width={20} height={20} src={football} className={classes.icon} />
+                <img alt="Fb" width={20} height={20} src={Fb} className={classes.icon} />
             </Grid>
             <Grid item component={"a"} target="_blank" href="https://www.linkedin.com/in/katha-india-64aabb84/">
-                <img alt="youtube" width={20} height={20} src={youtube} className={classes.icon} />
+                <img alt="Linkedin" width={20} height={20} src={Linkedin} className={classes.icon} />
             </Grid>
         </Grid>
     );
