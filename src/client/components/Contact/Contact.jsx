@@ -158,12 +158,18 @@ const Contact = (props) => {
             setEmailIdMessage("");
             setPhoneNumber("");
             setPhoneNumberMessage("");
+            await props.showLoader(true);
+
             if (props.showSnackBar && !_.isNil(props.isError) && !props.isError) {
+                await props.showLoader(false);
+
                 // props.showResponsePopUp(true);
                 // props.setRegistrationData("success", "Query Submitted Successfully!");
                 const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Query Submitted Successfully! Our team will reply to your query / reach out to you ASAP</Typography>
                 setAlert({ open: true, message: info, backgroundColor: "#4BB543" })
             } else if (props.showSnackBar && props.isError) {
+                await props.showLoader(false);
+
                 //props.showResponsePopUp(true);
                 const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Something went wrong, please try again!</Typography>
 
@@ -172,15 +178,18 @@ const Contact = (props) => {
         }
     }
 
-    useEffect(() => {
+    useEffect(async() => {
         console.log('showsnackbar', props.showSnackBar);
         if (props.showSnackBar && !_.isNil(props.isError) && !props.isError) {
             // props.showResponsePopUp(true);
             // props.setRegistrationData("success", "Query Submitted Successfully!");
+            await props.showLoader(false);
             const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Query Submitted Successfully! Our team will reply to your query / reach out to you ASAP</Typography>
             setAlert({ open: true, message: info, backgroundColor: "#4BB543" })
         } else if (props.showSnackBar && props.isError) {
             //props.showResponsePopUp(true);
+            await props.showLoader(false);
+
             const info = <Typography variant="h6" style={{ fontFamily: "Poppins" }}>Something went wrong, please try again!</Typography>
 
             setAlert({ open: true, message: info, backgroundColor: "#FF3232" })

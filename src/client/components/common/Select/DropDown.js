@@ -109,7 +109,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "& .MuiInputLabel-root": {
@@ -118,7 +118,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -130,7 +130,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "&:hover .MuiInputLabel-root": {
@@ -139,7 +139,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -151,7 +151,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "& .MuiInputLabel-root.Mui-focused": {
@@ -160,7 +160,7 @@ const useErrorStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
       },
       [theme.breakpoints.up("xl")]: {
-        fontSize: "1.75rem"
+        fontSize: "1.5rem"
       }
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
@@ -256,7 +256,7 @@ const DropDown = (props) => {
         FormHelperTextProps={{ style: styles.helper }}
         select
       >
-        {_.map(options, (option) => <MenuItem style={{ fontSize: matchesXL ? "1.75rem" : matchesLG ? "1.5rem" : "inherit" }} key={option} value={option}>{option}</MenuItem>
+        {_.map(options, (option) => <MenuItem style={{ fontSize: matchesXL ? "1.5rem" : matchesLG ? "1.5rem" : "inherit" }} key={option} value={option}>{option}</MenuItem>
         )}
       </TextField>
     </React.Fragment>
