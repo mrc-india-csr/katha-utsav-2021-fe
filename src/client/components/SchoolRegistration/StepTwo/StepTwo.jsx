@@ -68,7 +68,8 @@ const useStyles = makeStyles(theme => ({
       lineHeight: '24px',
       color: '#000000',
       alignItems: "Center",
-      marginBottom: '17px'
+      marginBottom: '17px',
+      textTransform: 'none',
     },
     NoteAlign: {
       justifyContent: "space-between",
@@ -504,9 +505,9 @@ const StepTwo = (props) => {
               <Typography gutterBottom variant="subtitle2" className={classes.Detail}>Student Details</Typography>
             </Grid>
           </Grid>
-          <Grid item container alignItems="center" direction="column">
+          <Grid id='student-count' item container alignItems="center" direction="column">
             <Grid item className={classes.StudentCountStepTwo}>
-              <DropDown errorMessage='' isError={false} fieldName={"StudentCount"} options={options} toChange={true}
+              <DropDown errorMessage='' isError={false} fieldName={"Student Count"} options={options} toChange={true}
                         eventValidation={(fieldName, e) => studentCount(fieldName, e)} value={states.dropDownValue}/>
             </Grid>
           </Grid>
@@ -535,26 +536,26 @@ const StepTwo = (props) => {
                   {states.dropDownValue !== '' && Array(states.dropDownValue).fill().map((x, i) => {
                     return <TableRow key={i}>
                       <div className={classes.SerialNo}>{i + 1}</div>
-                      <TableCell align="right">
+                      <TableCell>
                         <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentName.length > 0} fieldName={"studentName"} value={states.stepTwo[i].studentName} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell>
                         <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentEmail.length > 0} fieldName={"studentEmail"} value={states.stepTwo[i].studentEmail} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell>
                         <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentPhone.length > 0} fieldName={"studentPhone"} value={states.stepTwo[i].studentPhone} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell>
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
                                   options={["IV to VI", "VII to IX", "X to XII"]}
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
-                      <TableCell align="right" >
+                      <TableCell>
                           <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"}
                                     options={["Fiction", "Non-Fiction", "Poetry"]}
                                     value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell>
                         <FileUploader onFileUpload={(selectedFile, name, event, errorMessage) => onFileUpload(selectedFile, name, event,errorMessage, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
                       </TableCell>
                     </TableRow>
