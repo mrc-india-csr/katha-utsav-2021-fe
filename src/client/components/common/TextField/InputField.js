@@ -43,12 +43,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("lg")]: {
             width: 450,
             height: 30,
-            fontSize: "1.5rem"
+            fontSize: "1.35rem"
         },
         [theme.breakpoints.up("xl")]: {
             width: 500,
             height: 35,
-            fontSize: "1.5rem"
+            fontSize: "1.35rem"
         },
         [theme.breakpoints.down("sm")]: {
             width: 300
