@@ -107,3 +107,28 @@ export const PrepareRequest = (name, emailId, phoneNumber, School, City, Class, 
 
   return sampleFormData;
 }
+
+export const MultipleFormRequest = (formData, fileResponse, stepOneData, dropDownValue) => {
+  let studentsData = []
+  for (let step = 0; step < dropDownValue; step++) {
+    const newData = {
+      "studentName": formData[step].studentName,
+      "studentEmail": formData[step].studentEmail,
+      "studentPhone": formData[step].studentPhone,
+      "studentClass": formData[step].studentClass,
+      "storyCategory": formData[step].storyCategory,
+      "storyPath": fileResponse[step]
+    }
+    studentsData.push(newData)
+  }
+  const sampleFormData = {
+    "userName": stepOneData.schoolCoordinatorName,
+    "userEmail": stepOneData.emailId,
+    "userPhone": stepOneData.phoneNumber,
+    "userSchool": stepOneData.schoolName,
+    "userCity": stepOneData.city,
+    "studentsList": studentsData
+  }
+
+  return sampleFormData;
+}

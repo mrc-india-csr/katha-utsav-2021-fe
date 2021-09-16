@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import DropDown from '../../common/Select/DropDown';
@@ -16,6 +16,13 @@ import TableBody from "@material-ui/core/TableBody";
 import InputField from "../../common/TextField/InputField";
 import PaymentButton from '../../common/Button/PayButton';
 import FileUploader from "../../common/FileUploader";
+import _ from "lodash";
+import Alert from "@material-ui/lab/Alert";
+import FormData from "form-data";
+import axios from "axios";
+import {MultipleFormRequest, PrepareRequest} from "../../../Utils";
+import {displayPayment} from "../../../Utils/helpers/initiateRegistration";
+import Snackbar from "@material-ui/core/Snackbar";
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,11 +60,21 @@ const useStyles = makeStyles(theme => ({
       alignItems: "Center",
     },
     Reset: {
+      width: '49px',
+      fontFamily: 'Fredoka One',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '18px',
       lineHeight: '24px',
-      fontWeight: 'bold',
-      fontSize: '0.65rem',
+      color: '#000000',
       alignItems: "Center",
       marginBottom: '17px'
+    },
+    NoteAlign: {
+      justifyContent: "space-between",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: 'center'
+      }
     },
     UploadFile: {
       width: '160px',
@@ -90,13 +107,36 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right',
     letterSpacing: '-0.02em',
     color: '#000000',
-    paddingRight: '28px'
+    paddingRight: '28px',
+    paddingLeft: '1rem',
+      [theme.breakpoints.down("sm")]: {
+        padding: '0.5rem',
+        textAlign: 'center'
+      }
+  },
+    NoteMandatory: {
+    fontWeight: 500,
+    fontSize: '12px',
+    lineHeight: '32px',
+    textAlign: 'right',
+    letterSpacing: '-0.02em',
+    color: '#000000',
+    paddingRight: '28px',
+    marginLeft: '1rem',
+      [theme.breakpoints.down("sm")]: {
+        padding: '0.5rem',
+        textAlign: 'center'
+      }
+  },
+  Alert: {
+    padding: '5rem 15rem 0 15rem'
   }
   })
 );
 const StepTwo = (props) => {
   const options = Array(20).fill().map((x, i) => i + 1);
   const classes = useStyles();
+  const [alert, setAlert] = useState({ open: false, message: "", backgroundColor: "" });
   const [states, setStates] = React.useState({
     stepTwo: {
       0 : {
@@ -158,6 +198,21 @@ const StepTwo = (props) => {
       }
     }
 
+    const valueCollection = []
+    for (let step = 0; step < states.dropDownValue; step++) {
+      let rowValue = Object.values(states.stepTwo[step])
+      valueCollection.push(rowValue)
+    }
+
+    if (valueCollection[0].length > 0) {
+      for (let step = 0; step < states.dropDownValue; step++) {
+        values = {
+          ...values,
+          [step]: states.stepTwo[step]
+        }
+      }
+
+    }
     setStates((states) => {
       return {
         ...states,
@@ -170,8 +225,15 @@ const StepTwo = (props) => {
   }
 
   const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY"];
+  const [alertStatus, setAlertStatus] = useState('')
+  const alertBox = () => {
+    return <Alert severity="error" onClose={() => {setAlertStatus(false)}}>{alertStatus}</Alert>
+  }
 
-  const onFileUpload = async (selectedFile, name, event, i) => {
+  const onFileUpload = async (selectedFile, name, event, errorMessage, i) => {
+    if (errorMessage) {
+      setAlertStatus(errorMessage)
+    }
     if (name) {
       setStates((states) => {
         states.uploadFile[i].fileName = 'Uploaded'
@@ -183,7 +245,12 @@ const StepTwo = (props) => {
     }
   }
 
-  const validate = () => {
+  const paymentStateHandler = (paymentState, statusMessage, orderId) => {
+    props.setRegistrationData(paymentState, statusMessage, orderId);
+    props.showResponsePopUp(true);
+  };
+
+  const validate = async () => {
     let isError = false
     for (let step = 0; step < states.dropDownValue; step++) {
       let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(states.stepTwo[step].studentEmail);
@@ -198,7 +265,7 @@ const StepTwo = (props) => {
         })
         isError = true;
       }
-      if (_.isNull(states.stepTwo[step].studentName) || _.isNull(states.stepTwo[step].studentName)) {
+      if (_.isNull(states.stepTwo[step].studentName) || _.isEmpty(states.stepTwo[step].studentName)) {
         setStates((states) => {
           states.stepTwoErrorMessage[step].studentName = 'error'
           return {
@@ -247,6 +314,33 @@ const StepTwo = (props) => {
     }
 
     if(!isError) {
+      let fileData = []
+      for (let step = 0; step < states.dropDownValue; step++) {
+        fileData.push(states.stepTwo[step].storyPath)
+      }
+      await props.showLoader(true);
+      const body = new FormData();
+
+      let fileResponse = []
+      for (let step = 0; step < states.dropDownValue; step++) {
+        body.append('story', fileData[step]);
+        await axios.post('/api/story/upload', body).then(
+          (res) => {
+            fileResponse.push(res.data.path)
+          }
+        ).catch((e) => {
+          setAlert({ open: true, message: "File uploaded failed, please try again!", backgroundColor: "#FF3232" })
+          console.log(e)
+        });
+      }
+      await props.showLoader(false);
+
+      if (alert.open) return;
+
+      const data = MultipleFormRequest(states.stepTwo, fileResponse, props.stepOneData, states.dropDownValue)
+      await props.showLoader(true);
+      await displayPayment(data, paymentStateHandler);
+
       let stepTwoData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         let data = states.stepTwo[step]
@@ -416,12 +510,14 @@ const StepTwo = (props) => {
                         eventValidation={(fieldName, e) => studentCount(fieldName, e)} value={states.dropDownValue}/>
             </Grid>
           </Grid>
-          <Grid item container align="right" direction="column">
-            <Grid item>
-              <Typography gutterBottom variant="subtitle2" className={classes.Note}>Note : Supported Document types:
-                word, pdf, jpg, jpeg,png</Typography>
+            <Grid item container className={classes.NoteAlign}>
+              <Grid item align="left" direction="column">
+                <Typography gutterBottom variant="subtitle1" className={classes.NoteMandatory}>Note : All fields are mandatory</Typography>
+              </Grid>
+              <Grid item align="right" direction="column">
+                <Typography gutterBottom variant="subtitle2" className={classes.Note}>Note : Supported Document types: doc,docx, pdf, jpg, jpeg & png & maximum per file size is 10mb.</Typography>
+              </Grid>
             </Grid>
-          </Grid>
 
           <div id='bulk-details'>
             <TableContainer component={Paper}>
@@ -450,7 +546,7 @@ const StepTwo = (props) => {
                       </TableCell>
                       <TableCell align="right">
                         <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
-                                  options={["IV to VI", "VII to IX ", "X to XII"]}
+                                  options={["IV to VI", "VII to IX", "X to XII"]}
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right" >
@@ -459,7 +555,7 @@ const StepTwo = (props) => {
                                     value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell align="right">
-                        <FileUploader onFileUpload={(selectedFile, name, event) => onFileUpload(selectedFile, name, event, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
+                        <FileUploader onFileUpload={(selectedFile, name, event, errorMessage) => onFileUpload(selectedFile, name, event,errorMessage, i)} style={classes.UploadFile} buttonName={states.uploadFile[i].fileName} />
                       </TableCell>
                     </TableRow>
                   })}
@@ -467,6 +563,11 @@ const StepTwo = (props) => {
               </Table>
             </TableContainer>
           </div>
+
+          <Grid item  align="center" className={classes.Alert}>
+            {alertStatus && alertBox()}
+          </Grid>
+
           <Grid item  align="center" className={classes.Payment}>
             <PaymentButton name={"Pay"} onButtonClick={validate}/>
           </Grid>
@@ -477,6 +578,13 @@ const StepTwo = (props) => {
           </Grid>
         </Card>
       </Grid>
+      <Snackbar
+        autoHideDuration={4000}
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
     </Grid>
   )
 }
