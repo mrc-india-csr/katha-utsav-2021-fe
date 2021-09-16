@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
         showPopUp: (value) => dispatch(action.showPopUp(value)),
         showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
         setRegistrationData: (status, message) => dispatch(action.setRegistrationData(status, message)),
-        showLoader: (value) => dispatch(action.showLoader(value))
+        showLoader: (value) => dispatch(action.showLoader(value)),
+        showSchoolPopUp: (value) => dispatch(action.showPopUpSchool(value)),
     }
 }
 
