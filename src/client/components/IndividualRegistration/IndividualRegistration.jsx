@@ -198,11 +198,11 @@ const IndividualRegistration = (props) => {
         }
         if (!errorObject.isError) {
             const body = new FormData();
+            await props.showLoader(true);
             body.append('story', fileData);
             body.append('name', 'testing');
             const fileResponseData = (await axios.post('/api/story/upload', body)).data;
             const data = PrepareRequest(name, emailId, phoneNumber, school, city, classStandard, storyCategory, fileResponseData.path)
-            await props.showLoader(true);
             await displayPayment(data, paymentStateHandler);
             setName('');
             setNameMessage('');

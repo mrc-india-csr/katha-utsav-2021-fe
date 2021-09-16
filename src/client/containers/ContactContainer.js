@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    showLoader: (value) => dispatch(action.showLoader(value)),
     showSnackBarFunc: (value) => dispatch(action.isSnackBarVisible(value)),
     UploadDetails: (name, emailId, phoneNumber, message) => dispatch(action.UploadContactForm(name, emailId, phoneNumber, message)),
     showResponsePopUp: (value) => dispatch(action.showResponsePopUp(value)),
