@@ -191,6 +191,7 @@ const PaymentStatus = (props) => {
   const closeAllPopUp = () => {
     props.showResponsePopUp(false);
     props.showPopUp(false);
+    props.showSchoolPopUp(false)
   }
 
   const closeLoader = () => {
