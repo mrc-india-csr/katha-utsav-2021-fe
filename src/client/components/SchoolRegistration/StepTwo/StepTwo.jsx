@@ -22,6 +22,7 @@ import FormData from "form-data";
 import axios from "axios";
 import {MultipleFormRequest, PrepareRequest} from "../../../Utils";
 import {displayPayment} from "../../../Utils/helpers/initiateRegistration";
+import Snackbar from "@material-ui/core/Snackbar";
 
 
 const useStyles = makeStyles(theme => ({
@@ -70,7 +71,10 @@ const useStyles = makeStyles(theme => ({
       marginBottom: '17px'
     },
     NoteAlign: {
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: 'center'
+      }
     },
     UploadFile: {
       width: '160px',
@@ -103,7 +107,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right',
     letterSpacing: '-0.02em',
     color: '#000000',
-    paddingRight: '28px'
+    paddingRight: '28px',
+    paddingLeft: '1rem',
+      [theme.breakpoints.down("sm")]: {
+        padding: '0.5rem',
+        textAlign: 'center'
+      }
   },
     NoteMandatory: {
     fontWeight: 500,
@@ -113,7 +122,11 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: '-0.02em',
     color: '#000000',
     paddingRight: '28px',
-    marginLeft: '1rem'
+    marginLeft: '1rem',
+      [theme.breakpoints.down("sm")]: {
+        padding: '0.5rem',
+        textAlign: 'center'
+      }
   },
   Alert: {
     padding: '5rem 15rem 0 15rem'
@@ -123,6 +136,7 @@ const useStyles = makeStyles(theme => ({
 const StepTwo = (props) => {
   const options = Array(20).fill().map((x, i) => i + 1);
   const classes = useStyles();
+  const [alert, setAlert] = useState({ open: false, message: "", backgroundColor: "" });
   const [states, setStates] = React.useState({
     stepTwo: {
       0 : {
@@ -300,21 +314,28 @@ const StepTwo = (props) => {
     }
 
     if(!isError) {
-      const body = new FormData();
       let fileData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         fileData.push(states.stepTwo[step].storyPath)
       }
       await props.showLoader(true);
+      const body = new FormData();
 
       let fileResponse = []
       for (let step = 0; step < states.dropDownValue; step++) {
         body.append('story', fileData[step]);
-        const fileResponseData = (await axios.post('/api/story/upload', body)).data;
-        fileResponse.push(fileResponseData.path)
+        await axios.post('/api/story/upload', body).then(
+          (res) => {
+            fileResponse.push(res.data.path)
+          }
+        ).catch((e) => {
+          setAlert({ open: true, message: "File uploaded failed, please try again!", backgroundColor: "#FF3232" })
+          console.log(e)
+        });
       }
-
       await props.showLoader(false);
+
+      if (alert.open) return;
 
       const data = MultipleFormRequest(states.stepTwo, fileResponse, props.stepOneData, states.dropDownValue)
       await props.showLoader(true);
@@ -557,6 +578,13 @@ const StepTwo = (props) => {
           </Grid>
         </Card>
       </Grid>
+      <Snackbar
+        autoHideDuration={4000}
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
     </Grid>
   )
 }
