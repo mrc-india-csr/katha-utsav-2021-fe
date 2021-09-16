@@ -186,6 +186,7 @@ const useErrorStyles = makeStyles(theme => ({
     [theme.breakpoints.up("lg")]: {
       width: 430,
       height: 30,
+      padding: "20px 24px 10px",      
     },
     [theme.breakpoints.up("xl")]: {
       width: 480,
