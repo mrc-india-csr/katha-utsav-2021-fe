@@ -199,6 +199,7 @@ const StepTwo = (props) => {
       }
     }
 
+    // checks already value exists in state
     const valueCollection = []
     for (let step = 0; step < states.dropDownValue; step++) {
       let rowValue = Object.values(states.stepTwo[step])
@@ -210,6 +211,10 @@ const StepTwo = (props) => {
         values = {
           ...values,
           [step]: states.stepTwo[step]
+        }
+
+        uploadFile[step] = {
+          fileName: 'Uploaded'
         }
       }
 
@@ -226,16 +231,13 @@ const StepTwo = (props) => {
   }
 
   const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY"];
-  const [alertStatus, setAlertStatus] = useState('')
-  const alertBox = () => {
-    return <Alert severity="error" onClose={() => {setAlertStatus(false)}}>{alertStatus}</Alert>
-  }
 
   const onFileUpload = async (selectedFile, name, event, errorMessage, i) => {
     if (errorMessage) {
-      setAlertStatus(errorMessage)
+      setAlert({ open: true, message: errorMessage, backgroundColor: "#FF3232" })
     }
-    if (name) {
+    else if(name) {
+      setAlert({ ...alert, open: false, message: '', backgroundColor: 'none' })
       setStates((states) => {
         states.uploadFile[i].fileName = 'Uploaded'
         states.stepTwo[i].storyPath = selectedFile
@@ -565,10 +567,6 @@ const StepTwo = (props) => {
             </TableContainer>
           </div>
 
-          <Grid item  align="center" className={classes.Alert}>
-            {alertStatus && alertBox()}
-          </Grid>
-
           <Grid item  align="center" className={classes.Payment}>
             <PaymentButton name={"Pay"} onButtonClick={validate}/>
           </Grid>
@@ -585,7 +583,7 @@ const StepTwo = (props) => {
         message={alert.message}
         ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={() => setAlert({ ...alert, open: false })}></Snackbar>
+        ></Snackbar>
     </Grid>
   )
 }

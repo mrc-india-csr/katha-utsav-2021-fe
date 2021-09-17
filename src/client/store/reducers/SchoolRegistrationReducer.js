@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState ={
-    showPopUp: false
+    showPopUp: false,
+    step: 1
 }
 
 const SchoolRegistrationReducer = (state = initialState, action) => {
@@ -9,7 +10,13 @@ const SchoolRegistrationReducer = (state = initialState, action) => {
         case actionTypes.IS_SHOW_POPUP_SCHOOL:
             return{
                 ...state,
-                showPopUp: action.showPopUp
+                showPopUp: action.showPopUp,
+                step: 1
+            }
+        case actionTypes.UPDATE_STEP:
+            return{
+                ...state,
+                step: 2
             }
         default:
             return state;

@@ -10,7 +10,8 @@ export {
     validateSchoolStepOne,
     validateSuccessSchoolStepOne,
     validateFailSchoolStepOne,
-    showPopUpSchool
+    showPopUpSchool,
+    updateStep
 } from './SchoolRegistrationStepOneAction'
 
 export {

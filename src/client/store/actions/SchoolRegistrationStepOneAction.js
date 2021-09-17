@@ -39,3 +39,8 @@ export const showPopUpSchool = (showPopUp) => {
     }
 }
 
+export const updateStep = () => {
+    return {
+        type: actionTypes.UPDATE_STEP,
+    }
+}
