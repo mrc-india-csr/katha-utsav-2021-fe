@@ -161,7 +161,7 @@ const StepTwo = (props) => {
     },
     uploadFile: {
       0: {
-        fileName: 'Upload File'
+        fileName: 'Upload Here'
       }
     },
     dropDownValue : 1
@@ -195,7 +195,7 @@ const StepTwo = (props) => {
       }
 
       uploadFile[step] = {
-        fileName: 'Upload File'
+        fileName: 'Upload Here'
       }
     }
 
@@ -232,7 +232,7 @@ const StepTwo = (props) => {
     })
   }
 
-  const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY"];
+  const tableHeaders = [ "#", "NAME", "EMAIL ID", "PHONE NO", "CLASS", "STORY CATEGORY", "FILE"];
 
   const onFileUpload = async (selectedFile, name, event, errorMessage, i) => {
     if (errorMessage) {
@@ -309,7 +309,7 @@ const StepTwo = (props) => {
       }
       if (_.isEmpty(states.stepTwo[step].storyPath.name) || states.stepTwo[step].storyPath.size > 10000000) {
         setStates((states) => {
-          states.uploadFile[step].fileName = 'Upload File'
+          states.uploadFile[step].fileName = 'Upload Here'
           return {
             ...states,
           }
@@ -482,7 +482,7 @@ const StepTwo = (props) => {
         states.stepTwoErrorMessage[step].studentClass = ''
         states.stepTwoErrorMessage[step].storyCategory = ''
         states.stepTwoErrorMessage[step].storyPath = ''
-        states.uploadFile[step].fileName = 'Upload File'
+        states.uploadFile[step].fileName = 'Upload Here'
         return {
           ...states,
         }
