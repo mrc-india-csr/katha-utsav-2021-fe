@@ -73,7 +73,7 @@ const SchoolRegistration = (props) => {
     }
 
     return (
-        <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp}>
+        <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp} disableEnforceFocus={true}>
             <Grid container direction="column" className={classes.background}>
                 {/*---Cross Mark---*/}
                 <Grid item container justifyContent="flex-end">
