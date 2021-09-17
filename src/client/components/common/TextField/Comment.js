@@ -39,24 +39,29 @@ const useStyles = makeStyles(theme => ({
     widthAndHeight: {
         height: 200,
         width: 400,
+        lineHeight: "2rem",
         [theme.breakpoints.up("lg")]: {
             width:450,
             height:150,
-            fontSize: "1.5rem"
+            fontSize: "1.5rem",
+            lineHeight: "2rem",
         },
         [theme.breakpoints.up("xl")]: {
             width:500,
             height: 35,
             height:150,
-            fontSize: "1.75rem"
+            fontSize: "1.75rem",
+            lineHeight: "2rem",
         },
         [theme.breakpoints.down("sm")]: {
             width: 300,
             height:150,
+            lineHeight: "1.5rem",
         },
 
         [theme.breakpoints.down("xs")]: {
-            width: 230
+            width: 230,
+            lineHeight: "1.5rem",
         }
     }
 }));
