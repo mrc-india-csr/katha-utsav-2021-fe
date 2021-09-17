@@ -213,8 +213,10 @@ const StepTwo = (props) => {
           [step]: states.stepTwo[step]
         }
 
-        uploadFile[step] = {
-          fileName: 'Uploaded'
+        if (states.stepTwo[step].storyPath) {
+          uploadFile[step] = {
+            fileName: 'Uploaded'
+          }
         }
       }
 
@@ -234,7 +236,7 @@ const StepTwo = (props) => {
 
   const onFileUpload = async (selectedFile, name, event, errorMessage, i) => {
     if (errorMessage) {
-      setAlert({ open: true, message: errorMessage, backgroundColor: "#FF3232" })
+      setAlert({ open: true, message: errorMessage + ' ' +'for student' + ' ' + (i+1), backgroundColor: "#FF3232" })
     }
     else if(name) {
       setAlert({ ...alert, open: false, message: '', backgroundColor: 'none' })
@@ -312,7 +314,7 @@ const StepTwo = (props) => {
             ...states,
           }
         })
-        isError = false;
+        isError = true;
       }
     }
 
