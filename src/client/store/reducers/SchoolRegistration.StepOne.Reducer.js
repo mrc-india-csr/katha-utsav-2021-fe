@@ -11,7 +11,6 @@ const initialState ={
         cityMessage:'',
         isError: true
     },
-    step: 1,
 }
 
 const SchoolRegistrationStepOneReducer = (state = initialState, action) => {
@@ -30,7 +29,6 @@ const SchoolRegistrationStepOneReducer = (state = initialState, action) => {
                     cityMessage:"",
                     isError: false
                 },
-                step:2
             }
         case actionTypes.VALID_FAIL_SCHOOL_STEPONE:
             return {

@@ -3,9 +3,8 @@ import * as action from '../../store/actions/index';
 
 const mapStateToProps = (state) => {
   return {
-    step: state.SchoolRegistrationStepOneReducer.step,
-    showPopUp: state.SchoolRegistrationReducer.showPopUp
-
+    step: state.SchoolRegistrationReducer.step,
+    showPopUp: state.SchoolRegistrationReducer.showPopUp,
   }};
 
   const mapDispatchToProps = (dispatch) => {
