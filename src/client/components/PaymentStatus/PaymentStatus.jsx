@@ -244,7 +244,7 @@ const PaymentStatus = (props) => {
 
                 <Grid item>
                   <Typography gutterBottom variant="body1" className={classes.StatusInfoTag}>
-                    {(registrationStatus === 'success') ? 'You’ll recevie an e-mail notification with registration details from our team within 24 hours. Incase you didn’t receive any e-mail please check SPAM folder.' : 'Please reach out to us with the transaction ID if any amount got deducted from your account. Else, Please try again later.'}
+                    {(registrationStatus === 'success') ? 'You’ll receive an e-mail notification with registration details from our team within 24 hours. Incase you didn’t receive any e-mail please check SPAM folder.' : 'Please reach out to us with the transaction ID if any amount got deducted from your account. Else, Please try again later.'}
                   </Typography>
                 </Grid>
 
