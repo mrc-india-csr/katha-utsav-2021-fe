@@ -55,6 +55,10 @@ export const displayPayment = async (formData, paymentStateHandler) => {
         'sms': true,
         'email': true
       },
+      'prefill': {
+        'name': userName,
+        'email': userEmail,
+      },
       'theme': {
         'color': '#ffdb50'
       }
