@@ -47,7 +47,7 @@ export const displayPayment = async (formData, paymentStateHandler) => {
             await axios.post('/api/registration_failed', razorPayOrderData);
             paymentStateHandler('failed', `No worries, Your payment order ID is ${razorPayOrderData.id}.`, razorPayOrderData.id);
           } else {
-            paymentStateHandler('failed', 'OOPS, Something went wrong, Please try again sager some time', '');
+            paymentStateHandler('failed', 'OOPS, Something went wrong, Please try again sager some time', razorPayOrderData.id);
           }
         }
       },
