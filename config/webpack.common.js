@@ -116,7 +116,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      title: 'katha-utsav-2021-fe',
+      title: 'Katha Utsav 2021',
       template: path.join(__dirname, '../src/client/assets/template.html'),
     }),]
 
