@@ -51,11 +51,6 @@ export const displayPayment = async (formData, paymentStateHandler) => {
           }
         }
       },
-      'prefill': {
-        'name': userName,
-        'email': userEmail,
-        'contact': userPhone
-      },
       'notify': {
         'sms': true,
         'email': true
