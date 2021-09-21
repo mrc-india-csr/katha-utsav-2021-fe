@@ -224,13 +224,13 @@ const styles = {
 
 const DropDown = (props) => {
 
-  const { options, fieldName, onChangeFunc, value, isError, errorMessage, eventValidation } = props;
+  const { options, fieldName, fieldType = fieldName, onChangeFunc, value, isError, errorMessage, eventValidation } = props;
   const classes = isError ? useErrorStyles() : useStyles();
   const helperTestClasses = helperTextStyles();
   const theme = useTheme();
   const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
   const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
-  const labelName = matchesLG? <Typography variant="body1" style={{fontSize: matchesXL?"1.5rem":matchesLG?"1.25rem":"inherit"}}>{fieldName}</Typography> : fieldName;
+  const labelName = matchesLG? <Typography variant="body1" style={{fontSize: matchesXL?"1.5rem":matchesLG?"1.25rem":"inherit"}}>{fieldType}</Typography> : fieldType;
   const helperText = matchesLG? <Typography variant="body1" style={{fontSize: matchesXL?"1.25rem":matchesLG?"1rem":"inherit"}}>{errorMessage}</Typography> : errorMessage;
 
   return (
