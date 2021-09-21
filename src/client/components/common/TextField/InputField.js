@@ -62,11 +62,11 @@ const useStyles = makeStyles(theme => ({
 
 const InputField = (props) => {
     const classes = useStyles(props);
-    const { fieldName, value, isError, errorMessage, eventValidation } = props;
+    const { fieldName, fieldType = fieldName, value, isError, errorMessage, eventValidation } = props;
     const theme = useTheme();
     const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
     const matchesXL = useMediaQuery(theme.breakpoints.up('xl'));
-    const labelName = matchesLG ? <Typography variant="body1" style={{ fontSize: matchesXL ? "1.5rem" : matchesLG ? "1.25rem" : "inherit" }}>{fieldName}</Typography> : fieldName;
+    const labelName = matchesLG ? <Typography variant="body1" style={{ fontSize: matchesXL ? "1.5rem" : matchesLG ? "1.25rem" : "inherit" }}>{fieldType}</Typography> : fieldType;
     const helperText = matchesLG ? <Typography variant="body1" style={{ fontSize: matchesXL ? "1.25rem" : matchesLG ? "1rem" : "inherit" }}>{errorMessage}</Typography> : errorMessage;
 
     return (

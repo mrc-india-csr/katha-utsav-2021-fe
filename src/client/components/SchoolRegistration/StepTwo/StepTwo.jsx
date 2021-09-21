@@ -23,7 +23,6 @@ import {MultipleFormRequest, PrepareRequest} from "../../../Utils";
 import {displayPayment} from "../../../Utils/helpers/initiateRegistration";
 import Snackbar from "@material-ui/core/Snackbar";
 
-
 const useStyles = makeStyles(theme => ({
     background: {
       backgroundColor: '#FEDB50',
@@ -55,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     Payment: {
-      padding: '303px 0 17px 0',
+      padding: '10rem 0 1rem 0',
       alignItems: "Center",
     },
     Reset: {
@@ -130,6 +129,13 @@ const useStyles = makeStyles(theme => ({
   },
   Alert: {
     padding: '5rem 15rem 0 15rem'
+  },
+  ErrorToast: {
+    fontSize: '.75rem',
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: '1rem',
+    fontWeight: '500'
   }
   })
 );
@@ -137,6 +143,8 @@ const StepTwo = (props) => {
   const options = Array(20).fill().map((x, i) => i + 1);
   const classes = useStyles();
   const [alert, setAlert] = useState({ open: false, message: "", backgroundColor: "" });
+  const [error, showError] = useState(false);
+
   const [states, setStates] = React.useState({
     stepTwo: {
       0 : {
@@ -317,7 +325,12 @@ const StepTwo = (props) => {
       }
     }
 
-    if(!isError) {
+    if (isError) {
+      showError(true);
+    }
+
+    else {
+      showError(false);
       let fileData = []
       for (let step = 0; step < states.dropDownValue; step++) {
         fileData.push(states.stepTwo[step].storyPath)
@@ -540,21 +553,21 @@ const StepTwo = (props) => {
                     return <TableRow key={i}>
                       <div className={classes.SerialNo}>{i + 1}</div>
                       <TableCell>
-                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentName.length > 0} fieldName={"studentName"} value={states.stepTwo[i].studentName} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
+                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentName.length > 0} fieldName={"studentName"} fieldType={"Student Name"} value={states.stepTwo[i].studentName} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
                       <TableCell>
-                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentEmail.length > 0} fieldName={"studentEmail"} value={states.stepTwo[i].studentEmail} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
+                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentEmail.length > 0} fieldName={"studentEmail"} fieldType={"Student Email"} value={states.stepTwo[i].studentEmail} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
                       <TableCell>
-                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentPhone.length > 0} fieldName={"studentPhone"} value={states.stepTwo[i].studentPhone} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
+                        <InputField errorMessage='' isError={states.stepTwoErrorMessage[i].studentPhone.length > 0} fieldName={"studentPhone"} fieldType={"Student Phone"} value={states.stepTwo[i].studentPhone} eventValidation={(event) => stepTwoFormValidation(event, i)}/>
                       </TableCell>
                       <TableCell>
-                        <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"}
+                        <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].studentClass.length > 0} fieldName={"studentClass"} fieldType={"Student Class"}
                                   options={["IV to VI", "VII to IX", "X to XII"]}
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell>
-                          <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"}
+                          <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"} fieldType={"Student Category"}
                                     options={["Fiction", "Non-Fiction", "Poetry"]}
                                     value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
@@ -569,6 +582,9 @@ const StepTwo = (props) => {
           </div>
 
           <Grid item  align="center" className={classes.Payment}>
+            {error && <Grid item className={classes.ErrorToast}>
+              <div>Make sure all fields are updated & the file has been uploaded for all students.</div>
+            </Grid>}
             <PaymentButton name={"Pay"} onButtonClick={validate}/>
           </Grid>
           <Grid item container align="center"direction="column">
