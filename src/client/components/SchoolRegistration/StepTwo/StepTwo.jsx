@@ -17,7 +17,6 @@ import InputField from "../../common/TextField/InputField";
 import PaymentButton from '../../common/Button/PayButton';
 import FileUploader from "../../common/FileUploader";
 import _ from "lodash";
-import Alert from "@material-ui/lab/Alert";
 import FormData from "form-data";
 import axios from "axios";
 import {MultipleFormRequest, PrepareRequest} from "../../../Utils";
@@ -213,7 +212,7 @@ const StepTwo = (props) => {
           [step]: states.stepTwo[step]
         }
 
-        if (states.stepTwo[step].storyPath) {
+        if (states.uploadFile[step].fileName === 'Uploaded') {
           uploadFile[step] = {
             fileName: 'Uploaded'
           }
