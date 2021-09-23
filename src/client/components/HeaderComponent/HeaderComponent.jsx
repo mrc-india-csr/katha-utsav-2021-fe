@@ -293,9 +293,6 @@ const HeaderComponent = (props) => {
 
     );
 
-
-
-
     return (
         <React.Fragment>
             <ElevationScroll>
@@ -307,5 +304,3 @@ const HeaderComponent = (props) => {
 }
 
 export default HeaderComponent;
-
-
