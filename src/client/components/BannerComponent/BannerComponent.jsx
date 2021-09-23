@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroImg from '../../assets/images/hero-bg.png';
-import cians from '../../assets/images/cians.png';
+//import cians from '../../assets/images/cians.png';
+import cians from '../../assets/images/cians.svg';
 import DropDownButton from '../common/Button/DropDownButton';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
