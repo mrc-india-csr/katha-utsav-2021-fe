@@ -127,6 +127,7 @@
       @media (max-width: 760px) {
         flex-direction: column;
         font-size: small;
+        margin-bottom: 0;
       }
     }
   }
@@ -142,6 +143,7 @@
   .image-with-content {
     display: flex;
     align-items: center;
+    //margin: 0 1rem;
 
     @include breakpoint-large-down {
       width: 25rem;
@@ -149,6 +151,7 @@
 
     @include breakpoint-medium-down {
       width: 20rem;
+      margin: 0 1rem;
     }
 
 
@@ -171,6 +174,12 @@
   }
 
   .image-with-content:last-child {
-    margin-top: 1rem;
+    @media (max-width: 1000px) {
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 1200px) {
+      margin-left: 1.5rem;
+    }
   }
 }
