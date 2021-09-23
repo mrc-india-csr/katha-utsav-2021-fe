@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
     styleFormat: {
         color: "#66645E",
         fontFamily: "Poppins",
-        textAlign:"center",
+        textAlign: "center",
         fontSize: "1.2rem",
         marginLeft: "1rem",
         marginBottom: "1rem"
@@ -181,7 +181,6 @@ const HeaderComponent = (props) => {
         { name: "Schedule", url: "schedule" },
         { name: "Gallery", url: "katha-history" },
         { name: "Mentors", url: "mentors" },
-
     ]
 
     const menuServiceProperties = [
@@ -212,6 +211,9 @@ const HeaderComponent = (props) => {
                                         </Grid>
                                     ))
                                 }
+                                <Grid style={{textDecoration:"none"}} item component={"a"} target="_blank" href="https://katha.org/blog/">
+                                    <Tab key={"Blog"} label={"Blog"} className={classes.tab} />
+                                </Grid>
                             </Tabs>
                         </Grid>
                     </Grid>
@@ -243,6 +245,11 @@ const HeaderComponent = (props) => {
                             </Link>
                         ))
                     }
+                    <ListItem key={"Blog"}
+                        component={"a"} target="_blank" href="https://katha.org/blog/"
+                        onClick={(e) => { setOpenDrawer(false) }} divider button>
+                        <ListItemText classes={{ root: classes.menuItem }} disableTypography>{"Blog"}</ListItemText>
+                    </ListItem>
                 </List>
 
             </SwipeableDrawer>
@@ -281,7 +288,7 @@ const HeaderComponent = (props) => {
                 </Grid>
 
                 <Grid item container className={classes.cta} alignItems="center" direction="column">
-                    <Grid item style={{marginBottom: "2em"}}>
+                    <Grid item style={{ marginBottom: "2em" }}>
                         {<DropDownButton menuServiceProperties={menuServiceProperties} />}
                     </Grid>
                     <Grid item>
