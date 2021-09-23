@@ -72,12 +72,8 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/svg+xml',
-        },
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
@@ -91,7 +87,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader',
       },
     ],
