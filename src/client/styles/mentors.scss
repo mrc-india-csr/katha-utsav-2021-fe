@@ -21,10 +21,6 @@
     justify-content: center;
     margin-top: 3rem;
 
-    @include breakpoint-xlarge {
-      flex-direction: row;
-    }
-
     &--box {
       display: flex;
 
@@ -35,10 +31,14 @@
       .profile {
         margin: 0 1.5rem 2rem;
         font-family: 'Poppins', sans-serif;
+        text-align: center;
+        text-decoration: none;
+        color: #18191F;
+        cursor: pointer;
 
         img {
-          @include breakpoint-large-down {
-            width: 16rem;
+          @media (min-width: 600px) and (max-width: 900px) {
+            width: 12rem;
           }
 
           @media (max-width: 340px) {

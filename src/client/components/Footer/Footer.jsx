@@ -109,13 +109,13 @@ const Footer = () => {
     const groupIcons = (
         <Grid item container direction="row" className={classes.groupIcons}>
             <Grid item component={"a"} target="_blank" href="https://www.instagram.com/kathaindia/">
-                <img alt="Instagram" width={20} height={20} src={instagram} />
+                <img alt="Instagram" width={32} height={32} src={instagram} />
             </Grid>
             <Grid item component={"a"} target="_blank" href="https://www.facebook.com/kathaindia/">
-                <img alt="Fb" width={20} height={20} src={Fb} className={classes.icon} />
+                <img alt="Fb" width={32} height={32} src={Fb} className={classes.icon} />
             </Grid>
             <Grid item component={"a"} target="_blank" href="https://www.linkedin.com/in/katha-india-64aabb84/">
-                <img alt="Linkedin" width={20} height={20} src={Linkedin} className={classes.icon} />
+                <img alt="Linkedin" width={32} height={32} src={Linkedin} className={classes.icon} />
             </Grid>
         </Grid>
     );
@@ -160,7 +160,7 @@ const Footer = () => {
                                 <img src={Mobile} width={15} height={15} />
                             </Grid>
                             <Grid item >
-                                <Typography gutterBottom variant="body1" className={classes.MessageDetails}>+91 9289093393</Typography>
+                                <Typography gutterBottom variant="body1" className={classes.MessageDetails}>+91-928-909-3393</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

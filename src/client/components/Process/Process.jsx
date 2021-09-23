@@ -43,9 +43,9 @@ const Process = () => {
         },
         {
             context: 'Stage 3 Be the Writer',
-            header: 'Four-week intensive workshops on Saturday & Sunday',
+            header: 'Three-week intensive workshops on Saturday & Sunday and a Monday',
             content: [
-                'The GRAND FINALE is a four-week workshop process for the students selected from the level 2 - "KNOW YOUR MENTOR", wherein they will experience an advance mentoring process and each student will participate in the CHALLENGE GROUNDS.',
+                'The GRAND FINALE is a three-week workshop process for the students selected from the level 2 - "KNOW YOUR stories", wherein they will experience an advance mentoring process and each student will participate in the CHALLENGE GROUNDS.',
                 'The jury-selected stories will be awarded the KATHA National Writers\' Workshop Certificate and will also win a chance to get their stories featured on Katha\'s digital platforms.',
             ]
         }
@@ -80,9 +80,10 @@ const Process = () => {
                 <div className='process__footer'>
                     <ol>
                         <div className='process__footer--header'>Note:</div>
-                        <li>Each submission at STAGE 1 - "STORY UPLOAD" requires a fee of Rs 150/- for each writing piece.</li>
-                        <li>When shortlisted to STAGE 2 - "MASTER YOUR STORY", to confirm participation, each student will need to pay Rs 2500/- for  (Regional + finale), which is non-refundable. This fee takes care of complete 10-day digital workshop experience.</li>
+                        <li>Each submission at STAGE 1 - "UPLOAD stories" requires a fee of Rs 150/- for each writing piece.</li>
+                        <li>When shortlisted to STAGE 2 - "KNOW YOUR STORY", to confirm participation, each student will need to pay Rs 2500/- for (Regional + finale), which is non-refundable. This fee takes care of complete 10-day digital workshop experience.</li>
                         <li>Paying the registration fee (Rs. 150/- for each submission), does not automatically guarantee a berth in STAGE 2 - "MASTER YOUR STORY" - it will happen after a stringent process of shortlisting.</li>
+                        <li>Paying the registration fee (Rs. 2500/-), does not automatically guarantee a berth in STAGE 3 - "BE THE WRITER" - it will happen after a stringent process of shortlisting.</li>
                     </ol>
                 </div>
             </div>

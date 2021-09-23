@@ -567,7 +567,7 @@ const StepTwo = (props) => {
                                   value={states.stepTwo[i].studentClass} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
                       <TableCell>
-                          <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"} fieldType={"Student Category"}
+                          <DropDown errorMessage='' isError={states.stepTwoErrorMessage[i].storyCategory.length > 0} fieldName={"storyCategory"} fieldType={"Story Category"}
                                     options={["Fiction", "Non-Fiction", "Poetry"]}
                                     value={states.stepTwo[i].storyCategory} eventValidation={(id, event) => onDropDown(id, event, i)}/>
                       </TableCell>
