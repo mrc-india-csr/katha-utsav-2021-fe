@@ -10,7 +10,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -49,7 +48,6 @@ export default function DropDownButton(props) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
-    const history = useHistory();
 
     const handleClick = () => {
         console.info(`You clicked ${options[selectedIndex]}`);
@@ -101,7 +99,7 @@ export default function DropDownButton(props) {
                                             <MenuItem
                                                 key={option.name}
                                                 style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem"}}
-                                                onClick={() => {history.push(option.redirectPath)}}
+                                                onClick={() => {window.open(option.redirectPath,'_blank')}}
                                             >
                                                 {option.name}
                                             </MenuItem>
