@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import ReactHtmlParser from 'react-html-parser';
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
@@ -17,11 +18,11 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         color: "#FECB05",
-        alignItems: "baseline"
+        alignItems: "baseline",
+        justifyContent: "center"
     },
     number: {
-        marginRight: "18px",
-        fontSize: "72px"
+        fontSize: "48px"
     },
     month :{
         fontSize: "36px"
@@ -52,13 +53,10 @@ const Event = ({data}) => {
             <div className={classes.event}>
                 <div className={classes.date}>
                     <div className={classes.number}>
-                        {data.date}
-                    </div>
-                    <div  className={classes.month}>
-                        {data.month}
+                        {ReactHtmlParser(data.date)}
                     </div>
                 </div>
-                <div className={classes.phase}>Phase #{data.phase}</div>
+                <div className={classes.phase}>{data.phase}</div>
 
                 <div className={classes.description}>{data.text}</div>
             </div>
