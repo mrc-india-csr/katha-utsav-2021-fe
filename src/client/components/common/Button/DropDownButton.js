@@ -99,7 +99,7 @@ export default function DropDownButton(props) {
                                             <MenuItem
                                                 key={option.name}
                                                 style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem"}}
-                                                onClick={() => {window.open(option.redirectPath,'_blank')}}
+                                                onClick={() => {window.open(option.redirectPath)}}
                                             >
                                                 {option.name}
                                             </MenuItem>
