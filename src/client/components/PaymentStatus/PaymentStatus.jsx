@@ -16,6 +16,7 @@ import ContactUsButton from '../common/Button/ContactUsButton';
 import '../../styles/main.scss';
 import {Dialog, Slide} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   pageBackground: {
@@ -164,6 +165,7 @@ const FailureMessage = ({orderId}) => {
 };
 
 const PaymentStatus = (props) => {
+  const history = useHistory();
   const classes = useStyles(props);
   const {displayResponsePopUp, registrationStatus, orderId} = props;
   const theme = useTheme();
@@ -190,8 +192,7 @@ const PaymentStatus = (props) => {
 
   const closeAllPopUp = () => {
     props.showResponsePopUp(false);
-    props.showPopUp(false);
-    props.showSchoolPopUp(false)
+    history.push('/contact');
   }
 
   const closeLoader = () => {

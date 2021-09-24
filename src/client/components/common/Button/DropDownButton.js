@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,6 +49,7 @@ export default function DropDownButton(props) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const history = useHistory();
 
     const handleClick = () => {
         console.info(`You clicked ${options[selectedIndex]}`);
@@ -76,8 +78,8 @@ export default function DropDownButton(props) {
     return (
         <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
-            <Button className={classes.buttonArrow}    
-            ref={anchorRef} 
+            <Button className={classes.buttonArrow}
+            ref={anchorRef}
                         aria-controls={open ? 'split-button-menu' : undefined}
                         aria-expanded={open ? 'true' : undefined}
                         aria-label="select merge strategy"
@@ -99,7 +101,7 @@ export default function DropDownButton(props) {
                                             <MenuItem
                                                 key={option.name}
                                                 style={{fontSize: matchesXL?"2rem": matchesLG?"1.5rem":"inherit", paddingLeft: matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem", paddingRight:matchesXL?"1.5rem":matchesLG?"1.25rem":"1.8rem"}}
-                                                onClick={() => option.showPopUpFun(true)}
+                                                onClick={() => {history.push(option.redirectPath)}}
                                             >
                                                 {option.name}
                                             </MenuItem>

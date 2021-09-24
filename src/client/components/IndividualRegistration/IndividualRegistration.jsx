@@ -19,6 +19,7 @@ import { PrepareRequest } from "../../Utils/index";
 import _ from 'lodash';
 import axios from 'axios';
 import FormData from 'form-data'
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -112,7 +113,7 @@ const useStyles = makeStyles(theme => ({
 const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
 
 const IndividualRegistration = (props) => {
-
+    const history = useHistory();
     const classes = useStyles();
     const [name, setName] = useState('');
     const [nameMessage, setNameMessage] = useState(props.nameMessage);
@@ -225,7 +226,7 @@ const IndividualRegistration = (props) => {
     }
 
     const closePopUp = () => {
-        props.showPopUp(false);
+        history.push('/');
     }
 
     const onDropDown = (id, event) => {
@@ -366,7 +367,7 @@ const IndividualRegistration = (props) => {
     };
 
     return (
-        <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp} disableEnforceFocus={true}>
+        <Dialog fullScreen TransitionComponent={Transition} open={true} onClose={closePopUp} disableEnforceFocus={true}>
 
             <Grid container direction="column" className={classes.background}>
                 {/*---Cross Mark---*/}

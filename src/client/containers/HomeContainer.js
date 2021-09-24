@@ -3,21 +3,9 @@ import _ from 'lodash';
 import * as action from '../store/actions/index';
 import Home from '../components/Home/Home'
 
-
-    
-    const mapDispatchToProps = (dispatch) => {
-        return {
-          showIndividualPopUp: (value) => dispatch(action.showPopUp(value)),
-          showSchoolPopUp: (value) => dispatch(action.showPopUpSchool(value))
-        }
-      }
-
-
-
 const HomeContainer = connect(
     null,
-    mapDispatchToProps
+    null
   )(Home);
-  
+
   export default HomeContainer;
-  

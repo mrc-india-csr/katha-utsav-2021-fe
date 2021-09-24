@@ -1,16 +1,10 @@
-import { connect } from 'react-redux';
-import * as action from '../../store/actions/index';
+import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
     step: state.SchoolRegistrationReducer.step,
     showPopUp: state.SchoolRegistrationReducer.showPopUp,
-  }};
-
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      showPopUp: (value) => dispatch(action.showPopUpSchool(value)),
-    }
   }
+};
 
-export default connect(mapStateToProps,mapDispatchToProps);
+export default connect(mapStateToProps, null);
