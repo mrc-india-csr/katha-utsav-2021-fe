@@ -2,15 +2,13 @@
 export {
     validate,
     validateSuccess,
-    validateFail,
-    showPopUp
+    validateFail
 } from './IndividualRegistrationAction'
 
 export {
     validateSchoolStepOne,
     validateSuccessSchoolStepOne,
     validateFailSchoolStepOne,
-    showPopUpSchool,
     updateStep
 } from './SchoolRegistrationStepOneAction'
 

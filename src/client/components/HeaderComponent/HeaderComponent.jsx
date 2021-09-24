@@ -184,8 +184,8 @@ const HeaderComponent = (props) => {
     ]
 
     const menuServiceProperties = [
-        { name: 'For Individuals', showPopUpFun: props.showIndividualPopUp },
-        { name: 'For Schools', showPopUpFun: props.showSchoolPopUp },
+        { name: 'For Individuals', redirectPath: '/individual-registration' },
+        { name: 'For Schools', redirectPath: '/school-registration' },
     ];
 
     const handleChange = (event, newValue) => {

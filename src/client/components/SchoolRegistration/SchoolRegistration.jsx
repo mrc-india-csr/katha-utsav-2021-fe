@@ -9,7 +9,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
 import StepTwo from "./StepTwo";
-
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -40,21 +40,16 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-
-
 const Transition = React.forwardRef((props, ref) => <Slide ref={ref} direction="up" {...props} />);
 
-
-
 const SchoolRegistration = (props) => {
-
+    const history = useHistory();
     const theme = useTheme();
     const classes = useStyles();
 
     const closePopUp = () => {
-        props.showPopUp(false);
+        history.push('/');
     }
-
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
@@ -73,7 +68,7 @@ const SchoolRegistration = (props) => {
     }
 
     return (
-        <Dialog fullScreen TransitionComponent={Transition} open={props.showPopUp} onClose={closePopUp} disableEnforceFocus={true}>
+        <Dialog fullScreen TransitionComponent={Transition} open={true} onClose={closePopUp} disableEnforceFocus={true}>
             <Grid container direction="column" className={classes.background}>
                 {/*---Cross Mark---*/}
                 <Grid item container justifyContent="flex-end">
