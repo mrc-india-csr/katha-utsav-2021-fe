@@ -47,11 +47,11 @@ const Registration = (props) => {
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
     const onSchoolRegistration = () => {
-        window.open('/school-registration','_blank')
+        window.open('/school-registration')
     }
 
     const onStudentRegistration = () => {
-        window.open('/individual-registration','_blank')
+        window.open('/individual-registration')
     }
     return (
         <Grid container className={classes.background} direction={ matchesXS?"column":"row"}>
