@@ -24,15 +24,6 @@ const useStyles = makeStyles(theme => ({
         padding: 0,
         width: "100%",
         backgroundRepeat: "no-repeat",
-        [theme.breakpoints.up("xl")]: {
-            height: "150vh",
-        },
-        [theme.breakpoints.down("sm")]: {
-            height: "150vh",
-        },
-        [theme.breakpoints.down("xs")]: {
-            height: "150vh",
-        },
     },
     RegistrationForm: {
         color: "#66645E",
