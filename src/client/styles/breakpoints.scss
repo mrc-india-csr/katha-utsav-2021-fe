@@ -4,6 +4,12 @@
   }
 }
 
+@mixin breakpoint-small-down {
+  @include breakpoint(small down) {
+    @content;
+  }
+}
+
 @mixin breakpoint-medium-down {
   @include breakpoint(medium down) {
     @content;
