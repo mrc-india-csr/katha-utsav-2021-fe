@@ -25,7 +25,7 @@ const Timeline = () => {
               <h4>Katha’s Impact in <span className='yellow'>7 years!</span></h4>
               <div className='timeline__impact'>
                   <div className='timeline__impact--content'>
-                      <div><span className='purple'>1,00,000+</span> students PARTICIPATED,</div>
+                      <div><span className='purple'>1,00,000+</span> students PARTICIPATED</div>
                       <div><span className='purple'>35,000+</span> schools ENGAGED</div>
                       <div><span className='purple'>1,200+</span> poets, writers and authors COLLABORATED</div>
                   </div>

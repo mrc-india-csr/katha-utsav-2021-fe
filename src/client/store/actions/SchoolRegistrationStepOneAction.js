@@ -32,13 +32,6 @@ export const validateFailSchoolStepOne = (schoolNameMessage,emailIdMessage,phone
     }
 }
 
-export const showPopUpSchool = (showPopUp) => {
-    return {
-        type: actionTypes.IS_SHOW_POPUP_SCHOOL,
-        showPopUp
-    }
-}
-
 export const updateStep = () => {
     return {
         type: actionTypes.UPDATE_STEP,
