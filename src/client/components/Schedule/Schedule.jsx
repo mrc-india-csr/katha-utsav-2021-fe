@@ -46,34 +46,59 @@ const useStyles = makeStyles(theme => ({
 
 const Events = [
     {
-        date: "31",
-        month: "Aug",
-        phase: 1,
-        text: "Text"
+        date: "24<sup>th</sup> Sept - 25<sup>th</sup> Oct",
+        phase: "Stage 1 : Upload Story",
+        text: "Registrations"
     },
     {
-        date: "31",
-        month: "Sept",
-        phase: 2,
-        text: "Text"
+        date: "30<sup>th</sup> Oct",
+        phase: "Stage 1 : Upload Story ",
+        text: "Result"
     },
     {
-        date: "31",
-        month: "Oct",
-        phase: 3,
-        text: "Text"
+        date: "31<sup>st</sup> Oct - 15<sup>th</sup> Nov",
+        phase: "Stage 2 : Know your Story",
+        text: "Registrations"
     },
     {
-        date: "31",
-        month: "Oct",
-        phase: 3,
-        text: "Text"
+        date: "20<sup>th</sup> Nov - 21<sup>st</sup> Nov",
+        phase: "Stage 2 : Know your Story",
+        text: "Session 1 - Session 2"
     },
     {
-        date: "31",
-        month: "Oct",
-        phase: 3,
-        text: "Text"
+        date: "27<sup>th</sup> Nov - 28<sup>th</sup> Nov",
+        phase: "Stage 2 : Know your Story",
+        text: "Session 3 - Session 4"
+    },
+    {
+        date: "30<sup>th</sup> Nov",
+        phase: "Stage 2 : Know your Story",
+        text: "Story Results"
+    },
+    {
+        date: "30<sup>th</sup> Nov - 9<sup>th</sup> Dec",
+        phase: "Stage 3 : Be the Writer",
+        text: "Registrations"
+    },
+    {
+        date: "11<sup>th</sup> Dec - 12<sup>th</sup> Dec",
+        phase: "Stage 3 : Be the Writer",
+        text: "Session 1 - Session 2"
+    },
+    {
+        date: "18<sup>th</sup> Dec - 19<sup>th</sup> Dec",
+        phase: "Stage 3 : Be the Writer",
+        text: "Session 3 - Session 4"
+    },
+    {
+        date: "26<sup>th</sup> Dec - 27<sup>th</sup> Dec",
+        phase: "Stage 3 : Be the Writer",
+        text: "Session 5 - Session 6"
+    },
+    {
+        date: "8<sup>th</sup> Jan",
+        phase: "Celebrations!!",
+        text: "Challenge Grounds Results & Valedictory Ceremony"
     }
 ]
 
