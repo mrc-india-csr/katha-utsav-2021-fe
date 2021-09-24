@@ -15,10 +15,10 @@ const AppContainer = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/individual-registration" render={() => <IndividualRegistrationContainer/>}/>
-        <Route exact path="/school-registration" render={() => <SchoolRegistration/>}/>
-        <Route exact path="/contact" render={() => <ContactContainer/>}/>
         <Route exact path="/" render={() => <div className='home-page'><HomePage/></div>}/>
+        <Route path="/individual-registration" render={() => <IndividualRegistrationContainer/>}/>
+        <Route path="/school-registration" render={() => <SchoolRegistration/>}/>
+        <Route path="/contact" render={() => <ContactContainer/>}/>
       </Switch>
       <Loader/>
       <RegistrationResponseContainer/>
