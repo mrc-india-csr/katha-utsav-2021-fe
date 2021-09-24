@@ -9,9 +9,10 @@ const useStyles = makeStyles(theme => ({
         fontFamily: "Poppins",
         backgroundColor: "#F3F0EA",
         marginTop: "68px",
-        padding: "0 40px",
+        padding: "0 50px",
         [theme.breakpoints.down("xs")]: {
             marginTop: "52px",
+            padding: "0 30px"
         }
     },
     date: {
@@ -22,7 +23,10 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center"
     },
     number: {
-        fontSize: "48px"
+        fontSize: "48px",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "26px",
+        }
     },
     month :{
         fontSize: "36px"
