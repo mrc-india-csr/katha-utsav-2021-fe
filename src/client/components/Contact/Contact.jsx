@@ -21,7 +21,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 const useStyles = makeStyles(theme => ({
     background: {
         backgroundColor: '#FEDB50',
-        height: "200vh",
         padding: 0,
         width: "100%",
         backgroundRepeat: "no-repeat",
@@ -54,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     },
     registrationDivBackground: {
         backgroundColor: '#FEDB50',
-        height: "25vh",
+        height: "62px",
         width: "100%",
         backgroundSize: "cover",
         backgroundPosition: "center",

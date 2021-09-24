@@ -14,7 +14,6 @@ import PaymentButton from '../../common/Button/PayButton';
 const useStyles = makeStyles(theme => ({
     background: {
         backgroundColor: '#FEDB50',
-        height: "500vh",
         padding: 0,
         width: "100%",
         backgroundRepeat: "no-repeat",
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
     registrationDivBackground: {
         backgroundColor: '#FEDB50',
-        height: "25vh",
+        height: "62px",
         width: "100%",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -98,7 +97,7 @@ const StepOne = (props) => {
         let emailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(schoolEmailId);
         let phoneNumberValid = /^\d+$/.test(phoneNumber);
         let cityValid = /^[a-zA-Z ]*$/.test(city)
-      
+
         if (_.isNull(schoolEmailId) || _.isEmpty(schoolEmailId) || !emailValid) {
           setEmailIdMessage("Please enter a valid email")
           isError = true;
@@ -115,12 +114,12 @@ const StepOne = (props) => {
           setPhoneNumberMessage("Please enter a valid phoneNumber")
           isError = true;
         }
-      
+
         if (_.isEmpty(city) || _.isNull(city) || !cityValid) {
           setCityMessage ("Please Provide a valid city")
           isError = true;
         }
-        
+
         if(!isError) {
             props.validateDetails(schoolName,schoolEmailId,phoneNumber,schoolCoordinatorName,city)
         }
