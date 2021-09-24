@@ -10,9 +10,8 @@ const port = process.env.PORT || 9002;
 const multer = require('multer');
 var upload = multer({ dest: 'uploads/' })
 
-app.use(express.json()); 
+app.use(express.json());
 app.use(cors());
-// app.use(upload.array()); 
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -25,19 +24,12 @@ app.get('/api/healthy', (req, res) => {
   res.status(200).json({ message: ' Web is healthy!'+ process.env.NODE_ENV + process.env.KATHA_API});
 });
 
-
-  
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
-
-
 app.get('*', (req, res) => {
-  res.render('index');
-  });
-
+  res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
+});
 
 const server = app.listen(port, () => {
   console.log(`running in port ${port}`);
