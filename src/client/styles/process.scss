@@ -113,6 +113,7 @@
     background-color: #FEDB50;
     padding: 2rem;
     max-width: 35rem;
+    text-align: justify;
 
     @include breakpoint-medium-down {
       width: 26rem;
@@ -162,6 +163,7 @@
   &__footer {
     font-size: 1.125rem;
     margin-top: 2.5rem;
+    text-align: justify;
 
     &--header {
       font-weight: 700;
