@@ -29,7 +29,7 @@ const Mentors = () => {
                     <div className='mentors__container--box'>
                         <Profile image={Mentor4} name='Dr Shivani Kanodia' description='Performance Poet' link='https://www.linkedin.com/in/dr-shivani-kanodia-0a596827/'/>
                         <Profile image={Mentor5} name='Amita Khare' description='Performance Storyteller'/>
-                        <Profile image={Mentor6} name='Swetha Prakash' description='Performance Storyteller'/>
+                        <Profile image={Mentor6} name='Swetha Prakash' description='Performance Storyteller' link='https://www.clippings.me/swethaprakash'/>
                     </div>
                 </div>
             </div>

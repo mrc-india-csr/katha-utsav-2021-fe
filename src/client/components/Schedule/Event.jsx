@@ -24,8 +24,10 @@ const useStyles = makeStyles(theme => ({
     },
     number: {
         fontSize: "48px",
+        width: "424px",
         [theme.breakpoints.down("xs")]: {
             fontSize: "26px",
+            width: "unset",
         }
     },
     month :{
@@ -56,7 +58,7 @@ const Event = ({data}) => {
         <React.Fragment>
             <div className={classes.event}>
                 <div className={classes.date}>
-                    <div className={classes.number}>
+                    <div className={classes.number} style={data.singleDate ? {"textAlign" : "center"} : {}}>
                         {ReactHtmlParser(data.date)}
                     </div>
                 </div>
