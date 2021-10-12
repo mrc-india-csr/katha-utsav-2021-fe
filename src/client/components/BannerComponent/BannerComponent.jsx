@@ -160,10 +160,11 @@ const BannerComponent = (props) => {
                         </Typography>
                     </Grid>
 
-                    <Grid item>
-                        <img src={cians} alt="hero" width="180" height="30" />
-
-                    </Grid>
+                    <a href='https://ciansanalytics.com/' target='_blank'>
+                        <Grid item>
+                            <img src={cians} alt="hero" width="180" height="30" />
+                        </Grid>
+                    </a>
                 </Grid>
                 <Grid item container direction="row" xl={7} lg={7} md={7} justifyContent="center">
                     <img src={HeroImg} alt="hero" width={width} height={height} />
