@@ -27,7 +27,7 @@ const Mentors = () => {
                         <Profile image={Mentor3} name='Vikram Sridhar' description='Performance Storyteller and Poet' link='https://www.linkedin.com/in/vikramsridhar1/'/>
                     </div>
                     <div className='mentors__container--box'>
-                        <Profile image={Mentor4} name='Dr Shivani Kanodia' description='Performance Poet' link='https://www.linkedin.com/in/dr-shivani-kanodia-0a596827/'/>
+                        <Profile image={Mentor4} name='Dr Shivani Kanodia' description='Storyteller' link='https://www.linkedin.com/in/dr-shivani-kanodia-0a596827/'/>
                         <Profile image={Mentor5} name='Amita Khare' description='Performance Storyteller' link='https://www.sunokahaani.com/'/>
                         <Profile image={Mentor6} name='Swetha Prakash' description='Performance Storyteller' link='https://www.clippings.me/swethaprakash'/>
                     </div>
