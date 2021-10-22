@@ -42,67 +42,31 @@ const useStyles = makeStyles(theme => ({
 
 const Events = [
     {
-        date: "30<sup>th</sup> Sep - 25<sup>th</sup> Oct",
+        date: "30<sup>th</sup> Sep - 14<sup>th</sup> Nov",
         phase: "Stage 1 : Upload Story",
         text: "Registrations",
         singleDate: false
     },
     {
-        date: "30<sup>th</sup> Oct",
+        date: "16<sup>th</sup> Nov",
         phase: "Stage 1 : Upload Story ",
         text: "Result",
         singleDate: true
     },
     {
-        date: "31<sup>st</sup> Oct - 15<sup>th</sup> Nov",
-        phase: "Stage 2 : Know your Story",
+        date: "16<sup>th</sup> Nov - 4<sup>th</sup> Dec",
+        phase: "Stage 2 : Be the writer",
         text: "Registrations",
         singleDate: false
     },
     {
-        date: "20<sup>th</sup> Nov - 21<sup>st</sup> Nov",
-        phase: "Stage 2 : Know your Story",
-        text: "Session 1 - Session 2",
+        date: "10<sup>th</sup> Dec - 19<sup>th</sup> Dec",
+        phase: "Stage 2 : Be the writer",
+        text: "Sessions",
         singleDate: false
     },
     {
-        date: "27<sup>th</sup> Nov - 28<sup>th</sup> Nov",
-        phase: "Stage 2 : Know your Story",
-        text: "Session 3 - Session 4",
-        singleDate: false
-    },
-    {
-        date: "30<sup>th</sup> Nov",
-        phase: "Stage 2 : Know your Story",
-        text: "Story Results",
-        singleDate: true
-    },
-    {
-        date: "30<sup>th</sup> Nov - 9<sup>th</sup> Dec",
-        phase: "Stage 3 : Be the Writer",
-        text: "Registrations",
-        singleDate: false
-    },
-    {
-        date: "11<sup>th</sup> Dec - 12<sup>th</sup> Dec",
-        phase: "Stage 3 : Be the Writer",
-        text: "Session 1 - Session 2",
-        singleDate: false
-    },
-    {
-        date: "18<sup>th</sup> Dec - 19<sup>th</sup> Dec",
-        phase: "Stage 3 : Be the Writer",
-        text: "Session 3 - Session 4",
-        singleDate: false
-    },
-    {
-        date: "26<sup>th</sup> Dec - 27<sup>th</sup> Dec",
-        phase: "Stage 3 : Be the Writer",
-        text: "Session 5 - Session 6",
-        singleDate: false
-    },
-    {
-        date: "8<sup>th</sup> Jan",
+        date: "26<sup>th</sup> Dec",
         phase: "Celebrations!!",
         text: "Challenge Grounds Results & Valedictory Ceremony",
         singleDate: true
