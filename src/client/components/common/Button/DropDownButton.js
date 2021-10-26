@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +29,10 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("xl")]: {
             padding: "1.5rem",
             fontSize: "2rem"
+        },
+        "&:disabled": {
+            backgroundColor: '#E0E0E0',
+            color: '#6D6C6C'
         }
     },
     menuRegistration: {
@@ -47,6 +52,7 @@ export default function DropDownButton(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+    const {registrationOpen} = useSelector(state => state.RegistrationStatusReducer);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
     const handleClick = () => {
@@ -76,13 +82,13 @@ export default function DropDownButton(props) {
     return (
         <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
-            <Button className={classes.buttonArrow}
+            <Button className={classes.buttonArrow} disabled={!registrationOpen}
             ref={anchorRef}
                         aria-controls={open ? 'split-button-menu' : undefined}
                         aria-expanded={open ? 'true' : undefined}
                         aria-label="select merge strategy"
                         aria-haspopup="menu"
-                        onClick={handleToggle} variant="contained"><span style={{ marginRight: "10px" }}>Register Now </span><img src={downarrow} alt="down arrow" /> </Button>
+                        onClick={handleToggle} variant="contained"><span style={{ marginRight: "10px" }}>Register Now </span>{registrationOpen && <img src={downarrow} alt="down arrow" />} </Button>
 
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (

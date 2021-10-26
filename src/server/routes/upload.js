@@ -25,5 +25,8 @@ router.post('/upload',multer.single('story'), async function (req, res) {
     }
 });
 
-module.exports = router;
+router.get('/download_result', (req, res) => {
+    res.status(200).send(`https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_BUCKET_REGION}.amazonaws.com/${process.env.S3_FOLDER}result/results.xlsx`);
+});
 
+module.exports = router;

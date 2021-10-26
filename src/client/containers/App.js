@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -10,15 +10,19 @@ import SchoolRegistration from '../components/SchoolRegistration';
 import RegistrationResponseContainer from './RegistrationResponseContainer';
 import Loader from '../components/Loader/Loader';
 import ContactContainer from './ContactContainer';
+import {useSelector} from "react-redux";
 
 const AppContainer = () => {
+  const {registrationOpen} = useSelector(state => state.RegistrationStatusReducer);
+
   return (
     <Router>
       <Switch>
         <Route exact path="/" render={() => <div className='home-page'><HomePage/></div>}/>
-        <Route path="/individual-registration" render={() => <IndividualRegistrationContainer/>}/>
-        <Route path="/school-registration" render={() => <SchoolRegistration/>}/>
+        { registrationOpen && <Route path="/individual-registration" render={() => <IndividualRegistrationContainer/>}/> }
+        { registrationOpen && <Route path="/school-registration" render={() => <SchoolRegistration/>}/> }
         <Route path="/contact" render={() => <ContactContainer/>}/>
+        <Redirect to="/" />
       </Switch>
       <Loader/>
       <RegistrationResponseContainer/>

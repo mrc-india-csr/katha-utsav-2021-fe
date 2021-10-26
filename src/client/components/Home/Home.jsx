@@ -9,19 +9,23 @@ import Timer from '../Timer/Timer';
 import Schedule from '../Schedule/Schedule';
 import Footer from '../Footer/Footer'
 import Registration from '../Registration/Registration';
+import {useSelector} from "react-redux";
+import EndRegistration from "../EndRegistration/EndRegistration";
 
 const Home = (props) => {
-    return (
+  const {registrationOpen} = useSelector(state => state.RegistrationStatusReducer);
+
+  return (
         <React.Fragment>
             <HeaderComponent {...props}/>
-            <Timer />
+            {registrationOpen ? <Timer /> : <EndRegistration />}
             <Timeline />
             <Process />
             <AboutKatha />
             <Schedule/>
             <KathaHistory />
             <Mentors />
-            <Registration {...props} />
+            {registrationOpen && <Registration {...props} />}
             <Footer />
         </React.Fragment>
     );
