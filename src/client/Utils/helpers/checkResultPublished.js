@@ -1,7 +1,7 @@
 const checkResultPublished = () => {
-  const resultDate = new Date('2021-10-19');
+  const resultDate = new Date('2021-11-16');
   const todayDate = new Date();
-  return todayDate > resultDate;
+  return todayDate >= resultDate;
 };
 
 export default checkResultPublished();

@@ -41,24 +41,24 @@ const EndRegistration = () => {
 
   const closeRegistration = () => {
     return(
-      <React.Fragment>
-        <h3 style={{color: '#263238'}}>Stage - 1 registration has ended 🛑</h3>
-        <h3 style={{color: '#263238'}}>Results will be announced soon. Watch out this space for more details.</h3>
-      </React.Fragment>
+      <div className='close-registration-section'>
+        <h3>Stage - 1 registration has ended 🛑</h3>
+        <h3>Results will be announced soon. Watch out this space for more details.</h3>
+      </div>
     );
   };
 
   const publishResults = () => {
     return(
-      <React.Fragment>
-        <h3 style={{color: '#263238', marginTop: '5px'}}>Stage - 1 Results are out 🎉 Download the results now.</h3>
+      <div className='close-registration-section'>
+        <h3>Thank you for sending us your amazing stories and submissions! We had a lot of fun reading them and look forward to reading more of these gems from you! Check out the list of our winners here! You made it through to the next stage!</h3>
         <Button onClick={downloadClicked} className={classes.button}>Download Now</Button>
-      </React.Fragment>
+      </div>
     );
   };
 
   return (
-    <div className='timer'>
+    <div className='timer timer-flex'>
       {resultsAvailable? publishResults() : closeRegistration()}
     </div>
   );

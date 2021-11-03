@@ -59,4 +59,25 @@
       }
     }
   }
+
+  .close-registration-section {
+    h3 {
+      color: #263238;
+      line-height: unset;
+
+      @media (max-width: 928px) {
+        font-size: 20px;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.timer-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
