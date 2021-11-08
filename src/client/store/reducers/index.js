@@ -5,6 +5,7 @@ import SchoolRegistrationStepTwoReducer from './SchoolRegistration.StepTwo.Reduc
 import RegistrationResponseReducer from "./RegistrationResponseReducer";
 import ContactReducer from './ContactReducer';
 import { combineReducers } from 'redux';
+import RegistrationStatusReducer from "./RegistrationStatusReducer";
 
 
 const RootReducer = combineReducers({
@@ -13,7 +14,8 @@ const RootReducer = combineReducers({
     SchoolRegistrationReducer,
     SchoolRegistrationStepTwoReducer,
     RegistrationResponseReducer,
-    ContactReducer
+    ContactReducer,
+    RegistrationStatusReducer
   });
 
   export default RootReducer;

@@ -14,4 +14,7 @@ vault:
   name: katha-utsav-fe
   envs:
     - NODE_ENV
-    - KATHA_API 
+    - KATHA_API
+    - S3_BUCKET_NAME
+    - S3_BUCKET_REGION
+    - S3_FOLDER

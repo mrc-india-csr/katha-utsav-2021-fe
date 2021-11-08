@@ -96,8 +96,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
       KATHA_API: JSON.stringify(process.env.KATHA_API),
+      S3_BUCKET_NAME: JSON.stringify(process.env.S3_BUCKET_NAME),
+      S3_BUCKET_REGION: JSON.stringify(process.env.S3_BUCKET_REGION),
+      S3_FOLDER: JSON.stringify(process.env.S3_FOLDER),
       }
-  }), 
+  }),
     new CopyWebpackPlugin({
       patterns: [
 
