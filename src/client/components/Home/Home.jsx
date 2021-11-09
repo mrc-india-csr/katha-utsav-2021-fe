@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer'
 import Registration from '../Registration/Registration';
 import {useSelector} from "react-redux";
 import EndRegistration from "../EndRegistration/EndRegistration";
+import checkResultPublished from "../../Utils/helpers/checkResultPublished";
 
 const Home = (props) => {
   const {registrationOpen} = useSelector(state => state.RegistrationStatusReducer);
@@ -19,6 +20,7 @@ const Home = (props) => {
         <React.Fragment>
             <HeaderComponent {...props}/>
             {registrationOpen ? <Timer /> : <EndRegistration />}
+            {checkResultPublished &&  (<div className='second-stage-link-text'>Registration for the second stage is now online! <a href='#'>Sign up now</a> to take your stories to new heights and learn from the very best!!</div>)}
             <Timeline />
             <Process />
             <AboutKatha />
