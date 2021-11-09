@@ -81,3 +81,19 @@
   align-items: center;
   justify-content: center;
 }
+
+.second-stage-link-text {
+  padding: 0 6px;
+  margin-top: -72px;
+  text-align: center;
+  font-family: "Fredoka One";
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  color: #263238;
+
+  a {
+    color: #98248D;
+    text-decoration: underline;
+  }
+}

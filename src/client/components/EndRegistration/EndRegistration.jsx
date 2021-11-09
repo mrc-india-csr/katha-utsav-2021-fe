@@ -42,8 +42,8 @@ const EndRegistration = () => {
   const closeRegistration = () => {
     return(
       <div className='close-registration-section'>
-        <h3>Stage - 1 registration has ended 🛑</h3>
-        <h3>Results will be announced soon. Watch out this space for more details.</h3>
+        <h3>Thank you for your participation at Katha Utsav 2021 - Phase 1.</h3>
+        <h3>The results should be out soon</h3>
       </div>
     );
   };
@@ -52,7 +52,7 @@ const EndRegistration = () => {
     return(
       <div className='close-registration-section'>
         <h3>Thank you for sending us your amazing stories and submissions! We had a lot of fun reading them and look forward to reading more of these gems from you! Check out the list of our winners here! You made it through to the next stage!</h3>
-        <Button onClick={downloadClicked} className={classes.button}>Download Now</Button>
+        <Button onClick={downloadClicked} className={classes.button}>Check Results</Button>
       </div>
     );
   };
