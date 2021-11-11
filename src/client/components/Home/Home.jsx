@@ -20,7 +20,7 @@ const Home = (props) => {
         <React.Fragment>
             <HeaderComponent {...props}/>
             {registrationOpen ? <Timer /> : <EndRegistration />}
-            {checkResultPublished &&  (<div className='second-stage-link-text'>Registration for the second stage is now online! <a href='#'>Sign up now</a> to take your stories to new heights and learn from the very best!!</div>)}
+            {checkResultPublished &&  (<div className='second-stage-link-text'>Registration for the second stage is now online! <a href="https://summerworkshops.katha.org/registration-for-katha-utsav/" target="_blank">Sign up now</a> to take your stories to new heights and learn from the very best!!</div>)}
             <Timeline />
             <Process />
             <AboutKatha />
