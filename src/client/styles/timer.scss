@@ -10,13 +10,15 @@
   max-width: 72rem;
 
   @media (max-width: 500px) {
-    padding: .5rem;
+    padding: 1rem;
     width: 90%;
+    height: unset;
   }
 
   @media (max-width: 360px) {
-    padding: .5rem;
+    padding: 1rem;
     width: 80%;
+    height: unset;
   }
 
   h3 {

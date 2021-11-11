@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import checkRegistrationOpen from '../../Utils/helpers/checkRegistrationOpen';
 
 const useStyles = makeStyles(theme => ({
     ContactUsGrid: {
@@ -117,6 +118,7 @@ const useStyles = makeStyles(theme => ({
 const BannerComponent = (props) => {
     const classes = useStyles();
     const theme = useTheme();
+
     const ContactUs = (
         <Typography component={Link} to="/contact" gutterBottom variant="subtitle1" className={classes.contactUs}>Contact us</Typography>
     )
@@ -151,10 +153,9 @@ const BannerComponent = (props) => {
                             {ContactUs}
                         </Grid>
                     </Grid>
-
-                    <Grid item style={{marginTop: "1rem"}}>
+                    {checkRegistrationOpen && <Grid item style={{marginTop: "1rem"}}>
                         <Typography gutterBottom variant="body1" className={classes.registrationFee}>NOTE : Rs 150/- per registration</Typography>
-                    </Grid>
+                    </Grid>}
                     <Grid item style={{marginTop: "2rem"}}>
                         <Typography gutterBottom variant="body1" className={classes.coSponseredBy}>Co-sponsored by
                         </Typography>
