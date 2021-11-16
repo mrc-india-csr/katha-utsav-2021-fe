@@ -1,5 +1,5 @@
 const checkResultPublished = () => {
-  return false;
+  return true;
 };
 
 export default checkResultPublished();
